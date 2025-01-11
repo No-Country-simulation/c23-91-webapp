@@ -104,11 +104,6 @@ h2 {
     background-color: #f0f0f0;
 }
 
-/* Show menu on hover */
-.user-menu:hover .dropdown-menu {
-    display: block;
-}
-
 /*
 
 .white-circle {
