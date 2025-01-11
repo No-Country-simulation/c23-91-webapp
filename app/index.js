@@ -6,7 +6,6 @@ userMenu.addEventListener('click', () => {
     dropdownMenu.style.display = isVisible ? 'none' : 'block';
 });
 
-// Hide dropdown if clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.user-menu')) {
         dropdownMenu.style.display = 'none';
