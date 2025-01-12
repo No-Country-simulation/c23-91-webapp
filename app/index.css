@@ -9,6 +9,8 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -19,9 +21,13 @@ h2 {
 
 #main-container {
     width: 100%;
-    max-width: 620px;
+    /* max-width: 620px; */
     display: block;
-    margin: 0 auto;
+    overflow: hidden;
+}
+
+.header, #heroes-de-vida, .h1-p, .heroes {
+    max-width: 100%;
 }
 
 .header {
@@ -32,11 +38,13 @@ h2 {
     background-color: var(--primary-color);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    /*
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
+    */
 }
 
 .header a {
@@ -102,4 +110,50 @@ h2 {
 
 .dropdown-menu li:hover {
     background-color: #f0f0f0;
+}
+
+#heroes-de-vida {
+    display: block;
+    margin-top: 3em;
+}
+
+h1 {
+    font-size: 1.6rem;
+    font-weight: 550;
+}
+
+.heroes-flex {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2.5em;
+}
+
+span {
+    display: block;
+    margin-top: 0.4em;
+}
+
+hr {
+    margin-top: 1.2em;
+    border: 2px solid red;
+    width: 50px;
+}
+
+.heroes-p {
+    width: 68%;
+    margin-left: 3em;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.bold {
+    display: inline;
+    font-weight: bold;
+    margin: 0;
+}
+
+.heroes {
+    width: 150px;
+    height: 150px;
+    margin-top: 0.4em;
 }
