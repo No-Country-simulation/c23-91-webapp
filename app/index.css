@@ -32,7 +32,7 @@ body {
 }
 
 .heroes {
-    max-width: 200px;
+    max-width: 160px;
     height: auto;
 }
 
@@ -79,7 +79,7 @@ body {
 }
 
 .container {
-    background-color: rgb(243, 234, 234)!important;
+    background-color: rgb(255, 245, 245)!important;
     width: 80%;
 }
 
