@@ -2,194 +2,95 @@
     --primary-color: #D91100;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    margin: 0;
-    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h2 {
-    margin-bottom: 5em;
-    color: black;
-}
-
-#main-container {
-    width: 100%;
-    /* max-width: 620px; */
-    display: block;
-    overflow: hidden;
-}
-
-.header, #heroes-de-vida, .h1-p, .heroes {
-    max-width: 100%;
-}
-
 .header {
-    height: 4em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: var(--primary-color);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    /*
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    */
-}
-
-.header a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-.header a:hover {
-    transform: scale(1.2);
 }
 
 .logo {
     width: 50px;
-    border-radius: 50%;
-    margin-left: 1em;
-}
-
-#nav-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
-}
-
-.user-menu {
-    position: relative;
-    cursor: pointer;
-}
-
-.user-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 50px;
-    background-color: rgb(241, 65, 65);
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    list-style: none;
-    padding: 10px 0;
-    margin: 0;
-    width: 150px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-}
-
-.dropdown-menu li {
-    padding: 10px 20px;
-    margin-bottom: 0.3em;
-}
-
-.dropdown-menu li a {
-    text-decoration: none;
-    color: #333;
-}
-
-.dropdown-menu li:hover {
-    background-color: #f0f0f0;
-}
-
-#heroes-de-vida {
-    display: block;
-    width: 86%;
-    margin: 0 auto;
-    margin-top: 3em;
-    background-color: rgb(245, 235, 235);
-    border-radius: 8px;
-    padding: 10px;
-}
-
-h1 {
-    font-size: 2.2rem;
-    font-weight: 550;
-    margin-left: 1em;
-}
-
-.heroes-flex {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 2.5em;
-}
-
-span {
-    display: block;
-    margin-top: 0.4em;
-}
-
-hr {
-    margin-top: 1.2em;
-    margin-left: 2.6em;
-    border: 2px solid red;
-    width: 50px;
-}
-
-.heroes-p {
-    width: 68%;
-    margin-left: 5em;
-    font-size: 0.8rem;
-    line-height: 1.2;
-    margin-top: 4em;
-
-}
-
-.bold {
-    display: inline;
-    font-weight: bold;
-    margin: 0;
-}
-
-.heroes {
-    width: 400px;
-    height: 200px;
-    margin-top: 0.4em;
 }
 
 .hamburger-icon {
-    display: inline-block;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    padding: 10px;
-    border-radius: 5px;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
 }
 
 .hamburger-icon div {
-    width: 70%;
-    height: 5px;
+    width: 100%;
+    height: 4px;
     background-color: black;
-    margin: 5px auto;
+    margin: 5px 0;
     border-radius: 2px;
 }
 
-
-.heros-img {
-    width: 50%;
-    display: block;
-    margin: 0 auto;
-    margin-top: 2em;
+.heroes {
+    max-width: 200px;
+    height: auto;
 }
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+#heroes-de-vida {
+    background-color: gray;
+}
+
+#heroes-de-vida h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    text-align: left;
+    margin-left: 1em;
+    font-weight: 700;
+}
+
+#heroes-de-vida h1 .new-line {
+    display: block;
+}
+
+#heroes-de-vida hr.custom-hr {
+    opacity: 1;
+    width: 50px;
+    border: none;
+    height: 2px;
+    background-color: var(--primary-color);
+    margin-left: 2.2em;
+}
+
+#heroes-de-vida p.custom-paragraph {
+    width: 60%;
+    font-size: 0.8rem;
+    width: 60%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.custom-span {
+    font-weight: bold;
+}
+
+.container {
+    background-color: rgb(243, 234, 234)!important;
+    width: 80%;
+}
+
+.dropdown-menu {
+    background-color: rgb(243, 73, 73)!important;
+}
+
+.dropdown-item {
+    font-weight: bold;
+}
+
+
+
+

@@ -1,13 +1,9 @@
-const userMenu = document.querySelector('.user-menu');
-const dropdownMenu = document.querySelector('.dropdown-menu');
+document.addEventListener('click', (event) => {
+    const dropdown = document.querySelector('.dropdown-menu');
+    const userMenuButton = document.getElementById('userMenuButton');
 
-userMenu.addEventListener('click', () => {
-    const isVisible = dropdownMenu.style.display === 'block';
-    dropdownMenu.style.display = isVisible ? 'none' : 'block';
-});
-
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.user-menu')) {
-        dropdownMenu.style.display = 'none';
+    if (!userMenuButton.contains(event.target) && dropdown.classList.contains('show')) {
+        userMenuButton.click(); // Triggers Bootstrap's dropdown toggle
     }
 });
+
