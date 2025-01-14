@@ -26,6 +26,8 @@ const userSchema = new mongoose.Schema({
       notes: { type: String },
     },
   ],
+  donations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Donation" }],
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
 });
 
 const User = mongoose.model("User", userSchema);
