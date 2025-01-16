@@ -5,46 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./index.css">
-    <title>Document</title>
+    <title>Header Styling</title>
 </head>
 
 <body>
     <div id="main-container">
-        <header id="header" class="header d-flex align-items-center justify-content-between px-3">
-            <img class="logo rounded-circle" src="./Assets/logo.avif" alt="Logo">
+        <header id="header" class="header d-flex align-items-center justify-content-between px-3 bg-primary" style="height: 80px;">
+            <img class="logo rounded-circle img-fluid" src="./assets/logo.avif" alt="Logo" style="height: 50px;">
+
             <div class="user-menu dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="hamburger-icon">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-                    <li><a class="dropdown-item" href="#index">Home</a></li>
-                    <li><a class="dropdown-item" href="#agendar_cita">Agendar cita</a></li>
-                    <li><a class="dropdown-item" href="#mi_perfil">Mi perfil</a></li>
-                    <li><a class="dropdown-item" href="#mi_historial">Historial</a></li>
-                    <li><a class="dropdown-item" href="#logout">Cerrar sesión</a></li>
+                <ul class="dropdown-menu dropdown-menu-end bg-danger" aria-labelledby="userMenuButton">
+                    <li><a class="dropdown-item fw-bold text-black" href="#">Sobre nosotros</a></li>
+                    <li><a class="dropdown-item fw-bold text-black" href="#">Registrarme</a></li>
+                    <li><a class="dropdown-item fw-bold text-black" href="#">Iniciar sesión</a></li>
+                    <li><a class="dropdown-item fw-bold text-black" href="#">Agendar cita</a></li>
                 </ul>
             </div>
         </header>
+    </div>
 
-        <div id="heroes-de-vida" class="container bg-light rounded py-3 mt-4">
-            <h1 class="display-3">
-                Héroes de <span class="new-line">Vida</span>
-            </h1>
-            <hr class="custom-hr">
-            <p class="lead custom-paragraph">
-                Juntos podemos marcar la diferencia.
-                <span class="fw-bold custom-span">Cada donación de sangre puede salvar hasta tres vidas.</span> 
-                Sé el héroe que alguien necesita hoy.
-            </p>
-            <div class="text-center mt-4">
-                <img class="heroes img-fluid" src="./assets/heroes.png" alt="">
-            </div>
+    <div id="heroes-de-vida" class="container rounded py-3 mt-4">
+        <!-- Heading -->
+        <h1 class="display-3 text-left fw-bold ms-4">
+            <span>Héroes de</span>
+            <span class="new-line d-block">Vida</span>
+        </h1>
+        <hr class="mx-left bg-danger" style="width: 70px; height: 2px; color: red; border: none; margin-left: 2em; opacity: 1;">
+
+        <p class="lead text-left ms-5 w-75" style="font-size: 0.8rem;">
+            Juntos podemos marcar la diferencia.
+            <span class="fw-bold custom-span">Cada donación de sangre puede salvar hasta tres vidas.</span> 
+            Sé el héroe que alguien necesita hoy.
+        </p>
+
+        <p class="text-center text-white bg-danger rounded-pill px-3 py-2 mx-auto custom-center" style="width: 260px;">
+            ¿Qué necesito para donar?
+        </p>
+
+        <div class="text-center mt-4">
+            <img class="heroes img-fluid" src="./assets/heroes.png" alt="Héroes de Vida" style="width: 260px;">
         </div>
     </div>
 
@@ -54,3 +57,4 @@
 </body>
 
 </html>
+
