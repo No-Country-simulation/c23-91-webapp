@@ -3,7 +3,7 @@ document.addEventListener('click', (event) => {
     const userMenuButton = document.getElementById('userMenuButton');
 
     if (!userMenuButton.contains(event.target) && dropdown.classList.contains('show')) {
-        userMenuButton.click(); // Triggers Bootstrap's dropdown toggle
+        userMenuButton.click();
     }
 });
 
