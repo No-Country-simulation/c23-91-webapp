@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  age: { type: Number, required: true },
+  age: { type: Number, required: true, min: 18, max: 130 },
   gender: {
     type: String,
     enum: ["Male", "Female"],
@@ -12,13 +12,13 @@ const userSchema = new mongoose.Schema({
   bloodType: {
     type: String,
     enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
-    required: true,
   },
-  email: { 
-    type: String, 
-    required: true, 
+  email: {
+    type: String,
+    required: true,
     unique: true,
   },
+  password: { type: String, required: true },
   diseases: [
     {
       name: { type: String, required: true },
