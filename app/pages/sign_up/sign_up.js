@@ -79,3 +79,32 @@ function birthdayValidation(event){
   }
 }
 
+function createUser(event) {
+  event.preventDefault();
+  
+  const form = event.target;
+  const formData = new FormData(form);
+
+  const data = {
+    firstName: formData.get("name") || "", 
+    lastName: formData.get("lastName") || "", 
+    birthday: formData.get("birthday"), 
+    gender: formData.get("gender") || null, 
+    bloodType: formData.get("bloodType") || null, 
+    email: formData.get("email") || "", 
+    password: formData.get("password") || "", 
+    diseases: [], 
+  };
+
+  const selectedDiseases = Array.from(
+    document.querySelectorAll("#selectedDiseases .badge")
+  ).map(pill => ({
+    name: pill.textContent.trim(),
+    diagnosedDate: null, 
+    notes: "", 
+  }));
+
+  data.diseases = selectedDiseases;
+
+  console.log(data);
+};
