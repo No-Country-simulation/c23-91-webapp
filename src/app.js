@@ -1,17 +1,17 @@
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+import config from "./config/config.js";
 
 import userRouter from "./router/user.routes.js";
 import donationRouter from "./router/donation.routes.js";
 import appointmentRouter from "./router/appointment.routes.js";
 import institutionRouter from "./router/institution.routes.js";
+import authRoter from "./router/auth.routes.js";
 
-dotenv.config();
-
+// Variables
 const app = express();
-const PORT = process.env.PORT || 8080;
-const MONGO_URI = process.env.MONGO_URI;
+const PORT = config.PORT || 8080;
+const MONGO_URI = config.MONGO_URI;
 
 app.use(express.json());
 
@@ -20,10 +20,10 @@ app.use("/api", userRouter);
 app.use("/api", donationRouter);
 app.use("/api", appointmentRouter);
 app.use("/api", institutionRouter);
+app.use("/api", authRoter);
 
 // MongoDB
-mongoose
-  .connect(MONGO_URI)
+mongoose.connect(MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
   })

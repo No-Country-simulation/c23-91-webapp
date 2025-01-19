@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
@@ -6,7 +7,7 @@ const userSchema = new mongoose.Schema({
   age: { type: Number, required: true, min: 18, max: 130 },
   gender: {
     type: String,
-    enum: ["Male", "Female"],
+    enum: ["Male", "Female", "Other"],
     required: true,
   },
   bloodType: {
@@ -29,6 +30,22 @@ const userSchema = new mongoose.Schema({
   donations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Donation" }],
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
 });
+
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+userSchema.methods.comparePassword = function (candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
 
 const User = mongoose.model("User", userSchema);
 
