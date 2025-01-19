@@ -11855,39 +11855,50 @@ textarea.form-control-lg {
 
 /* custom BS styles */
 
+/* Wrapper Container */
 #donar-sangre {
-  margin-top: 4em;
   overflow: hidden;
-  white-space: nowrap;
   background-color: red;
   color: white;
   font-weight: bold;
   display: flex;
   align-items: center;
   height: 70px;
-  left: 50%;
+  position: relative;
+  white-space: nowrap;
 }
 
+/* Text Items */
 #donar-sangre p {
-  font-size: 1.2rem;
+  font-size: 0.9rem; 
   letter-spacing: 0.04rem;
   display: inline-block;
-  margin-top: 0.8em;
+  margin: 0;
   padding: 0;
-  white-space: nowrap;
-  animation: scroll-banner 15s linear infinite;
-  animation-delay: 3;
-  position: relative;
+  margin-right: 30px; /* Space between text items */
+  animation: scroll-banner 8s linear infinite;
 }
 
+ 
 @keyframes scroll-banner {
   0% {
-      transform: translateX(100%);
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-12.5%);
+  }
+  50% {
+    transform: translateX(-25%);
+  }
+  75% {
+    transform: translateX(-37.5%);
   }
   100% {
-      transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
+
+
 
 
 
