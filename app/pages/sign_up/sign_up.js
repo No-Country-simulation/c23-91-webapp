@@ -1,3 +1,5 @@
+import { baseURL } from "../../apis/client-server";
+
 window.onload=()=>{
   // ---------------------------------------------------------------------------------------------------
   // -------------------------------- Diseases selector component START --------------------------------
@@ -107,5 +109,27 @@ function createUser(event) {
   data.diseases = selectedDiseases;
 
   console.log(data);
+
+    fetch(`${baseURL}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      
+      if (data.status === 'success') {
+        alert('User registered successfully!');
+        // console.log('User registered:', data);
+      } else {
+        alert( `Error: ${data.message}`);
+      }
+    })
+    .catch(error => {
+      // console.error('Error during registration:', error);
+      alert('An error occurred during registration. Please try again later.');
+    });
 };
 
