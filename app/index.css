@@ -11898,6 +11898,81 @@ textarea.form-control-lg {
   }
 }
 
+.flip-card {
+  background-color: transparent;
+  width: 200px; /* Reduced width */
+  height: 140px; /* Reduced height */
+  border: 1px solid #f1f1f1;
+  border-radius: 0.8rem !important; /* Explicitly set the radius */
+  overflow: hidden; /* Ensure child elements respect the border-radius */
+  perspective: 1000px; /* Keeps 3D effect */
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner:hover {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Disable flipping for cards with the "no-flip" class */
+.no-flip .flip-card-inner {
+    transform: none !important; /* Prevent rotation */
+    transition: none !important; /* Disable animation */
+}
+
+/* Optional: Ensure no "back" side is shown */
+.no-flip .flip-card-back {
+    display: none;
+}
+
+@media (hover: none) {
+  /* Disable hover effect for touch devices */
+  .flip-card:hover .flip-card-inner {
+    transform: none;
+  }
+
+  /* Enable click-to-flip */
+  .flip-card:focus-within .flip-card-inner,
+  .flip-card:active .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Ensure focus works well */
+  .flip-card {
+    outline: none;
+    cursor: pointer;
+  }
+}
 
 
 
