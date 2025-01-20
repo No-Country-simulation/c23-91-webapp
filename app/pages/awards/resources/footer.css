@@ -1,0 +1,112 @@
+
+
+
+.footer > .container{
+    background-color:  rgb(217 17 0);
+}
+
+.footer {
+    background-color: rgb(217 17 0); /* Color rojo */
+    color: white;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Centrar el texto en todo el footer */
+}
+
+/* Contenedor central para alinear el contenido */
+.footer .container {
+    max-width: 100%;
+    
+    padding: 0 ;
+}
+
+/* Estilo para el contenido del footer */
+.footer-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Estilo para la sección con el título RedDeVida */
+.footer-section {
+    text-align: center; /* Alineación a la izquierda */
+    margin-bottom: 20px; /* Separación entre este bloque y el siguiente */
+    margin-right: 60px;
+}
+
+.footer-section h2 {
+    margin-bottom: 10px; /* Margen inferior para separar del contenido siguiente */
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Estilo para el contenedor de la marca */
+footer .footer-brand {
+    list-style: none;
+    padding: 0;
+}
+
+
+footer .footer-brand li {
+    margin: 5px 0;
+}
+
+footer .footer-brand a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer .footer-brand a:hover {
+    color: #f1f1f1;
+}
+
+/* Estilo para la información de contacto */
+.footer-info {
+    margin-top: 69px; /* Añade espacio arriba de la sección de contacto */
+    margin-left: 60px;
+}
+.footer_sectionInfo{
+    margin-top: 35px;
+}
+.footer-info p {
+    margin: 5px 0;
+}
+
+/* Estilo para el separador */
+.footer-hr {
+    border: 0;
+    border-top: 5px solid white;
+    /* margin-top: 2px; */
+    margin-bottom: 20px;
+    width: 100%; /* Ajusta el ancho del separador */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estilo para la parte inferior del footer */
+.footer-bottom {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* Estilo responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-brand {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}

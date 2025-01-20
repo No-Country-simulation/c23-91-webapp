@@ -1,0 +1,9 @@
+.custom-medals {
+    gap: 1rem; /* Reduce al mínimo la separación entre elementos */
+}
+
+.custom-medals li img {
+    margin-right: -8px; /* Superpone ligeramente las imágenes */
+    width: 100px; /* Ajusta el tamaño si es necesario */
+    height: 100px; /* Mantiene las proporciones redondeadas */
+}
