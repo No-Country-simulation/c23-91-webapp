@@ -1,5 +1,3 @@
-import { baseURL } from "../../apis/client-server";
-
 window.onload=()=>{
   // ---------------------------------------------------------------------------------------------------
   // -------------------------------- Diseases selector component START --------------------------------
@@ -47,6 +45,7 @@ window.onload=()=>{
       : '<i class="bi bi-eye-slash"></i>';
   });
   
+
 }
 
 
@@ -109,7 +108,7 @@ function createUser(event) {
 
   console.log(data);
 
-    fetch(`${baseURL}/register`, {
+    fetch('https://08f0-2800-2260-4040-1a92-4da9-c6f6-2943-edb3.ngrok-free.app/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -121,13 +120,13 @@ function createUser(event) {
       
       if (data.status === 'success') {
         alert('User registered successfully!');
-        // console.log('User registered:', data);
+        console.log('User registered:', data);
       } else {
         alert( `Error: ${data.message}`);
       }
     })
     .catch(error => {
-      // console.error('Error during registration:', error);
+      console.error('Error during registration:', error);
       alert('An error occurred during registration. Please try again later.');
     });
 };
