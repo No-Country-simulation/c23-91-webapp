@@ -1,3 +1,4 @@
+const inputEmailEl = document.getElementById('inputEmail');
 const passwordInput = document.getElementById('inputPassword');
 const togglePasswordButton = document.getElementById('togglePassword');
 
@@ -7,7 +8,13 @@ togglePasswordButton.addEventListener('click', () => {
   passwordInput.type = type;
 
   // Cambiar icono (opcional)
-  togglePasswordButton.innerHTML = type === 'password' 
+  togglePasswordButton.innerHTML = type === 'password'
     ? '<i class="bi bi-eye"></i>'
     : '<i class="bi bi-eye-slash"></i>';
 });
+
+function logUser(event) {
+  event.preventDefault();
+inputEmailEl.value = "";
+passwordInput.value = "";
+}
