@@ -10,3 +10,4 @@ router.post("/appointments", createAppointment);
 router.get("/appointments", getAppointments);
 
 export default router;
+ 

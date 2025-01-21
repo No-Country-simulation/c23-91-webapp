@@ -3,7 +3,7 @@ const passwordInput = document.getElementById('inputPassword');
 const togglePasswordButton = document.getElementById('togglePassword');
 
 togglePasswordButton.addEventListener('click', () => {
-  // Toggle input type between password and text
+
   const type = passwordInput.type === 'password' ? 'text' : 'password';
   passwordInput.type = type;
 
@@ -16,15 +16,21 @@ togglePasswordButton.addEventListener('click', () => {
 async function logUser(event) {
   event.preventDefault();
 
-  // Collect user data from input fields
   const userData = {
     email: inputEmailEl.value,
     password: passwordInput.value,
   };
 
   try {
-    // Fetch using the GET method (only for testing)
-    const response = await fetch('mock-response.json'); // No method or body needed for GET
+
+    const response = await fetch('https://097c-2800-2260-4040-1a92-588e-986a-7bb2-fa63.ngrok-free.app/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer <'your message'>`
+      },
+      body: JSON.stringify(userData),
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -32,9 +38,10 @@ async function logUser(event) {
 
     const data = await response.json();
 
-    // Simulate handling the response
     if (data.status === 'success') {
       alert('User logged in successfully!');
+      console.log(data);
+      localStorage.setItem("token", JSON.stringify(data.payload.token));
     } else {
       alert(`Error: ${data.message}`);
     }
@@ -43,8 +50,6 @@ async function logUser(event) {
     alert('An error occurred during login. Please try again later.');
   }
 
-  // Clear input fields after submission
   inputEmailEl.value = '';
   passwordInput.value = '';
 }
-
