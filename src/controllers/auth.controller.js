@@ -7,7 +7,7 @@ export const registerUser = async (req, res) => {
     const {
       firstName,
       lastName,
-      age,
+      birthday,
       gender,
       bloodType,
       email,
@@ -18,7 +18,7 @@ export const registerUser = async (req, res) => {
     if (
       !firstName ||
       !lastName ||
-      !age ||
+      !birthday ||
       !gender ||
       !bloodType ||
       !email ||
@@ -35,7 +35,7 @@ export const registerUser = async (req, res) => {
     const newUser = new User({
       firstName,
       lastName,
-      age,
+      birthday,
       gender,
       bloodType,
       email,

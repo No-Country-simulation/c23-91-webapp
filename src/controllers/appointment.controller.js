@@ -5,6 +5,19 @@ import Institution from "../models/institution.model.js";
 export const createAppointment = async (req, res) => {
   try {
     const { userId, institutionId, appointmentDate, notes } = req.body;
+
+    const conflictingAppointment = await Appointment.findOne({
+      institutionId,
+      appointmentDate,
+    });
+
+    if (conflictingAppointment) {
+      return res.status(400).json({
+        status: "error",
+        message: "The selected date and time are not available.",
+      });
+    }
+
     const newAppointment = new Appointment({
       userId,
       institutionId,
@@ -24,12 +37,12 @@ export const createAppointment = async (req, res) => {
 
     res.status(201).json({
       status: "success",
-      message: "Appointment created successfully",
+      message: "Appointment created successfully.",
       payload: savedAppointment,
     });
   } catch (error) {
     console.error("Error creating appointment:", error);
-    res.status(500).json({ status: "error", message: error.message });
+    res.status(500).json({ status: "error", message: "Internal server error.", error });
   }
 };
 
