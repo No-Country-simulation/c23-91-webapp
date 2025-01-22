@@ -23,23 +23,23 @@
                         <p class="small">Todos los datos de registro son necesarios.</p>
                         <div class="mb-3">
                             <label for="inputName" class="form-label">Nombres *</label>
-                            <input value="Pedro" name="name" type="text" class="form-control" id="inputName" placeholder="Ej. José María" required pattern="\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\b" onblur="inputValidation(event)">
+                            <input name="name" type="text" class="form-control" id="inputName" placeholder="Ej. José María" required pattern="\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\b" onblur="inputValidation(event)">
                             <div class="invalid-feedback" data-input-error="inputName"></div>
                         </div>
                         <div class="mb-3">
                             <label for="inputLastName" class="form-label">Apellidos *</label>
-                            <input value="Mendez" name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Ej. Mendez Hernandez" required pattern="\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\b" onblur="inputValidation(event)">
+                            <input name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Ej. Mendez Hernandez" required pattern="\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\b" onblur="inputValidation(event)">
                             <div class="invalid-feedback" data-input-error="inputLastName"></div>
                         </div>
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email *</label>
-                            <input value="pedrom@mail.com" name="email" type="email" class="form-control" id="inputEmail" placeholder="mymail@mail.com" required onblur="inputValidation(event)">
+                            <input name="email" type="email" class="form-control" id="inputEmail" placeholder="mymail@mail.com" required onblur="inputValidation(event)">
                             <div class="invalid-feedback" data-input-error="inputEmail"></div>
                         </div>
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">Contraseña *</label>
                             <div class="input-group">
-                                <input value="Hojknj768" name="password" type="password" class="form-control" id="inputPassword" placeholder="Contr43s3nh4+" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$" onblur="inputValidation(event)">
+                                <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Contr43s3nh4+" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$" onblur="inputValidation(event)">
                                 <button class="btn btn-secondary" type="button" id="togglePassword" style="box-shadow: none; border-radius: 0 15% 15% 0;">
                                     <i class="bi bi-eye text-primary"></i>
                                 </button>
