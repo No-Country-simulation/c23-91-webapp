@@ -49,15 +49,6 @@ window.onload=()=>{
 }
 
 
-function diseasesDisabled(){
-  const select = document.getElementById('diseasesSelect');
-  select.disabled = true;
-}
-function diseasesEnabled(){
-  const select = document.getElementById('diseasesSelect');
-  select.disabled = false;
-}
-
 function birthdayValidation(event){
   const input = event.target;
   const selectedDate = new Date(input.value); 

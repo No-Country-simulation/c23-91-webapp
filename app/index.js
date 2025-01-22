@@ -32,3 +32,12 @@ function inputValidation(event){
       input.classList.remove("is-invalid");
     }
   }
+
+  function diseasesDisabled(){
+    const select = document.getElementById('diseasesSelect');
+    select.disabled = true;
+  }
+  function diseasesEnabled(){
+    const select = document.getElementById('diseasesSelect');
+    select.disabled = false;
+  }
