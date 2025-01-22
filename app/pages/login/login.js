@@ -23,7 +23,7 @@ async function logUser(event) {
 
   try {
 
-    const response = await fetch('https://097c-2800-2260-4040-1a92-588e-986a-7bb2-fa63.ngrok-free.app/auth/login', {
+    const response = await fetch('https://5910-2800-2260-4040-1a92-49d3-f5a0-e305-aba0.ngrok-free.app/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
