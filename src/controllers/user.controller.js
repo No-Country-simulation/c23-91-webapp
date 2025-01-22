@@ -29,6 +29,31 @@ export const getUserById = async (req, res) => {
   }
 };
 
+export const getUserDetailsById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id)
+      .populate("donations")
+      .populate("appointments");
+
+    if (!user) {
+      return res.status(404).json({ status: "error", message: "User not found" });
+    }
+
+    const { donations, appointments } = user;
+
+    res.status(200).json({
+      status: "success",
+      payload: { donations, appointments },
+    });
+  } catch (error) {
+    handleServerError(res, error);
+  }
+};
+
+
+
 export const createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
