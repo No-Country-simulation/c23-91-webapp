@@ -107,5 +107,30 @@ function createUser(event) {
   data.diseases = selectedDiseases;
 
   console.log(data);
+<<<<<<< HEAD
+=======
+
+    fetch('https://08f0-2800-2260-4040-1a92-4da9-c6f6-2943-edb3.ngrok-free.app/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      
+      if (data.status === 'success') {
+        alert('User registered successfully!');
+        console.log('User registered:', data);
+      } else {
+        alert( `Error: ${data.message}`);
+      }
+    })
+    .catch(error => {
+      console.error('Error during registration:', error);
+      alert('An error occurred during registration. Please try again later.');
+    });
+>>>>>>> bd182769c5c4b58de60a531f13c4172d4e02c4ab
 };
 

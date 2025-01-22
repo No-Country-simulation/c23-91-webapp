@@ -11,3 +11,4 @@ router.post("/appointments", authMiddleware, createAppointment);
 router.get("/appointments", getAppointments);
 
 export default router;
+ 
