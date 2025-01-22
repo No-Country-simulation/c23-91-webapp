@@ -1,4 +1,5 @@
 import express from "express";
+import authMiddleware from "../middlewares/authmiddleware.js";
 import {
   createAppointment,
   getAppointments,
@@ -6,7 +7,8 @@ import {
 
 const router = express.Router();
 
-router.post("/appointments", createAppointment);
+router.post("/appointments", authMiddleware, createAppointment);
 router.get("/appointments", getAppointments);
 
 export default router;
+ 
