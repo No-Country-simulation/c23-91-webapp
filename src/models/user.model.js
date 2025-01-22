@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  age: { type: Number, required: true, min: 18, max: 130 },
+  birthday: { type: Date, required: true },
   gender: {
     type: String,
     enum: ["Male", "Female", "Other"],
@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   bloodType: {
     type: String,
     enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+    required: true,
   },
   email: {
     type: String,
@@ -29,6 +30,7 @@ const userSchema = new mongoose.Schema({
   ],
   donations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Donation" }],
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
+  // profilePicture: { type: String },
 });
 
 userSchema.pre("save", async function (next) {
