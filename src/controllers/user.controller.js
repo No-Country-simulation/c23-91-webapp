@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import { handleServerError } from "../utils/errorHandler.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -29,6 +30,31 @@ export const getUserById = async (req, res) => {
   }
 };
 
+export const getUserDetailsById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id)
+      .populate("donations")
+      .populate("appointments");
+
+    if (!user) {
+      return res.status(404).json({ status: "error", message: "User not found" });
+    }
+
+    const { donations, appointments } = user;
+
+    res.status(200).json({
+      status: "success",
+      payload: { donations, appointments },
+    });
+  } catch (error) {
+    handleServerError(res, error);
+  }
+};
+
+
+
 export const createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
@@ -53,7 +79,9 @@ export const updateUser = async (req, res) => {
     });
 
     if (!updatedUser) {
-      return res.status(404).json({ status: "error", message: "User not found" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "User not found" });
     }
 
     res.status(200).json({
@@ -72,7 +100,9 @@ export const deleteUser = async (req, res) => {
     const deletedUser = await User.findByIdAndDelete(id);
 
     if (!deletedUser) {
-      return res.status(404).json({ status: "error", message: "User not found" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "User not found" });
     }
 
     res.status(200).json({
@@ -82,9 +112,4 @@ export const deleteUser = async (req, res) => {
   } catch (error) {
     handleServerError(res, error);
   }
-};
-
-const handleServerError = (res, error) => {
-  console.error("Server error:", error);
-  res.status(500).json({ status: "error", message: "Internal server error", error });
 };
