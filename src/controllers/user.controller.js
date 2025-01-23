@@ -53,8 +53,6 @@ export const getUserDetailsById = async (req, res) => {
   }
 };
 
-
-
 export const createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
@@ -79,9 +77,7 @@ export const updateUser = async (req, res) => {
     });
 
     if (!updatedUser) {
-      return res
-        .status(404)
-        .json({ status: "error", message: "User not found" });
+      return res.status(404).json({ status: "error", message: "User not found" });
     }
 
     res.status(200).json({
@@ -100,9 +96,7 @@ export const deleteUser = async (req, res) => {
     const deletedUser = await User.findByIdAndDelete(id);
 
     if (!deletedUser) {
-      return res
-        .status(404)
-        .json({ status: "error", message: "User not found" });
+      return res.status(404).json({ status: "error", message: "User not found" });
     }
 
     res.status(200).json({
