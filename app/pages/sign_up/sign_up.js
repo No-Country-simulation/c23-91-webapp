@@ -4,18 +4,18 @@ window.onload=()=>{
   // ---------------------------------------------------------------------------------------------------
   const select = document.getElementById('diseasesSelect');
   const selectedDiseasesContainer = document.getElementById('selectedDiseases');
-  
+
   // Manage section
   select.addEventListener('change', () => {
     const disease = select.value;
-  
+
     // Avoid duplicated pills
     if (![...selectedDiseasesContainer.children].some(pill => pill.dataset.value === disease)) {
       const pill = document.createElement('span');
       pill.className = 'badge bg-secondary text-primary p-2 rounded-pill';
       pill.dataset.value = disease;
       pill.textContent = select.options[select.selectedIndex].text;
-  
+
       // Delete pill on event
       pill.addEventListener('click', () => {
         pill.remove();
@@ -107,10 +107,8 @@ function createUser(event) {
   data.diseases = selectedDiseases;
 
   console.log(data);
-<<<<<<< HEAD
-=======
 
-    fetch('https://08f0-2800-2260-4040-1a92-4da9-c6f6-2943-edb3.ngrok-free.app/api/register', {
+    fetch('http://localhost:8080/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -119,7 +117,7 @@ function createUser(event) {
     })
     .then(response => response.json())
     .then(data => {
-      
+
       if (data.status === 'success') {
         alert('User registered successfully!');
         console.log('User registered:', data);
@@ -131,6 +129,5 @@ function createUser(event) {
       console.error('Error during registration:', error);
       alert('An error occurred during registration. Please try again later.');
     });
->>>>>>> bd182769c5c4b58de60a531f13c4172d4e02c4ab
 };
 
