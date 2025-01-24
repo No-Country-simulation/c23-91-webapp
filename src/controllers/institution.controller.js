@@ -1,21 +1,6 @@
 import Institution from "../models/institution.model.js";
 
-export const createInstitution = async (req, res) => {
-  try {
-    const newInstitution = new Institution(req.body);
-    const savedInstitution = await newInstitution.save();
-
-    res.status(201).json({
-      status: "success",
-      message: "Institution created successfully",
-      payload: savedInstitution,
-    });
-  } catch (error) {
-    console.error("Error creating institution:", error);
-    res.status(500).json({ status: "error", message: error.message });
-  }
-};
-
+// Ordenar respuesta JSON
 export const getInstitutions = async (req, res) => {
   try {
     const institutions = await Institution.find()
@@ -28,6 +13,22 @@ export const getInstitutions = async (req, res) => {
     });
   } catch (error) {
     console.error("Error getting institutions:", error);
+    res.status(500).json({ status: "error", message: error.message });
+  }
+};
+
+export const createInstitution = async (req, res) => {
+  try {
+    const newInstitution = new Institution(req.body);
+    const savedInstitution = await newInstitution.save();
+
+    res.status(201).json({
+      status: "success",
+      message: "Institution created successfully",
+      payload: savedInstitution,
+    });
+  } catch (error) {
+    console.error("Error creating institution:", error);
     res.status(500).json({ status: "error", message: error.message });
   }
 };
@@ -79,6 +80,33 @@ export const updateInstitution = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating institution:", error);
+    res.status(500).json({ status: "error", message: "Internal server error.", error });
+  }
+};
+
+export const getInstitutionAppointments = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const institution = await Institution.findById(id).populate("appointments");
+
+    if (!institution) {
+      return res.status(404).json({
+        status: "error",
+        message: "Institution not found.",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Institution appointments fetched successfully.",
+      payload: {
+        institutionId: institution._id,
+        appointments: institution.appointments,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching institution appointments:", error);
     res.status(500).json({ status: "error", message: "Internal server error.", error });
   }
 };
