@@ -1,0 +1,45 @@
+/* Adjust table width */
+.table {
+  width: 90% !important; /* Expand table width for better visibility */
+  margin: auto; /* Center table */
+}
+
+/* Font size adjustments for mobile */
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.75rem; /* Smaller font size for mobile */
+  }
+
+  /* Hide the 4th column (Ubicación) in mobile */
+  .table th:nth-child(4),
+  .table td:nth-child(4) {
+    display: none !important;
+  }
+}
+
+/* Set background color for the header row */
+.table thead {
+  background-color: #F6F4F4!important; /* Light gray for header row */
+}
+
+/* Custom row striping for tbody */
+.table tbody tr:nth-child(odd) {
+  background-color: white!important; /* White for odd rows */
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #F6F4F4; /* Light gray for even rows */
+}
+
+/* Remove bottom border between rows */
+.table-hover th,
+.table-hover td {
+  border-bottom: none !important;
+  background-color: transparent !important;
+}
+
+/* Ensure no Bootstrap hover color overrides row striping */
+.table-hover tbody tr:hover {
+  background-color: transparent !important; /* Remove hover effect background */
+}
+
