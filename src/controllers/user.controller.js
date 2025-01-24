@@ -35,11 +35,23 @@ export const getUserDetailsById = async (req, res) => {
     const { id } = req.params;
 
     const user = await User.findById(id)
-      .populate("donations")
-      .populate("appointments");
+      .populate({
+        path: "donations",
+        populate: {
+          path: "institutionId",
+          select: "name address institutionType email dailyDonorCapacity"
+        }
+      })
+      .populate({
+        path: "appointments",
+        populate: {
+          path: "institutionId",
+          select: "name address institutionType email dailyDonorCapacity"
+        }
+      });
 
     if (!user) {
-      return res.status(404).json({ status: "error", message: "User not found" });
+      return res.status(404).json({ status: "error", message: "User  not found" });
     }
 
     const { donations, appointments } = user;

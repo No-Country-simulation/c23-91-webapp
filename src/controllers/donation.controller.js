@@ -21,13 +21,36 @@ export const getDonations = async (req, res) => {
 
 export const createDonation = async (req, res) => {
   try {
-    const { userId, institutionId, bloodType, notes } = req.body;
+    const { userId, institutionId, notes } = req.body;
+
+    const pendingAppointment = await Appointment.findOne({
+      userId,
+      institutionId,
+      status: "Pending",
+    });
+
+    if (!pendingAppointment) {
+      return res.status(404).json({
+        status: "error",
+        message: "No pending appointment found for this user and institution.",
+      });
+    }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        message: "User not found.",
+      });
+    }
+
+    const bloodType = user.bloodType;
 
     const newDonation = new Donation({
       userId,
       institutionId,
       bloodType,
       notes,
+      donationDate: pendingAppointment.appointmentDate,
     });
 
     const savedDonation = await newDonation.save();
@@ -39,8 +62,8 @@ export const createDonation = async (req, res) => {
       $push: { donations: savedDonation._id },
     });
 
-    const updatedAppointment = await Appointment.findOneAndUpdate(
-      { userId, institutionId, status: "Pending" },
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      pendingAppointment._id,
       { status: "Completed" },
       { new: true }
     );
