@@ -80,6 +80,7 @@ export const login = async (req, res) => {
       JWT_SECRET,
       { expiresIn: "1h" }
     );
+    console.log("Generated Token:", token);
 
     res.status(200).json({
       status: "success",

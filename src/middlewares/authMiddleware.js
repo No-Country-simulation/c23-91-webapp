@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
-import config from "../config/config.js"
+import config from "../config/config.js";
 
 const authMiddleware = (req, res, next) => {
-  const token = req.headers["authorization"]?.split(" ")[1]; // Formato esperado: "Bearer <token>"
-  
+  const token = req.headers["authorization"]?.split(" ")[1]; // Formato: "Bearer <token>"
+
   if (!token) {
     return res.status(401).json({
       status: "error",
