@@ -42,6 +42,7 @@ async function logUser(event) {
       alert('User logged in successfully!');
       console.log(data);
       localStorage.setItem("token", JSON.stringify(data.payload.token));
+      localStorage.setItem("userId", JSON.stringify(data.payload.user.id));
     } else {
       alert(`Error: ${data.message}`);
     }
