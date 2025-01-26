@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import { handleServerError } from "../utils/errorHandler.js";
 
+// GET - Obtener todos los usuarios.
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find()
@@ -13,6 +14,7 @@ export const getUsers = async (req, res) => {
   }
 };
 
+// GET - Obtener un usuario por ID.
 export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -30,6 +32,7 @@ export const getUserById = async (req, res) => {
   }
 };
 
+// GET - Obtener citas y donaciones de un usuario por ID.
 export const getUserDetailsById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -39,15 +42,15 @@ export const getUserDetailsById = async (req, res) => {
         path: "donations",
         populate: {
           path: "institutionId",
-          select: "name address institutionType email dailyDonorCapacity"
-        }
+          select: "name address institutionType email dailyDonorCapacity",
+        },
       })
       .populate({
         path: "appointments",
         populate: {
           path: "institutionId",
-          select: "name address institutionType email dailyDonorCapacity"
-        }
+          select: "name address institutionType email dailyDonorCapacity",
+        },
       });
 
     if (!user) {
@@ -65,6 +68,7 @@ export const getUserDetailsById = async (req, res) => {
   }
 };
 
+// POST - Crear un nuevo usuario.
 export const createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
@@ -80,6 +84,7 @@ export const createUser = async (req, res) => {
   }
 };
 
+// PUT - Actualizar información de un usuario.
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -102,6 +107,7 @@ export const updateUser = async (req, res) => {
   }
 };
 
+// DELETE - Eliminar usuario por ID.
 export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;

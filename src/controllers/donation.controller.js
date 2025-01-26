@@ -3,6 +3,7 @@ import User from "../models/user.model.js";
 import Institution from "../models/institution.model.js";
 import Appointment from "../models/appointment.model.js";
 
+// GET - Obtener todas las donaciones.
 export const getDonations = async (req, res) => {
   try {
     const donations = await Donation.find()
@@ -19,6 +20,7 @@ export const getDonations = async (req, res) => {
   }
 };
 
+// POST - Crear una nueva donación.
 export const createDonation = async (req, res) => {
   try {
     const { userId, institutionId, notes } = req.body;

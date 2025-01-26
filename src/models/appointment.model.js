@@ -20,7 +20,7 @@ const appointmentSchema = new mongoose.Schema({
     enum: ["Pending", "Completed", "Cancelled"],
     default: "Pending",
   },
-  notes: { type: String },
+  notes: { type: String, maxlength: 500 },
 });
 
 const Appointment = mongoose.model("Appointment", appointmentSchema);
