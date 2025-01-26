@@ -1,8 +1,10 @@
+/*
+
 document.addEventListener('DOMContentLoaded', () => {
   function fetchDonationData() {
     const userId = JSON.parse(localStorage.getItem("userId") || "null");
     
-    fetch(`http://localhost:8080/api/users/${userId}/details`)
+    fetch("./mock-response.json") // http://localhost:8080/api/users/${userId}/details`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -20,17 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchDonationData();
 });
 
+*/
 
-
-
-
-/*
 
 document.addEventListener('DOMContentLoaded', () => {
 
     function fetchDonationData() {
       const userId = JSON.parse(localStorage.getItem("userId") || "null");
-      fetch(`http://localhost:8080/api/users/${userId}/details`)
+      fetch(`./mock-response.json`) // http://localhost:8080/api/users/${userId}/details`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -85,5 +84,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchDonationData();
   });
-
-  */
