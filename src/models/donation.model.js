@@ -14,7 +14,6 @@ const donationSchema = new mongoose.Schema({
   donationDate: {
     type: Date,
     required: true,
-    default: Date.now,
   },
   bloodType: {
     type: String,

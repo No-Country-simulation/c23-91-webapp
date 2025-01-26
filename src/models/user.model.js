@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
@@ -19,18 +19,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Validación de email.
   },
   password: { type: String, required: true },
   diseases: [
     {
       name: { type: String, required: true },
       diagnosedDate: { type: Date },
-      notes: { type: String },
+      notes: { type: String, maxlength: 500 },
     },
   ],
   donations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Donation" }],
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
-  // profilePicture: { type: String },
+  // profilePicture: {  },
+  // awards: { },
 });
 
 userSchema.pre("save", async function (next) {
@@ -41,7 +43,7 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 

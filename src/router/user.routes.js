@@ -15,13 +15,13 @@ router.get("/users", getUsers);
 router.get("/users/:id", getUserById);
 router.get("/users/:id/details", getUserDetailsById);
 
-// POST 
+// POST
 router.post("/users", createUser);
 
-// UPDATE 
+// UPDATE
 router.put("/users/:id", updateUser);
 
-// DELETE 
+// DELETE
 router.delete("/users/:id", deleteUser);
 
 export default router;
