@@ -1,18 +1,19 @@
 window.onload=()=>{
   const select = document.getElementById('diseasesSelect');
   const selectedDiseasesContainer = document.getElementById('selectedDiseases');
-  
+
   // Manage section
   select.addEventListener('change', () => {
     const disease = select.value;
-  
+
     // Avoid duplicated pills
     if (![...selectedDiseasesContainer.children].some(pill => pill.dataset.value === disease)) {
       const pill = document.createElement('span');
       pill.className = 'badge bg-secondary text-primary p-2 rounded-pill';
       pill.dataset.value = disease;
       pill.textContent = select.options[select.selectedIndex].text;
-  
+
+      // Delete pill on event
       pill.addEventListener('click', () => {
         pill.remove();
       });
@@ -100,7 +101,7 @@ function createUser(event) {
     })
     .then(response => response.json())
     .then(data => {
-      
+
       if (data.status === 'success') {
         alert('User registered successfully!');
         console.log('User registered:', data);

@@ -6,7 +6,10 @@ import {
 
 const router = express.Router();
 
-router.post("/donations", createDonation);
+// GET
 router.get("/donations", getDonations);
+
+// POST
+router.post("/donations", createDonation);
 
 export default router;

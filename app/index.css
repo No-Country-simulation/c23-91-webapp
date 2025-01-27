@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url(pages/awards/awards.css);
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Playwrite+AU+SA:wght@100..400&display=swap");
 /*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
@@ -487,7 +488,7 @@ button,
 [type=button],
 [type=reset],
 [type=submit] {
-  -webkit-appearance: button;
+  --webkit-appearance: button;
 }
 button:not(:disabled),
 [type=button]:not(:disabled),
@@ -544,7 +545,7 @@ legend + * {
 }
 
 [type=search] {
-  -webkit-appearance: textfield;
+--webkit-appearance: textfield;
   outline-offset: -2px;
 }
 
@@ -566,7 +567,7 @@ legend + * {
 
 ::file-selector-button {
   font: inherit;
-  -webkit-appearance: button;
+  --webkit-appearance: button;
 }
 
 output {
