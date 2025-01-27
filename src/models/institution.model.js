@@ -1,37 +1,32 @@
 import mongoose from "mongoose";
 
 const institutionSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, maxlength: 100 },
   institutionType: {
     type: String,
-    enum: ["Hospital", "Clinic", "Blood Bank"],
+    enum: ["Hospital", "Clínica", "Banco de Sangre"],
     required: true,
   },
-  address: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  address: { type: String, required: true, maxlength: 250 },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Validación de email.
+  },
   operatingHours: {
-    monday: {
+    mondayToFriday: {
       open: { type: String, required: true },
       close: { type: String, required: true },
     },
-    tuesday: {
-      open: { type: String, required: true },
-      close: { type: String, required: true },
+    saturday: {
+      open: { type: String },
+      close: { type: String },
     },
-    wednesday: {
-      open: { type: String, required: true },
-      close: { type: String, required: true },
+    sunday: {
+      open: { type: String },
+      close: { type: String },
     },
-    thursday: {
-      open: { type: String, required: true },
-      close: { type: String, required: true },
-    },
-    friday: {
-      open: { type: String, required: true },
-      close: { type: String, required: true },
-    },
-    saturday: { open: String, close: String },
-    sunday: { open: String, close: String },
   },
   dailyDonorCapacity: { type: Number, required: true, min: 0, max: 1000 },
   donations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Donation" }],
