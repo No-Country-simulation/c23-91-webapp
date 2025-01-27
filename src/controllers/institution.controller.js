@@ -37,6 +37,7 @@ export const getInstitutionAppointments = async (req, res) => {
       message: "Institution appointments fetched successfully.",
       payload: {
         institutionId: institution._id,
+        operatingHours: institution.operatingHours,
         appointments: institution.appointments,
       },
     });
