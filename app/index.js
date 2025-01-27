@@ -66,12 +66,17 @@ logoutBtn.addEventListener('click', () => {
 */
 
 
+function diseasesToggle(){
+  const select = document.getElementById('diseasesSelect');
+  select.disabled = !select.disabled;
+};
 
-  function diseasesDisabled(){
-    const select = document.getElementById('diseasesSelect');
-    select.disabled = true;
+function removeDisease(event){
+  const diseaseNo = event.target;
+
+  if(diseaseNo.checked){
+    document.getElementById('selectedDiseases').innerHTML = '';
   }
-  function diseasesEnabled(){
-    const select = document.getElementById('diseasesSelect');
-    select.disabled = false;
-  }
+  diseasesToggle();
+
+}

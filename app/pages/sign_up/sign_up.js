@@ -1,7 +1,4 @@
 window.onload=()=>{
-  // ---------------------------------------------------------------------------------------------------
-  // -------------------------------- Diseases selector component START --------------------------------
-  // ---------------------------------------------------------------------------------------------------
   const select = document.getElementById('diseasesSelect');
   const selectedDiseasesContainer = document.getElementById('selectedDiseases');
   
@@ -16,7 +13,6 @@ window.onload=()=>{
       pill.dataset.value = disease;
       pill.textContent = select.options[select.selectedIndex].text;
   
-      // Delete pill on event
       pill.addEventListener('click', () => {
         pill.remove();
       });
@@ -26,10 +22,6 @@ window.onload=()=>{
     // Reset select value
     select.value = '';
   });
-  // ---------------------------------------------------------------------------------------------------
-  // -------------------------------- Diseases selector component END ----------------------------------
-  // ---------------------------------------------------------------------------------------------------
-  
   
   const passwordInput = document.getElementById('inputPassword');
   const togglePasswordButton = document.getElementById('togglePassword');
@@ -99,7 +91,7 @@ function createUser(event) {
 
   console.log(data);
 
-    fetch('https://08f0-2800-2260-4040-1a92-4da9-c6f6-2943-edb3.ngrok-free.app/api/register', {
+    fetch('http://localhost:8080/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
