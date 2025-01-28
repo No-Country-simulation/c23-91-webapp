@@ -1,11 +1,10 @@
-console.log("token:::>", localStorage.getItem("token"));
-console.log("userID:::>", localStorage.getItem("userID"));
+console.log(localStorage.getItem("userID"));
 let user;
 document.addEventListener("DOMContentLoaded", function () {
-    // Función para cargar los datos del usuario
+    // Load user data in 'datos personales' form
     async function loadFormData() {
-        const spinner = document.getElementById("spinner"); // Referencia al spinner
-        spinner.style.display = "block"; // Mostrar el spinner
+        const spinner = document.getElementById("spinner"); 
+        spinner.style.display = "block";
         const userID = localStorage.getItem("userID");
         try {
             const response = await fetch(`http://localhost:8080/api/users/${userID}`, {
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
             user = data.payload;
 
-            // Llenado de inputs del formulario con los datos recibidos
             document.getElementById("inputName").value = user.firstName || "";
             document.getElementById("inputLastName").value = user.lastName || "";
             document.getElementById("inputEmail").value = user.email || "";
@@ -46,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Llamar a la función al cargar la página
+    // Call function on window load
     loadFormData();
 });
 
@@ -62,8 +60,10 @@ function createDiseasePill(diseaseValue, diseaseName) {
         pill.remove();
         if(diseasesChanged(diseasesPills, user.diseases)){
             document.getElementById("btn-updateUser").disabled = false;
+            document.getElementById("next-button1").disabled = true;
         } else {
             document.getElementById("btn-updateUser").disabled = true;
+            docuemnt.getElementById("next-button1").disabled = false;
         }
     });
 
@@ -93,23 +93,26 @@ function userAddDisease(event){
 
         if(diseasesChanged(diseasesPills, user.diseases)){
             document.getElementById("btn-updateUser").disabled = false;
+            document.getElementById("next-button1").disabled = true;
         } else {
             document.getElementById("btn-updateUser").disabled = true;
+            document.getElementById("next-button1").disabled = false;
         }
     }
     // Reset select value
     select.value = '';
-    // select.addEventListener('change', () => {
-    // });
 }
 
+// Unable and disable update button
 function userDataChange(event) {
     const input = event.target;
     const value = input.value;
     if (value !== user[input.dataset.field]) {
         document.getElementById("btn-updateUser").disabled = false;
+        document.getElementById("next-button1").disabled = true;
     } else {
         document.getElementById("btn-updateUser").disabled = true;
+        document.getElementById("next-button1").disabled = false;
     }
 }
 
@@ -117,7 +120,7 @@ function userDataChange(event) {
 async function nextStep(currentStep) {
     document.getElementById(`step-${currentStep}`).classList.add('d-none');
 
-    // Mostrar el siguiente paso
+    // Stepper styles
     const nextStep = currentStep + 1;
     document.getElementById(`step-${nextStep}`).classList.replace('d-none', 'd-flex');
 
@@ -143,7 +146,6 @@ async function nextStep(currentStep) {
             }
             const data = await response.json();
             const institutions = data.payload;
-            console.log(data);
 
             const institutionSelect = document.getElementById("institutionSelect");
             institutions.forEach(hospital => {
@@ -152,14 +154,10 @@ async function nextStep(currentStep) {
                 option.textContent = hospital.name;
                 institutionSelect.appendChild(option);
 
-                console.log(hospital._id)
             });
         } catch (error) {
             console.error("Error al cargar los hospitales:", error);
         }
-        console.log("Vamos al paso 2")
-    } else if (currentStep === 2) {
-        console.log("Vamos al paso 3")
     }
 }
 
@@ -199,10 +197,11 @@ async function updateUser(event) {
       .then(data => {
         
         if (data.status === 'success') {
-          alert('User registered successfully!');
           console.log('User registered:', data);
+          document.getElementById("next-button1").disabled = false;
+          document.getElementById("btn-updateUser").disabled = true;
         } else {
-          alert( `Error: ${data.message}`);
+        //   alert( `Error: ${data.message}`);
         }
       })
       .catch(error => {
@@ -211,6 +210,7 @@ async function updateUser(event) {
       });
   };
   
+// Create an array of available times based on the hospital's schedule
 function generateTimes(schedules) {
     const [openTime, closeTime] = schedules;
     const availableTimes = [];
@@ -218,26 +218,44 @@ function generateTimes(schedules) {
     const [oH, oM] = openTime.split(":").map(Number);
     const [cH, cM] = closeTime.split(":").map(Number);
 
-    let start = oH * 60 + oM; // Convertimos la hora de apertura a minutos
-    const end = cH * 60 + cM; // Convertimos la hora de cierre a minutos
+    // Convert openHours and closeHours to minutes
+    let start = oH * 60 + oM; 
+    const end = cH * 60 + cM; 
 
-    // Generar los horarios cada 30 minutos
-    while (start + 30 <= end) { // Nos aseguramos de no pasar del horario de cierre
-        const hora = Math.floor(start / 60); // Calculamos las horas
-        const minutos = start % 60; // Calculamos los minutos
+    // Generate times in 30-minute intervals
+    while (start + 30 <= end) { 
+        const hora = Math.floor(start / 60); 
+        const minutos = start % 60; 
         availableTimes.push(
             `${hora.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}`
-        ); // Añadimos el horario formateado
-        start += 30; // Sumamos 30 minutos
+        ); 
+        start += 30;
     }
 
     return availableTimes;
 }
 
+// Join date and hour selected by user
+function combinarFechaHora(fecha, hora) {
+    const [horaSeleccionada, minutosSeleccionados] = hora.split(":").map(Number);
+
+    const fechaCompleta = new Date(fecha);
+    fechaCompleta.setUTCHours(horaSeleccionada, minutosSeleccionados, 0, 0); 
+    fechaCompleta.setUTCMinutes(minutosSeleccionados);
+
+    return fechaCompleta.toISOString(); // Convertir a ISO en UTC
+}
+
+let bookedAppointments = {};
+
+let timesMondayToFriday = [];
+let timesSaturday = [];
+let timesSunday = [];
+
 async function getHospitalSchedule(event) {
     const institutionId = event.target.value;
     try{
-        const response = await fetch(`http://localhost:8080/api/institutions/679510245a3c2689379c2554/appointments`, {
+        const response = await fetch(`http://localhost:8080/api/institutions/${institutionId}/appointments`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -248,71 +266,76 @@ async function getHospitalSchedule(event) {
             throw new Error("Error al cargar los hospitales");
         }
         const data = await response.json();
-        // const institutions = data.payload;
-        console.log(data);  
-    } catch {
+        const institution = data.payload;
+        console.log(institution);
+
+        bookedAppointments = {};
+
+        timesMondayToFriday = generateTimes([institution.operatingHours.mondayToFriday.open, institution.operatingHours.mondayToFriday.close]);
+        timesSaturday = generateTimes([institution.operatingHours.saturday.open, institution.operatingHours.saturday.close]);
+        timesSunday = generateTimes([institution.operatingHours.sunday.open, institution.operatingHours.sunday.close]);
+
+        institution.appointments.forEach((appointment) => {
+            const date = new Date(appointment.appointmentDate);
+          
+            // Date format (YYYY-MM-DD)
+            const formattedDate = date.toISOString().split("T")[0];
+          
+            const hours = date.getUTCHours().toString().padStart(2, "0");
+            const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+            const formattedTime = `${hours}:${minutes}`;
+          
+            // Agregar al objeto bookedAppointments
+            if (!bookedAppointments[formattedDate]) {
+              bookedAppointments[formattedDate] = []; // Crear el arreglo si no existe
+            }
+            bookedAppointments[formattedDate].push(formattedTime);
+          });
+
+          console.log(bookedAppointments);
+
+    } catch(error) {
         console.error("Error al cargar los hospitales:", error);
     }
 }
 
-function combinarFechaHora(fecha, hora) {
-    const [horaSeleccionada, minutosSeleccionados] = hora.split(":").map(Number);
-  
-    const fechaCompleta = new Date(fecha);
-    fechaCompleta.setHours(horaSeleccionada, minutosSeleccionados, 0, 0);
-  
-    return fechaCompleta;
-  }
-
-// Simulación de las citas ya agendadas
-const bookedAppointments = {
-    "2025-01-10": ["11:30", "14:00"], // Citas ya tomadas
-    "2025-01-12": ["09:00", "10:30"],
-    "2025-01-15": ["11:00", "13:30"],
-};
-
-const timesMondayToFriday = generateTimes(["08:00", "20:00"]);
-const timesSaturday = generateTimes(["09:00", "14:00"]);
-const timesSunday = generateTimes(["cerrado", "cerrado"]);
-
-let appointmentDate;
+let appointmentDateSelected;
 document.addEventListener("DOMContentLoaded", function () {
     const calendar = flatpickr("#datepicker", {
         inline: true,
-        dateFormat: "d-m-Y",
+        dateFormat: "Y-m-d",
         defaultDate: "today",
-        minDate: "today", // Deshabilitar días anteriores a hoy
-        maxDate: new Date().fp_incr(90), // Permitir agendar citas hasta 30 días después
+        minDate: "today", 
+        maxDate: new Date().fp_incr(90), 
         onReady: function () {
             const daysContainer = document.querySelector(".flatpickr-days");
-            daysContainer.classList.add("gap-2"); // Ajustar espacio entre días
+            daysContainer.classList.add("gap-2"); 
         },
         onDayCreate: function (dObj, dStr, fp, dayElem) {
-            // Aplicar estilo a días deshabilitados (anteriores a hoy)
+            // Disable days styles
             if (dayElem.classList.contains("flatpickr-disabled")) {
                 dayElem.classList.add("bg-white", "text-muted"); // Fondo blanco y texto tenue
             }
-            // Obtener la fecha del día actual
+
             const date = dayElem.dateObj.toISOString().split("T")[0];
             if (dayElem.dateObj.getDay() === 0) {
-                dayElem.classList.add("bg-danger", "text-white", "border", "border-white"); // Domingo
+                dayElem.classList.add("bg-danger", "text-white", "border", "border-white");
             }
 
             if(dayElem.dateObj.getDay() > 0 && dayElem.dateObj.getDay() <= 5){
                 if (bookedAppointments[date] && bookedAppointments[date].length === timesMondayToFriday.length) {
-                    dayElem.classList.add("bg-primary", "text-white", "border", "border-white"); // Día sin horarios disponibles
+                    dayElem.classList.add("bg-primary", "text-white", "border", "border-white"); 
                 } else {
-                    dayElem.classList.add("bg-secondary", "text-dark", "border", "border-white"); // Día con horarios disponibles
+                    dayElem.classList.add("bg-secondary", "text-dark", "border", "border-white"); 
                 }   
             } else if(dayElem.dateObj.getDay() === 6){
                 if (bookedAppointments[date] && bookedAppointments[date].length === timesSaturday.length) {
-                    dayElem.classList.add("bg-primary", "text-white", "border", "border-white"); // Día sin horarios disponibles
+                    dayElem.classList.add("bg-primary", "text-white", "border", "border-white"); 
                 } else {
-                    dayElem.classList.add("bg-secondary", "text-dark", "border", "border-white"); // Día con horarios disponibles
+                    dayElem.classList.add("bg-secondary", "text-dark", "border", "border-white"); 
                 }   
             }
 
-            // Marcar los días según disponibilidad
         },
         onChange: function (selectedDates, dateStr) {
             const selectedDate = new Date(selectedDates[0]);
@@ -322,22 +345,21 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(dateStr);
 
             const timesContainer = document.getElementById("available-times");
-            timesContainer.innerHTML = ""; // Limpiar horarios
+            timesContainer.innerHTML = ""; 
 
-            // Remover bordes negros de otros días seleccionados previamente
+            //Remove styles from previous selected day
             document.querySelectorAll(".flatpickr-day").forEach(day => {
                 day.classList.remove("border-black");
             });
 
-            // Agregar borde negro al día seleccionado
+            // Add black border to selected day
             const selectedDay = document.querySelector(".flatpickr-day.selected");
             if (selectedDay) {
                 selectedDay.classList.replace("border-white", "border-primary");
             }
 
-            // Calcular horarios disponibles
-            const bookedTimes = bookedAppointments[dateStr] || []; // Citas tomadas en la fecha seleccionada
-             // Filtrar horas disponibles
+            const bookedTimes = bookedAppointments[dateStr] || []; 
+             // Filter available times based on the selected day
             let availableTimes;
             if(dayOfWeek === 0){
                 availableTimes = timesSunday.filter(time => !bookedTimes.includes(time)); 
@@ -350,20 +372,18 @@ document.addEventListener("DOMContentLoaded", function () {
             if (availableTimes.length > 0) {
                 availableTimes.forEach(time => {
                     const pill = document.createElement("span");
-                    pill.className = "badge bg-secondary text-dark p-2 border rounded-pill"; // Usar estilos Bootstrap
+                    pill.className = "badge bg-secondary text-dark p-2 border rounded-pill";
                     pill.textContent = time;
                     timesContainer.appendChild(pill);
 
-                    // Evento de selección de horario
                     pill.onclick = () => {
-                        // Remover selección previa
+                        // Remove previous selected time styles
                         const previouslySelected = document.querySelector(".badge.bg-primary");
                         if (previouslySelected) {
                             previouslySelected.classList.remove("bg-primary", "text-white");
                             previouslySelected.classList.add("bg-secondary", "text-dark");
                         }
-                        appointmentDate = combinarFechaHora(selectedDates[0], time);
-                        // Seleccionar el horario actual
+                        appointmentDateSelected = combinarFechaHora(selectedDates[0], pill.textContent);
                         pill.classList.remove("bg-secondary", "text-dark");
                         pill.classList.add("bg-primary", "text-white");
                     };
@@ -381,7 +401,7 @@ function createAppointment(event) {
     const form = event.target;
     const formData = new FormData(form);
     const appointmentData = {
-        date: appointmentDate,
+        appointmentDate: appointmentDateSelected,
         institutionId: formData.get("institutionSelect"),
         userId: localStorage.getItem("userID"),
         status: "Pending",
@@ -390,32 +410,34 @@ function createAppointment(event) {
 
     console.log(appointmentData);
 
-//     fetch("http://localhost:8080/api/appointments", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         },
-//         body: JSON.stringify(appointmentData),
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.status === "success") {
-//                 alert("Cita agendada exitosamente");
-//                 console.log("Cita agendada:", data);
-//             } else {
-//                 alert(`Error: ${data.message}`);
-//             }
-//         })
-//         .catch(error => {
-//             console.error("Error al agendar la cita:", error);
-//             alert("Ocurrió un error al agendar la cita. Por favor, inténtalo de nuevo más tarde.");
-//         });
+    fetch("http://localhost:8080/api/appointments", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(appointmentData),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                const divResponse = document.getElementById("step-3");
+                divResponse.innerHTML = `
+                    <i class="bi bi-check-circle-fill fs-1 text-success text-center"></i>
+                    <h3 class="text-center">Tu cita se ha agendado correctamente</h3>
+                    <p>Para ver todos los detalles ve al inicio </p>
+                    <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
+                    `;
+            }
+        })
+        .catch(error => {
+            const divResponse = document.getElementById("step-3");
+            divResponse.innerHTML = `
+                <i class="bi bi-x-circle-fill fs-1 text-primary text-center"></i>
+                <h3 class="text-center">Hubo un error al agendar la cita</h3>
+                <p>Ocurrió un error, intentalo más tarde</p>
+                <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
+                `;
+        });
 }
 
-
-function finishStepper() {
-    // Mostrar mensaje de finalización
-    alert("¡Formulario completado con éxito!");
-    location.reload(); // Recargar la página
-};

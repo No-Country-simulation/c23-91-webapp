@@ -179,7 +179,7 @@
                       </div>
                   </div>
                   <button class="btn btn-primary" disabled id="btn-updateUser" type="submit" >Actualizar datos</button>
-                  <button class="btn btn-primary" onclick="nextStep(1)" type="button">Siguiente</button>
+                  <button class="btn btn-primary" onclick="nextStep(1)" disabled id="next-button1" type="button">Siguiente</button>
                 </form>
             </div>
       
@@ -214,11 +214,7 @@
               <button class="btn btn-primary" onclick="nextStep(2)" type="submit">Siguiente</button>         
             </form>
       
-            <div id="step-3" class="step-content d-none d-flex flex-column justify-content-center align-items-center" style="height: 50vh;">
-              <i class="bi bi-check-circle-fill fs-1 text-success text-center"></i>
-              <h3 class="text-center">Tu cita se ha agendado correctamente</h3>
-              <p>Para ver todos los detalles ve al inicio </p>
-              <button class="btn btn-primary" onclick="finishStepper()">Finalizar</button>
+            <div id="step-3" class="step-content d-none d-flex flex-column justify-content-center align-items-center bg-light py-4 rounded" style="height: 50vh;">
             </div>
           </div>
         </div>
