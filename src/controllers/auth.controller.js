@@ -97,7 +97,7 @@ export const login = async (req, res) => {
 // POST - Registrar usuarios en lote.
 export const registerUsersBatch = async (req, res) => {
   try {
-    const users = req.body; // Espera un array de usuarios
+    const users = req.body;
 
     if (!Array.isArray(users) || users.length === 0) {
       return res.status(400).json({

@@ -22,8 +22,7 @@ export const getInstitutionAppointments = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const institution = await Institution.findById(id)
-    .populate("appointments");
+    const institution = await Institution.findById(id).populate("appointments");
 
     if (!institution) {
       return res.status(404).json({
@@ -37,6 +36,7 @@ export const getInstitutionAppointments = async (req, res) => {
       message: "Institution appointments fetched successfully.",
       payload: {
         institutionId: institution._id,
+        operatingHours: institution.operatingHours,
         appointments: institution.appointments,
       },
     });
@@ -66,7 +66,7 @@ export const createInstitution = async (req, res) => {
 // POST - Registrar un lote de instituciones.
 export const createInstitutionsBatch = async (req, res) => {
   try {
-    const institutions = req.body; // Espera un array de instituciones.
+    const institutions = req.body;
 
     if (!Array.isArray(institutions) || institutions.length === 0) {
       return res.status(400).json({
@@ -78,9 +78,23 @@ export const createInstitutionsBatch = async (req, res) => {
     const savedInstitutions = [];
 
     for (const institution of institutions) {
-      const { name, institutionType, address, email, operatingHours, dailyDonorCapacity } = institution;
+      const {
+        name,
+        institutionType,
+        address,
+        email,
+        operatingHours,
+        dailyDonorCapacity,
+      } = institution;
 
-      if (!name || !institutionType || !address || !email || !operatingHours || dailyDonorCapacity === undefined) {
+      if (
+        !name ||
+        !institutionType ||
+        !address ||
+        !email ||
+        !operatingHours ||
+        dailyDonorCapacity === undefined
+      ) {
         return res.status(400).json({
           status: "error",
           message: "All fields are required for each institution.",
