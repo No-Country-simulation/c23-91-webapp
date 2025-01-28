@@ -24,6 +24,7 @@ async function logUser(event) {
   try {
 
     const response = await fetch('http://localhost:8080/auth/login', {
+    const response = await fetch('http://localhost:8080/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,8 +42,8 @@ async function logUser(event) {
     if (data.status === 'success') {
       alert('User logged in successfully!');
       console.log(data);
-      localStorage.setItem("token", JSON.stringify(data.payload.token));
-      localStorage.setItem("userId", JSON.stringify(data.payload.user.id));
+      localStorage.setItem("token", data.payload.token);
+      localStorage.setItem("userID", data.payload.user.id);
     } else {
       alert(`Error: ${data.message}`);
     }

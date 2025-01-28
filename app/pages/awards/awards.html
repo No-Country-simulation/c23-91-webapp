@@ -59,8 +59,8 @@
         </div>
     </header>
 
-    <main class="row container my-4 mx-auto gx-4">
-        <aside class="mt-5 p-3 rounded d-flex flex-column flex-md-row align-items-start gap-4">
+    <section class="row container my-4 mx-auto gx-4">
+        <aside class="mt-1 p-3 rounded d-flex flex-column flex-md-row align-items-start gap-4">
             <!-- Primera sección -->
             <section class="col-md-6 col-12 rounded mx-auto">
                 <h2 class="text-capitalize text-start m-lg-2">Mis medallas</h2>
@@ -179,9 +179,35 @@
         </aside>
 
 
-    </main>
+    </section>
 
+    <div class="bg-primary text-white text-center py-3 mt-1">
+        <p class="mb-0 fw-bold">MIS DONACIONES</p>
+    </div>
 
+    <section class="container my-5 d-flex flex-column justify-content-center mt-3">
+        <table class="table table-hover text-center w-100">
+            <thead class="table-light">
+                <tr>
+                    <th>Número</th>
+                    <th>Fecha</th>
+                    <th>Hospital</th>
+                    <th class="d-none d-md-table-cell">Ubicación</th>
+                </tr>
+            </thead>
+            <tbody id="donationsTableBody">
+
+            </tbody>
+        </table>
+
+        <!-- Paginacion -->
+        <nav>
+            <ul class="pagination justify-content-center" id="paginationContainer">
+
+            </ul>
+        </nav>
+    </section>
+</main>
 
     <footer class="bg-primary pb-2">
         <div id="1" class="d-flex justify-content-start gap-3 align-items-center ps-4 pt-4 mt-5 mb-4">
@@ -210,4 +236,6 @@
         <p class="text-center text-white" style="font-size: 0.7rem; font-weight: 300;">Todos los derechos son reservados
             | 2025</p>
     </footer>
+    <script src="./awards.js"></script>
 </body>
+</html>

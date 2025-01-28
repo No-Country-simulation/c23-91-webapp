@@ -1,7 +1,4 @@
 window.onload=()=>{
-  // ---------------------------------------------------------------------------------------------------
-  // -------------------------------- Diseases selector component START --------------------------------
-  // ---------------------------------------------------------------------------------------------------
   const select = document.getElementById('diseasesSelect');
   const selectedDiseasesContainer = document.getElementById('selectedDiseases');
 
@@ -26,10 +23,6 @@ window.onload=()=>{
     // Reset select value
     select.value = '';
   });
-  // ---------------------------------------------------------------------------------------------------
-  // -------------------------------- Diseases selector component END ----------------------------------
-  // ---------------------------------------------------------------------------------------------------
-  
   
   const passwordInput = document.getElementById('inputPassword');
   const togglePasswordButton = document.getElementById('togglePassword');
