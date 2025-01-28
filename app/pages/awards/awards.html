@@ -59,7 +59,7 @@
         </div>
     </header>
 
-    <main class="row container my-4 mx-auto gx-4">
+    <section class="row container my-4 mx-auto gx-4">
         <aside class="mt-5 p-3 rounded d-flex flex-column flex-md-row align-items-start gap-4">
             <!-- Primera sección -->
             <section class="col-md-6 col-12 rounded mx-auto">
@@ -179,7 +179,55 @@
         </aside>
 
 
-    </main>
+    </section>
+
+    <div class="bg-primary text-white text-center py-3 mt-5">
+        <p class="mb-0 fw-bold">MIS DONACIONES</p>
+    </div>
+
+    <section class="container my-5 d-flex flex-column justify-content-center mt-3">
+        <table class="table table-hover text-center w-100">
+            <thead class="table-light">
+                <tr>
+                    <th>Número</th>
+                    <th>Fecha</th>
+                    <th>Hospital</th>
+                    <th class="d-none d-md-table-cell">Ubicación</th>
+                </tr>
+            </thead>
+            <tbody id="donationsTableBody">
+
+            </tbody>
+        </table>
+
+        <!-- Paginacion -->
+        <nav>
+            <ul class="pagination justify-content-center" id="paginationContainer">
+
+            </ul>
+        </nav>
+    </section>
+</main>
+
+<footer class="bg-primary pb-2">
+    <div class="d-flex justify-content-start gap-3 align-items-center ps-4 pt-4 mt-5 mb-4">
+        <img class="logo rounded-circle img-fluid" src="/app/assets/logo.avif" alt="Logo" style="height: 50px;">
+        <h6 class="text-white">NombreApp</h6>
+    </div>
+    <nav class="d-flex gap-4 gap-lg-5 justify-content-center align-items-center flex-grow-1">
+        <div class="d-flex flex-column justify-content-center align-items-start">
+            <a href="./index.html" class="text-white text-decoration-none m-1" style="font-size: 0.8rem; font-weight: 300;">Inicio</a>
+            <a href="./pages/login.html" class="text-white text-decoration-none m-1" style="font-size: 0.8rem; font-weight: 300;">Inicio de sesión</a>
+            <a href="#" class="text-white text-decoration-none m-1" style="font-size: 0.8rem; font-weight: 300;">Agenda tu cita</a>
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start">
+            <a href="#" class="text-white text-decoration-none m-1" style="font-size: 0.8rem; font-weight: 300;">CONTACTO</a>
+            <a href="#" class="text-white text-decoration-none m-1" style="font-size: 0.8rem; font-weight: 300;">nombreApp@mail.com</a>
+            <p class="text-white m-1" style="font-size: 0.8rem; font-weight: 300;">+(12) 34-56-78-910</p>
+        </div>
+    </nav>
+    <hr style="border: none; border-top: 1px solid #fff; opacity: 1;">
+    <p class="text-center text-white" style="font-size: 0.7rem; font-weight: 300;">Todos los derechos son reservados | 2025</p>
 
 
 
