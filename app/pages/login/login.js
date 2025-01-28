@@ -43,6 +43,7 @@ async function logUser(event) {
       console.log(data);
       localStorage.setItem("token", JSON.stringify(data.payload.token));
       localStorage.setItem("userId", JSON.stringify(data.payload.user.id));
+      const userId_back_LS = JSON.parse(localStorage.getItem("userId"));
     } else {
       alert(`Error: ${data.message}`);
     }
@@ -54,3 +55,7 @@ async function logUser(event) {
   inputEmailEl.value = '';
   passwordInput.value = '';
 }
+
+// localStorage.setItem("prueba", "valor");
+const value = data.payload.user.id;
+localStorage.setItem("prueba2", "JSON.strinfigy('value')");
