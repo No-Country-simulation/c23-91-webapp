@@ -12,7 +12,7 @@ const institutionSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Validación de email.
+    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   },
   operatingHours: {
     mondayToFriday: {
