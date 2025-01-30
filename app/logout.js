@@ -4,7 +4,7 @@ function logout() {
     const confirmation = confirm('¿Está seguro de que desea cerrar sesión?');
     if (confirmation) {
         localStorage.removeItem('token');
-        localStorage.removeItem('userId');
+        localStorage.removeItem('userID');
         alert('Ha cerrado su sesión');
         const absoluteUrl = `${window.location.origin}/app/index.html`;
         window.location.href = absoluteUrl;

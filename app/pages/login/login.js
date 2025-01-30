@@ -7,7 +7,6 @@ togglePasswordButton.addEventListener('click', () => {
   const type = passwordInput.type === 'password' ? 'text' : 'password';
   passwordInput.type = type;
 
-  // Toggle icon
   togglePasswordButton.innerHTML = type === 'password'
     ? '<i class="bi bi-eye"></i>'
     : '<i class="bi bi-eye-slash"></i>';
@@ -24,7 +23,7 @@ async function logUser(event) {
   try {
 
     const response = await fetch('http://localhost:8080/auth/login', {
-    const response = await fetch('http://localhost:8080/auth/login', {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

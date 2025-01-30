@@ -92,12 +92,12 @@
                         <h2 class="fs-4 text-center text-md-start">Última donación:</h2>
                         <div class="d-flex justify-content-center">
                             <section class="position-relative rounded text-center p-3 w-100 h-auto">
-                                <section class="border fw-bold fs-4 bg-danger text-white py-2 rounded-top">Enero
+                                <section class="border fw-bold fs-4 bg-danger text-white py-2 rounded-top" id="mes_ult_don">Enero
                                 </section>
-                                <h1 class="border fw-semibold  text-black py-5 rounded-bottom bg-white" style="font-size: 5rem;">15
+                                <h1 class="border fw-semibold  text-black py-5 rounded-bottom bg-white" style="font-size: 5rem;" id="dia_ult_don">15
                                 </h1>
                                 <span
-                                    class="position-absolute fw-bold fs-1 text-center  bg-danger text-white rounded py-1 px-1 w-50 mx-auto bottom-0 end-0">2025</span>
+                                    class="position-absolute fw-bold fs-1 text-center  bg-danger text-white rounded py-1 px-1 w-50 mx-auto bottom-0 end-0" id="anio_ult_don">2025</span>
                             </section>
                         </div>
                     </section>
@@ -137,22 +137,22 @@
 
                     <span class="dash_awards d-block text-center my-3"></span>
 
-                    <h5 class="text-center mt-4 fs-6">Última donación</h5>
+                    <!-- <h5 class="text-center mt-4 fs-6">Última donación</h5> -->
 
-                    <div class="position-relative d-flex justify-content-center mt-3 ">
+                    <div id="cita_content" class="position-relative d-flex justify-content-center mt-3 ">
                         <section class="rounded text-center p-3" style="width: 150px;">
-                            <section class="border fw-bold fs-5 bg-danger text-white py-2 rounded-top">Enero</section>
-                            <section class="border fw-semibold fs-4 text-black py-3 rounded-bottom bg-white">15
+                            <section class="border fw-bold fs-5 bg-danger text-white py-2 rounded-top" id="mes_prox_cita">Enero</section>
+                            <section class="border fw-semibold fs-4 text-black py-3 rounded-bottom bg-white" id="dia_prox_cita">15
                             </section>
                             <span
-                                class=" position-absolute end-0 bottom-0 fw-bold fs-6 text-center bg-danger text-white rounded py-1 px-1 w-25 me-5 mx-auto d-block" >2025</span>
+                                class=" position-absolute end-0 bottom-0 fw-bold fs-6 text-center bg-danger text-white rounded py-1 px-1 w-25 me-5 mx-auto d-block" id="anio_prox_cita">2025</span>
                         </section>
                     </div>
-                    <aside class="d-flex align-items-center gap-4 ms-md-4">
+                    <!-- <aside class="d-flex align-items-center gap-4 ms-md-4">
                         <img src="./blood-icons/ubicacion.png" alt="hospital" class="img-fluid rounded-circle"
                             style="width: 28px; height: 28px;">
                         <p class="fs-6 mb-0">Hospital General 24, Buenos Aires, Argentina</p>
-                    </aside>
+                    </aside> -->
                    
                     <section class="d-flex flex-column align-items-center text-center my-3">
                        
@@ -166,8 +166,8 @@
                         </div>
 
                         <div class="d-flex gap-3 mt-5 mb-1">
-                            <button class="btn btn-primary px-4 py-2 rounded-pill">Cancelar cita</button>
-                            <button class="btn btn-danger px-4 py-2 rounded-pill">Editar cita</button>
+                            <button class="btn btn-primary px-4 py-2 rounded-pill" id="cancelar_cita">Cancelar cita</button>
+                            <!-- <button class="btn btn-danger px-4 py-2 rounded-pill">Editar cita</button> -->
                         </div>
                     </section>
 
@@ -195,14 +195,14 @@
                     <th class="d-none d-md-table-cell">Ubicación</th>
                 </tr>
             </thead>
-            <tbody id="donationsTableBody">
+            <tbody id="donations-container">
 
             </tbody>
         </table>
 
         <!-- Paginacion -->
         <nav>
-            <ul class="pagination justify-content-center" id="paginationContainer">
+            <ul class="d-flex pagination page-item page-link justify-content-center" style="border:none;" id="pagination-container">
 
             </ul>
         </nav>
