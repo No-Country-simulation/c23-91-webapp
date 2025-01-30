@@ -6,6 +6,7 @@ const dia_prox_cita_El = document.getElementById("dia_prox_cita");
 const anio_prox_cita_El = document.getElementById("anio_prox_cita");
 const cancelar_cita_El = document.getElementById("cancelar_cita");
 const cita_content_El = document.getElementById("cita_content");
+const estado_El = document.getElementById("estado");
 let appointmentId;
 
 console.log(cancelar_cita_El);
@@ -62,8 +63,8 @@ const fetchDonationsData = async () => {
 
       console.log("Before setting elements:");
       console.log("Month:", month);
-    console.log("Day:", day);
-    console.log("Year:", year);
+      console.log("Day:", day);
+      console.log("Year:", year);
 
       mes_ult_don_El.textContent = month;
       dia_ult_don_El.textContent = day;
@@ -91,6 +92,8 @@ if (appointmentsData.length > 0) {
     anio_prox_cita_El.textContent = year_app;
 
     cancelar_cita_El.disabled = false;
+    cancelar_cita_El.style.display= "block";
+
   } else {
     cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary rounded">
@@ -99,8 +102,11 @@ if (appointmentsData.length > 0) {
     </div>
 `;
 
-    cancelar_cita_El.disabled = true;
+    cancelar_cita_El.style.display = "none";
+    estado_El.classList.add("d-none");
+
   }
+  
 } else {
   cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded">
@@ -109,7 +115,9 @@ if (appointmentsData.length > 0) {
     </div>
 `;
 
-  cancelarBtn.disabled = true;
+    cancelar_cita_El.style.display = "none";
+    estado_El.classList.add("d-none");
+
 }
 
 
