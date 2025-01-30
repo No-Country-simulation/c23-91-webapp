@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   birthday: { type: Date, required: true },
   gender: {
     type: String,
-    enum: ["Male", "Female", "Other"],
+    enum: ["Male", "Female",],
     required: true,
   },
   bloodType: {

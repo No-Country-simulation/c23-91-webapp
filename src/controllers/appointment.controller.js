@@ -44,6 +44,28 @@ export const createAppointment = async (req, res) => {
       });
     }
 
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        message: "User not found.",
+      });
+    }
+
+    const lastDonation = await Donation.findOne({ userId }).sort({ donationDate: -1 });
+    if (lastDonation) {
+      const monthsToWait = user.gender === "Male" ? 3 : 4;
+      const nextEligibleDate = new Date(lastDonation.donationDate);
+      nextEligibleDate.setMonth(nextEligibleDate.getMonth() + monthsToWait);
+
+      if (new Date(appointmentDate) < nextEligibleDate) {
+        return res.status(400).json({
+          status: "error",
+          message: `You must wait at least ${monthsToWait} months before scheduling a new donation appointment.`,
+        });
+      }
+    }
+
     const newAppointment = new Appointment({
       userId,
       institutionId,
@@ -77,12 +99,13 @@ export const createAppointment = async (req, res) => {
   }
 };
 
+
 // PUT - Confirmar una cita.
 export const confirmAppointment = async (req, res) => {
   try {
-    const { appointmentId } = req.params;
+    const { id } = req.params;
 
-    const appointment = await Appointment.findById(appointmentId);
+    const appointment = await Appointment.findById(id);
 
     if (!appointment || appointment.status !== "Pending") {
       return res.status(400).json({
@@ -118,7 +141,7 @@ export const confirmAppointment = async (req, res) => {
     });
 
     const updatedAppointment = await Appointment.findByIdAndUpdate(
-      appointmentId,
+      id,
       { status: "Completed" },
       { new: true }
     );
@@ -127,7 +150,8 @@ export const confirmAppointment = async (req, res) => {
     const totalPoints = (user.totalPoints || 0) + pointsEarned;
 
     const awards = await Award.find({
-      pointsRequired: { $lte: totalPoints }}).sort({ pointsRequired: -1 });
+      pointsRequired: { $lte: totalPoints },
+    }).sort({ pointsRequired: -1 });
     const highestAward = awards[0];
 
     const updateData = { totalPoints };
@@ -149,6 +173,41 @@ export const confirmAppointment = async (req, res) => {
     });
   } catch (error) {
     console.error("Error confirming appointment:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error.",
+      error,
+    });
+  }
+};
+
+// PUT - Cancelar una cita.
+export const cancelAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const appointment = await Appointment.findById(id);
+
+    if (!appointment || appointment.status !== "Pending") {
+      return res.status(400).json({
+        status: "error",
+        message: "Appointment not found or cannot be cancelled.",
+      });
+    }
+
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      id,
+      { status: "Cancelled" },
+      { new: true }
+    );
+
+    res.status(200).json({
+      status: "success",
+      message: "Appointment cancelled successfully.",
+      payload: updatedAppointment,
+    });
+  } catch (error) {
+    console.error("Error cancelling appointment:", error);
     res.status(500).json({
       status: "error",
       message: "Internal server error.",
