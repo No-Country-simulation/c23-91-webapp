@@ -52,19 +52,19 @@ export const createAppointment = async (req, res) => {
       });
     }
 
-    const lastDonation = await Donation.findOne({ userId }).sort({ donationDate: -1 });
-    if (lastDonation) {
-      const monthsToWait = user.gender === "Male" ? 3 : 4;
-      const nextEligibleDate = new Date(lastDonation.donationDate);
-      nextEligibleDate.setMonth(nextEligibleDate.getMonth() + monthsToWait);
+    // const lastDonation = await Donation.findOne({ userId }).sort({ donationDate: -1 });
+    // if (lastDonation) {
+    //   const monthsToWait = user.gender === "Male" ? 3 : 4;
+    //   const nextEligibleDate = new Date(lastDonation.donationDate);
+    //   nextEligibleDate.setMonth(nextEligibleDate.getMonth() + monthsToWait);
 
-      if (new Date(appointmentDate) < nextEligibleDate) {
-        return res.status(400).json({
-          status: "error",
-          message: `You must wait at least ${monthsToWait} months before scheduling a new donation appointment.`,
-        });
-      }
-    }
+    //   if (new Date(appointmentDate) < nextEligibleDate) {
+    //     return res.status(400).json({
+    //       status: "error",
+    //       message: `You must wait at least ${monthsToWait} months before scheduling a new donation appointment.`,
+    //     });
+    //   }
+    // }
 
     const newAppointment = new Appointment({
       userId,
