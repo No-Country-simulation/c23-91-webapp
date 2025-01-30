@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Get donations data:
 const fetchDonationsData = async () => {
+
   try {
     const userID = localStorage.getItem("userID");
 
@@ -43,13 +44,26 @@ const fetchDonationsData = async () => {
     donationsData = data.payload?.donations || [];
     console.log("Extracted Donations:", donationsData);
 
+    console.log("donationsData at start:", donationsData);
+
+    const monthNames = [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+
     if (donationsData.length > 0) {
       const lastDonation = donationsData[donationsData.length - 1];
       const donationDate = new Date(lastDonation.donationDate);
 
       const year = donationDate.getFullYear();
-      const month = String(donationDate.getMonth() + 1).padStart(2, '0');
+      const monthIndex = donationDate.getMonth();
+      const month = monthNames[monthIndex];
       const day = String(donationDate.getDate()).padStart(2, '0');
+
+      console.log("Before setting elements:");
+      console.log("Month:", month);
+    console.log("Day:", day);
+    console.log("Year:", year);
 
       mes_ult_don_El.textContent = month;
       dia_ult_don_El.textContent = day;
@@ -68,7 +82,8 @@ if (appointmentsData.length > 0) {
   if (nextAppointment.status === "Pending") {
     const appointmentDate = new Date(nextAppointment.appointmentDate);
     const year_app = appointmentDate.getFullYear();
-    const month_app = String(appointmentDate.getMonth() + 1).padStart(2, '0');
+    const monthIndex = appointmentDate.getMonth();
+    const month_app = monthNames[monthIndex];
     const day_app = String(appointmentDate.getDate()).padStart(2, '0');
 
     mes_prox_cita_El.textContent = month_app;
@@ -110,7 +125,7 @@ const displayDonations = (donations) => {
   const container = document.getElementById("donations-container");
 
   if (!container) {
-    console.warn("⚠️ Donations container not found.");
+    console.warn("Donations container not found.");
     return;
   }
 
@@ -143,7 +158,7 @@ const renderPagination = (donations) => {
   const paginationContainer = document.getElementById("pagination-container");
 
   if (!paginationContainer) {
-    console.warn("⚠️ Pagination container not found.");
+    console.warn("Pagination container not found.");
     return;
   }
 
@@ -176,7 +191,7 @@ const renderPagination = (donations) => {
 
 cancelar_cita_El.addEventListener("click", async function () {
   if (!appointmentId) {
-    console.error("❌ No appointment ID found!");
+    console.error("No appointment ID found!");
     return;
   }
 
@@ -191,12 +206,20 @@ cancelar_cita_El.addEventListener("click", async function () {
     }
 
     const result = await response.json();
-    console.log("✅ Appointment cancelled:", result);
+    console.log("Appointment cancelled:", result);
 
     cancelar_cita_El.disabled = true;
   } catch (error) {
-    console.error("❌ Failed to cancel the appointment:", error);
+    console.error("Failed to cancel the appointment:", error);
   }
+
+  cita_content_El.innerHTML = `
+    <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary rounded">
+      <p class="mb-3 text-primary fs-6">"No tienes ninguna cita agendada"</p>
+      <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
+    </div>
+    `;
+
 });
 
 
