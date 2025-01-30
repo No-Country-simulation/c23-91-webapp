@@ -228,6 +228,9 @@ cancelar_cita_El.addEventListener("click", async function () {
     </div>
     `;
 
+    cancelar_cita_El.style.display = "none";
+    estado_El.classList.add("d-none");
+
 });
 
 
