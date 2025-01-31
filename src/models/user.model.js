@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   birthday: { type: Date, required: true },
   gender: {
     type: String,
-    enum: ["Male", "Female", "Other"],
+    enum: ["Male", "Female",],
     required: true,
   },
   bloodType: {
@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Validación de email.
+    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   },
   password: { type: String, required: true },
   diseases: [
@@ -31,8 +31,15 @@ const userSchema = new mongoose.Schema({
   ],
   donations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Donation" }],
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
+  totalPoints: { type: Number, default: 0 },
+  awards: [
+    {
+      level: { type: Number, required: true },
+      name: { type: String, required: true },
+      dateAchieved: { type: Date, default: Date.now },
+    },
+  ],
   // profilePicture: {  },
-  // awards: { },
 });
 
 userSchema.pre("save", async function (next) {
