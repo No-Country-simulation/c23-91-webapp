@@ -54,3 +54,4 @@ async function logUser(event) {
   inputEmailEl.value = '';
   passwordInput.value = '';
 }
+

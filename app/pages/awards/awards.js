@@ -7,14 +7,96 @@ const anio_prox_cita_El = document.getElementById("anio_prox_cita");
 const cancelar_cita_El = document.getElementById("cancelar_cita");
 const cita_content_El = document.getElementById("cita_content");
 const estado_El = document.getElementById("estado");
+let mapFrameDonEl = document.getElementById("mapFrameDon");
+let mapFrameCitEl = document.getElementById("mapFrameCit");
+let nombre_hosp_ult_don_El = document.getElementById("nombre_hosp_ult_don");
+let nombre_hosp_prox_cita_El = document.getElementById("nombre_hosp_prox_cita");
+let sitio_Web_Link_Don = document.querySelector(".d-flex.align-items-center.gap-2.text-decoration-underline");
+let sitio_Web_Link_Cit = document.querySelector(".text-decoration-underline.mt-5");
 let appointmentId;
-
-console.log(cancelar_cita_El);
-
+let lastDonationHospital = "";
+let nextAppointmentHospital = "";
 let currentPage = 1;
 const donationsPerPage = 8;
-
 let donationsData = [];
+
+const hospitales = [
+  {
+    name: "Hospital El Cruce",
+    address:
+      "Av. Calchaquí 5401, B1888 Florencio Varela, Provincia de Buenos Aires",
+    website: "https://www.hospitalelcruce.org/",
+    url: "https://www.google.com/maps?q=Av.+Calchaquí+5401,+B1888+Florencio+Varela,+Provincia+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Clínica del Sol",
+    address: "Av. Coronel Díaz 2211, C1425 Cdad. Autónoma de Buenos Aires",
+    website: "https://www.cdelsol.com.ar/cdelsol/",
+    url: "https://www.google.com/maps?q=Av.+Coronel+Díaz+2211,+C1425+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Banco de Sangre Buenos Aires",
+    address: "Av. Díaz Vélez 3973, Cdad. Autónoma de Buenos Aires",
+    website: "https://www.hemocentro.org/",
+    url: "https://www.google.com/maps?q=Av.+Díaz+Vélez+3973,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Hospital de Clínicas 'Dr. Alberto de Zara'",
+    address: "Av. Córdoba 2351, C1120 Cdad. Autónoma de Buenos Aires",
+    website: "https://portal.hospitaldeclinicas.uba.ar/",
+    url: "https://www.google.com/maps?q=Av.+Córdoba+2351,+C1120+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Hospital Italiano de Buenos Aires",
+    address: "Perón 4190, Almagro, Cdad. Autónoma de Buenos Aires",
+    website: "https://www.hospitalitaliano.org.ar/",
+    url: "https://www.google.com/maps?q=Perón+4190,+Almagro,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Clínica Zabala",
+    address: "Av. Cabildo 1295, C1426AAM Cdad. Autónoma de Buenos Aires",
+    website: "https://www.swissmedical.com.ar/clinewsite/zabala/",
+    url: "https://www.google.com/maps?q=Av.+Cabildo+1295,+C1426AAM+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Hospital de Niños 'Ricardo Gutiérrez'",
+    address: "Gallo 1330, Recoleta, Cdad. Autónoma de Buenos Aires",
+    website:
+      "https://buenosaires.gob.ar/salud/hospitales-y-establecimientos-de-salud/hospital-de-ninos-dr-ricardo-gutierrez",
+    url: "https://www.google.com/maps?q=Gallo+1330,+Recoleta,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Instituto del Cáncer de la Fundación Favaloro",
+    address: "Av. Belgrano 1746, Cdad. Autónoma de Buenos Aires",
+    website: "https://www.fundacionfavaloro.org/",
+    url: "https://www.google.com/maps?q=Av.+Belgrano+1746,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Banco Central de Sangre",
+    address: "Av. Díaz Vélez 3973, Cdad. Autónoma de Buenos Aires",
+    website: "https://www.hemocentro.org/",
+    url: "https://www.google.com/maps?q=Av.+Díaz+Vélez+3973,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Hospital Militar Central 'Cirujano Mayor Dr. Ricardo Argerich'",
+    address: "Av. Luis María Campos 726-800, Cdad. Autónoma de Buenos Aires",
+    website: "https://www2.hmc.mil.ar/",
+    url: "https://www.google.com/maps?q=Av.+Luis+María+Campos+726-800,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
+  },
+  {
+    name: "Hospital Central",
+    address: "L. N. Alem &, M5502 Salta, Mendoza",
+    website:
+      "https://www.facebook.com/people/Hospital-Central-de-Mendoza/100068122383336/#",
+    url: "https://www.google.com/maps?q=L.+N.+Alem+%26,+M5502+Salta,+Mendoza&output=embed",
+  },
+  {
+    name: "Clínica del Norte",
+    address: "25 de Mayo 138 - 4200 Santiago del Estero",
+    website: "https://sanatorionorte.com/",
+    url: "https://www.google.com/maps?q=25+de+Mayo+138+-+4200+Santiago+del+Estero&output=embed",
+  },
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchDonationsData();
@@ -22,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Get donations data:
 const fetchDonationsData = async () => {
-
   try {
     const userID = localStorage.getItem("userID");
 
@@ -31,25 +112,43 @@ const fetchDonationsData = async () => {
       return;
     }
 
-    console.log("Fetching from:", `http://localhost:8080/api/users/${userID}/details`);
+    console.log(
+      "Fetching from:",
+      `http://localhost:8080/api/users/${userID}/details`
+    );
 
-    const response = await fetch(`http://localhost:8080/api/users/${userID}/details`);
+    const response = await fetch(
+      `http://localhost:8080/api/users/${userID}/details`
+    );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch donations data: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch donations data: ${response.status} ${response.statusText}`
+      );
     }
 
     const data = await response.json();
     console.log("API Response:", data);
 
     donationsData = data.payload?.donations || [];
-    console.log("Extracted Donations:", donationsData);
 
-    console.log("donationsData at start:", donationsData);
+    lastDonationHospital =
+      donationsData[donationsData.length - 1]?.institutionId?.name;
+    nombre_hosp_ult_don_El.textContent = lastDonationHospital;
 
     const monthNames = [
-      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
     ];
 
     if (donationsData.length > 0) {
@@ -59,71 +158,75 @@ const fetchDonationsData = async () => {
       const year = donationDate.getFullYear();
       const monthIndex = donationDate.getMonth();
       const month = monthNames[monthIndex];
-      const day = String(donationDate.getDate()).padStart(2, '0');
-
-      console.log("Before setting elements:");
-      console.log("Month:", month);
-      console.log("Day:", day);
-      console.log("Year:", year);
+      const day = String(donationDate.getDate()).padStart(2, "0");
 
       mes_ult_don_El.textContent = month;
       dia_ult_don_El.textContent = day;
       anio_ult_don_El.textContent = year;
-
-      console.log(`Last donation date: ${year}-${month}-${day}`);
     }
+
+    const hospitalIndexDon = hospitales.findIndex(
+      (hospital) => hospital.name === lastDonationHospital
+    );
+    mapFrameDonEl.src = hospitales[hospitalIndexDon].url;
+    sitio_Web_Link_Don.href = hospitales[hospitalIndexDon].website;
+    sitio_Web_Link_Don.target = "_blank";
 
     const appointmentsData = data.payload?.appointments || [];
     appointmentId = appointmentsData[appointmentsData.length - 1]._id;
-    console.log(appointmentId);
 
-if (appointmentsData.length > 0) {
-  const nextAppointment = appointmentsData[appointmentsData.length - 1];
+    if (appointmentsData.length > 0) {
+      const nextAppointment = appointmentsData[appointmentsData.length - 1];
 
-  if (nextAppointment.status === "Pending") {
-    const appointmentDate = new Date(nextAppointment.appointmentDate);
-    const year_app = appointmentDate.getFullYear();
-    const monthIndex = appointmentDate.getMonth();
-    const month_app = monthNames[monthIndex];
-    const day_app = String(appointmentDate.getDate()).padStart(2, '0');
+      if (nextAppointment.status === "Pending") {
+        const appointmentDate = new Date(nextAppointment.appointmentDate);
+        const year_app = appointmentDate.getFullYear();
+        const monthIndex = appointmentDate.getMonth();
+        const month_app = monthNames[monthIndex];
+        const day_app = String(appointmentDate.getDate()).padStart(2, "0");
 
-    mes_prox_cita_El.textContent = month_app;
-    dia_prox_cita_El.textContent = day_app;
-    anio_prox_cita_El.textContent = year_app;
+        mes_prox_cita_El.textContent = month_app;
+        dia_prox_cita_El.textContent = day_app;
+        anio_prox_cita_El.textContent = year_app;
 
-    cancelar_cita_El.disabled = false;
-    cancelar_cita_El.style.display= "block";
+        cancelar_cita_El.disabled = false;
+        cancelar_cita_El.style.display = "block";
 
-  } else {
-    cita_content_El.innerHTML = `
+        nextAppointmentHospital =
+          appointmentsData[appointmentsData.length - 1]?.institutionId?.name;
+        nombre_hosp_prox_cita_El.textContent = nextAppointmentHospital;
+
+        const hospitalIndexCit = hospitales.findIndex(
+          (hospital) => hospital.name === nextAppointmentHospital
+        );
+        mapFrameCitEl.src = hospitales[hospitalIndexCit].url;
+        sitio_Web_Link_Cit.href = hospitales[hospitalIndexCit].website;
+        sitio_Web_Link_Cit.target = "_blank";
+      } else {
+        cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary rounded">
       <p class="mb-3 text-primary fs-6">"No tienes ninguna cita agendada"</p>
       <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
     </div>
 `;
 
-    cancelar_cita_El.style.display = "none";
-    estado_El.classList.add("d-none");
-
-  }
-  
-} else {
-  cita_content_El.innerHTML = `
+        cancelar_cita_El.style.display = "none";
+        estado_El.classList.add("d-none");
+      }
+    } else {
+      cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded">
       <p class="mb-3 text-primary">"No tienes ninguna cita agendada"</p>
       <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
     </div>
 `;
 
-    cancelar_cita_El.style.display = "none";
-    estado_El.classList.add("d-none");
-
-}
-
+      cancelar_cita_El.style.display = "none";
+      estado_El.classList.add("d-none");
+    }
 
     displayDonations(donationsData);
     renderPagination(donationsData);
-
   } catch (error) {
     console.error("Error fetching donations data:", error);
   }
@@ -180,7 +283,7 @@ const renderPagination = (donations) => {
 
     for (let i = 1; i <= totalPages; i++) {
       const li = document.createElement("li");
-      li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+      li.className = `page-item ${i === currentPage ? "active" : ""}`;
       li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
 
       li.addEventListener("click", (e) => {
@@ -204,10 +307,13 @@ cancelar_cita_El.addEventListener("click", async function () {
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/api/appointments/${appointmentId}/cancel`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" }
-    });
+    const response = await fetch(
+      `http://localhost:8080/api/appointments/${appointmentId}/cancel`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status} - ${response.statusText}`);
@@ -228,9 +334,6 @@ cancelar_cita_El.addEventListener("click", async function () {
     </div>
     `;
 
-    cancelar_cita_El.style.display = "none";
-    estado_El.classList.add("d-none");
-
+  cancelar_cita_El.style.display = "none";
+  estado_El.classList.add("d-none");
 });
-
-

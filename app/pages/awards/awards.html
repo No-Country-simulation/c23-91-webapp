@@ -117,12 +117,9 @@
                         <aside class="d-flex align-items-center gap-4 ms-md-4">
                             <img src="./blood-icons/ubicacion.png" alt="hospital" class="img-fluid rounded-circle"
                                 style="width: 28px; height: 28px;">
-                            <p class="mb-0">Hospital General 24, Buenos Aires, Argentina</p>
+                            <p id="nombre_hosp_ult_don" class="mb-0">Nombre del hospital</p>
                         </aside>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.9004869840655!2d-58.40951932350434!3d-34.58138445632045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb57cc40263d5%3A0xeb42c7229c2253c3!2sHospital%20General%20de%20Agudos%20Dr.%20Juan%20A.%20Fern%C3%A1ndez!5e0!3m2!1ses!2sar!4v1737758716965!5m2!1ses!2sar"
-                            width="250" height="150" class="rounded ms-md-4" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe id="mapFrameDon" width="250" height="200" style="border:0" loading="lazy" allowfullscreen></iframe>
                     </section>
                 </aside>
 
@@ -131,7 +128,7 @@
             </section>
 
             <!-- Segunda sección -->
-            <section class="col-md-4 col-12 mt-3 mx-auto">
+            <section class="col-md-4 col-12 mt-5 mx-auto">
                 <section class="p-2 bg-light mt-1" style="max-width: 350px; margin: 0 auto;">
                     <h2 class="text-center mt-3 fs-5">Mi próxima cita</h2>
 
@@ -139,7 +136,7 @@
 
                     <!-- <h5 class="text-center mt-4 fs-6">Última donación</h5> -->
 
-                    <div id="cita_content" class="position-relative d-flex justify-content-center mt-3 ">
+                    <div id="cita_content" class="position-relative d-flex justify-content-center mt-3 mb-3 ">
                         <section class="rounded text-center p-3" style="width: 150px;">
                             <section class="border fw-bold fs-5 bg-danger text-white py-2 rounded-top" id="mes_prox_cita">Enero</section>
                             <section class="border fw-semibold fs-4 text-black py-3 rounded-bottom bg-white" id="dia_prox_cita">15
@@ -148,12 +145,24 @@
                                 class=" position-absolute end-0 bottom-0 fw-bold fs-6 text-center bg-danger text-white rounded py-1 px-1 w-25 me-5 mx-auto d-block" id="anio_prox_cita">2025</span>
                         </section>
                     </div>
-                    <!-- <aside class="d-flex align-items-center gap-4 ms-md-4">
-                        <img src="./blood-icons/ubicacion.png" alt="hospital" class="img-fluid rounded-circle"
-                            style="width: 28px; height: 28px;">
-                        <p class="fs-6 mb-0">Hospital General 24, Buenos Aires, Argentina</p>
-                    </aside> -->
-
+                    <aside class="text-center m-2 mb-3">
+                        <strong class="fs-4">2</strong>
+                        <img src="./blood-icons/fuego.png" alt="fire" class="img-fluid"
+                            style="width: 24px; height: 24px;">
+                        <a href="#" class="text-decoration-underline mt-5">
+                            <span class="fs-4">Sitio web</span>
+                            <img src="./blood-icons/enlace.png" alt="enlace" class="img-fluid"
+                                style="width: 24px; height: 24px;">
+                        </a>
+                    </aside>
+                    <div class="d-flex flex-column align-items-center justify-content-center"> 
+                        <aside class="d-flex align-items-center gap-4 ms-md-4 mt-2">
+                            <img src="./blood-icons/ubicacion.png" alt="hospital" class="img-fluid rounded-circle"
+                                style="width: 28px; height: 28px;">
+                            <p id="nombre_hosp_prox_cita" class="fs-6 mb-0">Nombre Hospital proxima cita</p>
+                        </aside>
+                        <iframe id="mapFrameCit" width="250" height="200" style="border:0" loading="lazy" allowfullscreen></iframe>
+                    </div>
                     <section class="d-flex flex-column align-items-center text-center my-3">
 
                         <div id="estado" class="d-flex align-items-center gap-1">
@@ -165,7 +174,7 @@
                             </p>
                         </div>
 
-                        <div class="d-flex gap-3 mt-5 mb-1">
+                        <div class="d-flex gap-3 mt-3 mb-1">
                             <button class="btn btn-primary px-4 py-2 rounded-pill" id="cancelar_cita">Cancelar cita</button>
                             <!-- <button class="btn btn-danger px-4 py-2 rounded-pill">Editar cita</button> -->
                         </div>
