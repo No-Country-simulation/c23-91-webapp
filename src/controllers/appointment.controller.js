@@ -99,14 +99,12 @@ export const createAppointment = async (req, res) => {
   }
 };
 
-
 // PUT - Confirmar una cita.
 export const confirmAppointment = async (req, res) => {
   try {
     const { id } = req.params;
 
     const appointment = await Appointment.findById(id);
-
     if (!appointment || appointment.status !== "Pending") {
       return res.status(400).json({
         status: "error",
@@ -149,10 +147,9 @@ export const confirmAppointment = async (req, res) => {
     const pointsEarned = 30;
     const totalPoints = (user.totalPoints || 0) + pointsEarned;
 
-    const awards = await Award.find({
+    const highestAward = await Award.findOne({
       pointsRequired: { $lte: totalPoints },
     }).sort({ pointsRequired: -1 });
-    const highestAward = awards[0];
 
     const updateData = { totalPoints };
     if (highestAward && !user.awards.includes(highestAward._id)) {
