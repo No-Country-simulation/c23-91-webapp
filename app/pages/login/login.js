@@ -53,5 +53,8 @@ async function logUser(event) {
 
   inputEmailEl.value = '';
   passwordInput.value = '';
+
+  const absoluteUrl = `${window.location.origin}/app/pages/awards/awards.html`;
+        window.location.href = absoluteUrl;
 }
 

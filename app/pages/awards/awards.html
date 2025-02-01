@@ -13,53 +13,40 @@
 
 <body>
 
-    <header id="header" class="header d-flex align-items-center justify-content-between px-3 bg-primary"
-        style="height: 80px;">
-        <a href="../../index.html">
-            <img class="logo rounded-circle img-fluid" src="../../assets/logo.avif" alt="Logo" style="height: 50px;">
+    <header class="header d-flex align-items-center justify-content-between px-3 bg-primary" style="height: 80px;">
+        <a href="./index.html">
+            <img class="logo rounded-circle img-fluid" src="/app/assets/logo.avif" alt="Logo" style="height: 50px;">
         </a>
 
-        <div class="d-flex align-items-center">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
 
-            <nav class="d-none d-lg-flex">
-                <a class="nav-link text-white fw-bold mx-2" href="../../index.html">Principal</a>
-                <a class="nav-link text-white fw-bold mx-2" href="../schedule_appointment/sched_appointment.html">Agendar cita</a>
-                <!-- <a class="nav-link text-white fw-bold mx-2" href="../sign_up/sign_up.html">Registrarme</a> -->
-                <!-- <a class="nav-link text-white fw-bold mx-2" href="#">Iniciar sesión</a> -->
-            </nav>
-
-            <div class="user-menu dropdown">
-                <button class="btn btn-primary d-lg-none" type="button" id="userMenuButton" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <span class="navbar-toggler-icon"><i class="bi bi-list text-dark fs-3"></i></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end bg-danger" aria-labelledby="userMenuButton">
-                    <li><a class="dropdown-item fw-bold text-black" href="../../index.html">Principal</a></li>
-                    <!-- <li><a class="dropdown-item fw-bold text-black" href="../sign_up/sign_up.html">Registrarme</a> -->
-                    </li>
-                    <li><a class="dropdown-item fw-bold text-black" href="./login.html>Iniciar sesión"></a></li>
-                        <li><a class=" dropdown-item fw-bold text-black" href="#">Agendar cita</a></li>
-                </ul>
-            </div>
 
-            <div class="user-menu dropdown d-none d-lg-block">
-                <button class="btn btn-primary" type="button" id="desktopUserMenuButton" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <img class="rounded-circle" src="../../assets/user_icon.png" alt="User Profile"
-                        style="height: 50px; width: 50px;">
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end bg-danger" aria-labelledby="desktopUserMenuButton">
-                    <li><a class="dropdown-item fw-bold text-black" href="../../index.html"></a></li>
-                    <!-- <li><a class="dropdown-item fw-bold text-black" href="../sign_up/sign_up.html">Registrarme</a> -->
-                    </li>
-                    <!-- <li><a class="dropdown-item fw-bold text-black" href="./login.html">Iniciar sesión</a></li> -->
-                    <li><a class="dropdown-item fw-bold text-black"
-                            href="../schedule_appointment/sched_appointement">Agendar cita</a></li>
-                </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white p-1" href="/app/index.html">Principal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white p-1" href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="logoutBtn_D" class="nav-link text-white p-1" type="button" aria-label="Cierre su sesión">
+                                Cerrar sesión
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
-    
+
 <main>
     <section class="row container my-4 mx-auto gx-4">
         <aside class="mt-1 p-3 rounded d-flex flex-column flex-md-row align-items-start gap-4">
@@ -248,5 +235,6 @@
             | 2025</p>
     </footer>
     <script src="./awards.js"></script>
+    <script src="../../logout.js" type="text/javascript"></script>
 </body>
 </html>

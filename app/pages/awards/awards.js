@@ -13,6 +13,7 @@ let nombre_hosp_ult_don_El = document.getElementById("nombre_hosp_ult_don");
 let nombre_hosp_prox_cita_El = document.getElementById("nombre_hosp_prox_cita");
 let sitio_Web_Link_Don = document.querySelector(".d-flex.align-items-center.gap-2.text-decoration-underline");
 let sitio_Web_Link_Cit = document.querySelector(".text-decoration-underline.mt-5");
+const link_Citas_El = document.querySelector(".text-center.m-2.mb-3");
 let appointmentId;
 let lastDonationHospital = "";
 let nextAppointmentHospital = "";
@@ -98,6 +99,8 @@ const hospitales = [
   },
 ];
 
+ 
+
 document.addEventListener("DOMContentLoaded", () => {
   fetchDonationsData();
 });
@@ -150,6 +153,8 @@ const fetchDonationsData = async () => {
       "Noviembre",
       "Diciembre",
     ];
+
+
 
     if (donationsData.length > 0) {
       const lastDonation = donationsData[donationsData.length - 1];
@@ -336,4 +341,5 @@ cancelar_cita_El.addEventListener("click", async function () {
 
   cancelar_cita_El.style.display = "none";
   estado_El.classList.add("d-none");
+
 });
