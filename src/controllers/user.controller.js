@@ -5,8 +5,9 @@ import { handleServerError } from "../utils/errorHandler.js";
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find()
+      .populate("appointments")
       .populate("donations")
-      .populate("appointments");
+      .populate("awards");
 
     res.status(200).json({ status: "success", payload: users });
   } catch (error) {
@@ -19,20 +20,42 @@ export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id)
+      .populate("appointments")
       .populate("donations")
-      .populate("appointments");
+      .populate("awards");
 
     if (!user) {
       return res.status(404).json({ status: "error", message: "User not found" });
     }
 
-    res.status(200).json({ status: "success", payload: user });
+    const lastAppointment = user.appointments.length
+      ? user.appointments[user.appointments.length - 1]
+      : null;
+
+    let lastAppointmentData = null;
+    if (lastAppointment) {
+      lastAppointmentData = {
+        status: lastAppointment.status,
+        donationDate:
+          lastAppointment.status === "Completed"
+            ? lastAppointment.appointmentDate
+            : null,
+      };
+    }
+
+    res.status(200).json({
+      status: "success",
+      payload: {
+        user,
+        lastAppointment: lastAppointmentData,
+      },
+    });
   } catch (error) {
     handleServerError(res, error);
   }
 };
 
-// GET - Obtener citas y donaciones de un usuario por ID.
+// GET - Obtener citas, donaciones y nivel de un usuario por ID.
 export const getUserDetailsById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -51,17 +74,18 @@ export const getUserDetailsById = async (req, res) => {
           path: "institutionId",
           select: "name address institutionType email dailyDonorCapacity",
         },
-      });
+      })
+      .populate("awards");
 
     if (!user) {
-      return res.status(404).json({ status: "error", message: "User  not found" });
+      return res.status(404).json({ status: "error", message: "User not found" });
     }
 
-    const { donations, appointments } = user;
+    const { donations, appointments, awards } = user;
 
     res.status(200).json({
       status: "success",
-      payload: { donations, appointments },
+      payload: { donations, appointments, awards },
     });
   } catch (error) {
     handleServerError(res, error);
