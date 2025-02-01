@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error("Error al cargar los datos");
             }
             const data = await response.json();
-            user = data.payload;
+            user = data.payload.user;
 
             document.getElementById("inputName").value = user.firstName || "";
             document.getElementById("inputLastName").value = user.lastName || "";
