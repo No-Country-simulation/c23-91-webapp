@@ -103,15 +103,29 @@ function createUser(event) {
     .then(data => {
 
       if (data.status === 'success') {
-        alert('User registered successfully!');
+        document.getElementById("success-alert").classList.replace("d-none", "d-flex");
         console.log('User registered:', data);
       } else {
-        alert( `Error: ${data.message}`);
+        const alertError = document.getElementById("error-alert")
+        alertError.innerHTML = `
+          <div class="alert alert-danger align-items-center d-flex" role="alert">
+            <i class="bi bi-x-circle-fill fs-3 text-danger text-center me-3"></i>
+            <div>
+             ${data.message}
+            </div>
+          </div>`
       }
     })
     .catch(error => {
+      const alertError = document.getElementById("error-alert")
+        alertError.innerHTML = `
+          <div class="alert alert-danger align-items-center d-flex" role="alert">
+            <i class="bi bi-x-circle-fill fs-3 text-danger text-center me-3"></i>
+            <div>
+             Ocurrió un error, intentalo mas tarde
+            </div>
+          </div>`
       console.error('Error during registration:', error);
-      alert('An error occurred during registration. Please try again later.');
     });
 };
 
