@@ -343,3 +343,13 @@ cancelar_cita_El.addEventListener("click", async function () {
   estado_El.classList.add("d-none");
 
 });
+
+
+if (document.referrer.includes("login.html")) {
+  const successAlert = document.getElementById("success-alert");
+  successAlert.classList.replace("d-none", "d-flex");
+
+  setTimeout(() => {
+    successAlert.classList.replace("d-flex", "d-none");
+  }, 5000);
+}

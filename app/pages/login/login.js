@@ -39,22 +39,34 @@ async function logUser(event) {
     const data = await response.json();
 
     if (data.status === 'success') {
-      alert('User logged in successfully!');
       console.log(data);
       localStorage.setItem("token", data.payload.token);
       localStorage.setItem("userID", data.payload.user.id);
+
+      const absoluteUrl = `${window.location.origin}/app/pages/awards/awards.html`;
+      window.location.href = absoluteUrl;
     } else {
-      alert(`Error: ${data.message}`);
+      document.getElementById("error-alert").innerHTML =`
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <i class="bi bi-check-circle me-2"></i>
+            <div>
+                ${data.message}
+            </div>
+        </div>`
     }
   } catch (error) {
     console.error('Error during login:', error);
-    alert('An error occurred during login. Please try again later.');
+    document.getElementById("error-alert").innerHTML =`
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <i class="bi bi-check-circle me-2"></i>
+            <div>
+                Ocurrió un error, intentalo mas tarde.
+            </div>
+        </div>`
   }
 
   inputEmailEl.value = '';
   passwordInput.value = '';
 
-  const absoluteUrl = `${window.location.origin}/app/pages/awards/awards.html`;
-        window.location.href = absoluteUrl;
 }
 
