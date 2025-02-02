@@ -11972,5 +11972,68 @@ textarea.form-control-lg {
 }
 
 
+.dropdown-menu {
+  min-width: 200px;
+  width: auto;
+  border: none;
+}
+
+@media (max-width: 991px) {
+  .dropdown-menu {
+      position: static !important;
+      width: 100%;
+  }
+
+  .navbar-collapse {
+      width: 60%;
+  }
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar-nav .nav-item {
+  margin-bottom: 0;
+}
+
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+      position: absolute;
+      top: 68px;
+      right: 10px;
+      width: 140px;
+      background: red;
+      border-radius: 5px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 8px;
+  }
+
+  .nav-link {
+    margin-right: 20px !important;
+  }
+
+  .nav-link:last-child {
+    margin-right: 0 !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 

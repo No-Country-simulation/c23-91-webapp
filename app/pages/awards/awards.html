@@ -13,53 +13,40 @@
 
 <body>
 
-    <header id="header" class="header d-flex align-items-center justify-content-between px-3 bg-primary"
-        style="height: 80px;">
-        <a href="../../index.html">
-            <img class="logo rounded-circle img-fluid" src="../../assets/logo.avif" alt="Logo" style="height: 50px;">
+    <header class="header d-flex align-items-center justify-content-between px-3 bg-primary" style="height: 80px;">
+        <a href="./index.html">
+            <img class="logo rounded-circle img-fluid" src="/app/assets/logo.avif" alt="Logo" style="height: 50px;">
         </a>
 
-        <div class="d-flex align-items-center">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
 
-            <nav class="d-none d-lg-flex">
-                <a class="nav-link text-white fw-bold mx-2" href="../../index.html">Principal</a>
-                <a class="nav-link text-white fw-bold mx-2" href="../schedule_appointment/sched_appointment.html">Agendar cita</a>
-                <!-- <a class="nav-link text-white fw-bold mx-2" href="../sign_up/sign_up.html">Registrarme</a> -->
-                <!-- <a class="nav-link text-white fw-bold mx-2" href="#">Iniciar sesión</a> -->
-            </nav>
-
-            <div class="user-menu dropdown">
-                <button class="btn btn-primary d-lg-none" type="button" id="userMenuButton" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <span class="navbar-toggler-icon"><i class="bi bi-list text-dark fs-3"></i></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end bg-danger" aria-labelledby="userMenuButton">
-                    <li><a class="dropdown-item fw-bold text-black" href="../../index.html">Principal</a></li>
-                    <!-- <li><a class="dropdown-item fw-bold text-black" href="../sign_up/sign_up.html">Registrarme</a> -->
-                    </li>
-                    <li><a class="dropdown-item fw-bold text-black" href="./login.html>Iniciar sesión"></a></li>
-                        <li><a class=" dropdown-item fw-bold text-black" href="#">Agendar cita</a></li>
-                </ul>
-            </div>
 
-            <div class="user-menu dropdown d-none d-lg-block">
-                <button class="btn btn-primary" type="button" id="desktopUserMenuButton" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <img class="rounded-circle" src="../../assets/user_icon.png" alt="User Profile"
-                        style="height: 50px; width: 50px;">
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end bg-danger" aria-labelledby="desktopUserMenuButton">
-                    <li><a class="dropdown-item fw-bold text-black" href="../../index.html"></a></li>
-                    <!-- <li><a class="dropdown-item fw-bold text-black" href="../sign_up/sign_up.html">Registrarme</a> -->
-                    </li>
-                    <!-- <li><a class="dropdown-item fw-bold text-black" href="./login.html">Iniciar sesión</a></li> -->
-                    <li><a class="dropdown-item fw-bold text-black"
-                            href="../schedule_appointment/sched_appointement">Agendar cita</a></li>
-                </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white p-1" href="/app/index.html">Principal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white p-1" href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="logoutBtn_D" class="nav-link text-white p-1" type="button" aria-label="Cierre su sesión">
+                                Cerrar sesión
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
-    
+
 <main>
     <section class="row container my-4 mx-auto gx-4">
         <aside class="mt-1 p-3 rounded d-flex flex-column flex-md-row align-items-start gap-4">
@@ -119,12 +106,9 @@
                         <aside class="d-flex align-items-center gap-4 ms-md-4">
                             <img src="./blood-icons/ubicacion.png" alt="hospital" class="img-fluid rounded-circle"
                                 style="width: 28px; height: 28px;">
-                            <p class="mb-0">Hospital General 24, Buenos Aires, Argentina</p>
+                            <p id="nombre_hosp_ult_don" class="mb-0">Nombre del hospital</p>
                         </aside>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.9004869840655!2d-58.40951932350434!3d-34.58138445632045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb57cc40263d5%3A0xeb42c7229c2253c3!2sHospital%20General%20de%20Agudos%20Dr.%20Juan%20A.%20Fern%C3%A1ndez!5e0!3m2!1ses!2sar!4v1737758716965!5m2!1ses!2sar"
-                            width="250" height="150" class="rounded ms-md-4" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe id="mapFrameDon" width="250" height="200" style="border:0" loading="lazy" allowfullscreen></iframe>
                     </section>
                 </aside>
 
@@ -133,7 +117,7 @@
             </section>
 
             <!-- Segunda sección -->
-            <section class="col-md-4 col-12 mt-3 mx-auto">
+            <section class="col-md-4 col-12 mt-5 mx-auto">
                 <section class="p-2 bg-light mt-1" style="max-width: 350px; margin: 0 auto;">
                     <h2 class="text-center mt-3 fs-5">Mi próxima cita</h2>
 
@@ -141,7 +125,7 @@
 
                     <!-- <h5 class="text-center mt-4 fs-6">Última donación</h5> -->
 
-                    <div id="cita_content" class="position-relative d-flex justify-content-center mt-3 ">
+                    <div id="cita_content" class="position-relative d-flex justify-content-center mt-3 mb-3 ">
                         <section class="rounded text-center p-3" style="width: 150px;">
                             <section class="border fw-bold fs-5 bg-danger text-white py-2 rounded-top" id="mes_prox_cita">Enero</section>
                             <section class="border fw-semibold fs-4 text-black py-3 rounded-bottom bg-white" id="dia_prox_cita">15
@@ -150,12 +134,24 @@
                                 class=" position-absolute end-0 bottom-0 fw-bold fs-6 text-center bg-danger text-white rounded py-1 px-1 w-25 me-5 mx-auto d-block" id="anio_prox_cita">2025</span>
                         </section>
                     </div>
-                    <!-- <aside class="d-flex align-items-center gap-4 ms-md-4">
-                        <img src="./blood-icons/ubicacion.png" alt="hospital" class="img-fluid rounded-circle"
-                            style="width: 28px; height: 28px;">
-                        <p class="fs-6 mb-0">Hospital General 24, Buenos Aires, Argentina</p>
-                    </aside> -->
-
+                    <aside class="text-center m-2 mb-3">
+                        <strong class="fs-4">2</strong>
+                        <img src="./blood-icons/fuego.png" alt="fire" class="img-fluid"
+                            style="width: 24px; height: 24px;">
+                        <a href="#" class="text-decoration-underline mt-5">
+                            <span class="fs-4">Sitio web</span>
+                            <img src="./blood-icons/enlace.png" alt="enlace" class="img-fluid"
+                                style="width: 24px; height: 24px;">
+                        </a>
+                    </aside>
+                    <div class="d-flex flex-column align-items-center justify-content-center"> 
+                        <aside class="d-flex align-items-center gap-4 ms-md-4 mt-2">
+                            <img src="./blood-icons/ubicacion.png" alt="hospital" class="img-fluid rounded-circle"
+                                style="width: 28px; height: 28px;">
+                            <p id="nombre_hosp_prox_cita" class="fs-6 mb-0">Nombre Hospital proxima cita</p>
+                        </aside>
+                        <iframe id="mapFrameCit" width="250" height="200" style="border:0" loading="lazy" allowfullscreen></iframe>
+                    </div>
                     <section class="d-flex flex-column align-items-center text-center my-3">
 
                         <div id="estado" class="d-flex align-items-center gap-1">
@@ -167,7 +163,7 @@
                             </p>
                         </div>
 
-                        <div class="d-flex gap-3 mt-5 mb-1">
+                        <div class="d-flex gap-3 mt-3 mb-1">
                             <button class="btn btn-primary px-4 py-2 rounded-pill" id="cancelar_cita">Cancelar cita</button>
                             <!-- <button class="btn btn-danger px-4 py-2 rounded-pill">Editar cita</button> -->
                         </div>
@@ -239,5 +235,6 @@
             | 2025</p>
     </footer>
     <script src="./awards.js"></script>
+    <script src="../../logout.js" type="text/javascript"></script>
 </body>
 </html>
