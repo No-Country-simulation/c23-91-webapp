@@ -11,6 +11,7 @@ let mapFrameDonEl = document.getElementById("mapFrameDon");
 let mapFrameCitEl = document.getElementById("mapFrameCit");
 let nombre_hosp_ult_don_El = document.getElementById("nombre_hosp_ult_don");
 let nombre_hosp_prox_cita_El = document.getElementById("nombre_hosp_prox_cita");
+const bloodIcon = document.getElementById("blood-icon");
 let sitio_Web_Link_Don = document.querySelector(
   ".d-flex.align-items-center.gap-2.text-decoration-underline"
 );
@@ -47,7 +48,7 @@ const hospitales = [
     url: "https://www.google.com/maps?q=Av.+Coronel+Díaz+2211,+C1425+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
   },
   {
-    name: "Banco de Sangre Buenos Aires",
+    name: "Banco de Sangre de Buenos Aires",
     address: "Av. Díaz Vélez 3973, Cdad. Autónoma de Buenos Aires",
     website: "https://www.hemocentro.org/",
     url: "https://www.google.com/maps?q=Av.+Díaz+Vélez+3973,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
@@ -84,13 +85,13 @@ const hospitales = [
     url: "https://www.google.com/maps?q=Av.+Belgrano+1746,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
   },
   {
-    name: "Banco Central de Sangre",
+    name: "Banco de Sangre",
     address: "Av. Díaz Vélez 3973, Cdad. Autónoma de Buenos Aires",
     website: "https://www.hemocentro.org/",
     url: "https://www.google.com/maps?q=Av.+Díaz+Vélez+3973,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
   },
   {
-    name: "Hospital Militar Central 'Cirujano Mayor Dr. Ricardo Argerich'",
+    name: "Hospital Militar Central 'Cirujano Mayor Dr. Cosme Argerich'",
     address: "Av. Luis María Campos 726-800, Cdad. Autónoma de Buenos Aires",
     website: "https://www2.hmc.mil.ar/",
     url: "https://www.google.com/maps?q=Av.+Luis+María+Campos+726-800,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
@@ -400,3 +401,15 @@ fetch(`http://localhost:8080/api/users/${userID}`)
       medalSixEl.classList.add("medal-unlocked");
     }
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    cancelar_cita_El.addEventListener("click", () => {
+      cancelar_cita_El.style.display = "none";
+      estado_El.classList.add("d-none");
+      nombre_hosp_prox_cita.classList.add("d-none");
+      link_Citas_El.style.display = "none";
+      bloodIcon.style.display = "none";
+      mapFrameCitEl.style.display = "none";
+    });
+  });
+  
