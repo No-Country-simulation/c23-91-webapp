@@ -11,8 +11,12 @@ let mapFrameDonEl = document.getElementById("mapFrameDon");
 let mapFrameCitEl = document.getElementById("mapFrameCit");
 let nombre_hosp_ult_don_El = document.getElementById("nombre_hosp_ult_don");
 let nombre_hosp_prox_cita_El = document.getElementById("nombre_hosp_prox_cita");
-let sitio_Web_Link_Don = document.querySelector(".d-flex.align-items-center.gap-2.text-decoration-underline");
-let sitio_Web_Link_Cit = document.querySelector(".text-decoration-underline.mt-5");
+let sitio_Web_Link_Don = document.querySelector(
+  ".d-flex.align-items-center.gap-2.text-decoration-underline"
+);
+let sitio_Web_Link_Cit = document.querySelector(
+  ".text-decoration-underline.mt-5"
+);
 const link_Citas_El = document.querySelector(".text-center.m-2.mb-3");
 let appointmentId;
 let lastDonationHospital = "";
@@ -20,6 +24,13 @@ let nextAppointmentHospital = "";
 let currentPage = 1;
 const donationsPerPage = 8;
 let donationsData = [];
+const userID = localStorage.getItem("userID");
+const medalOneEl = document.getElementById("medal-one");
+const medalTwoEl = document.getElementById("medal-two");
+const medalThreeEl = document.getElementById("medal-three");
+const medalFourEl = document.getElementById("medal-four");
+const medalFiveEl = document.getElementById("medal-five");
+const medalSixEl = document.getElementById("medal-six");
 
 const hospitales = [
   {
@@ -99,8 +110,6 @@ const hospitales = [
   },
 ];
 
- 
-
 document.addEventListener("DOMContentLoaded", () => {
   fetchDonationsData();
 });
@@ -153,8 +162,6 @@ const fetchDonationsData = async () => {
       "Noviembre",
       "Diciembre",
     ];
-
-
 
     if (donationsData.length > 0) {
       const lastDonation = donationsData[donationsData.length - 1];
@@ -341,9 +348,7 @@ cancelar_cita_El.addEventListener("click", async function () {
 
   cancelar_cita_El.style.display = "none";
   estado_El.classList.add("d-none");
-
 });
-
 
 if (document.referrer.includes("login.html")) {
   const successAlert = document.getElementById("success-alert");
@@ -353,3 +358,45 @@ if (document.referrer.includes("login.html")) {
     successAlert.classList.replace("d-flex", "d-none");
   }, 5000);
 }
+
+let userPoints = "";
+
+fetch(`http://localhost:8080/api/users/${userID}`)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    const userPoints = data.payload.user.totalPoints;
+
+    updateMedals(userPoints);
+  })
+  .catch((error) => console.error("Error fetching data:", error));
+
+  function updateMedals(points) {
+    if (points >= 30) {
+      medalOneEl.classList.remove("medal-locked");
+      medalOneEl.classList.add("medal-unlocked");
+    }
+    if (points >= 120) {
+      medalTwoEl.classList.remove("medal-locked");
+      medalTwoEl.classList.add("medal-unlocked");
+    }
+    if (points >= 210) {
+      medalThreeEl.classList.remove("medal-locked");
+      medalThreeEl.classList.add("medal-unlocked");
+    }
+    if (points >= 300) {
+      medalFourEl.classList.remove("medal-locked");
+      medalFourEl.classList.add("medal-unlocked");
+    }
+    if (points >= 390) {
+      medalFiveEl.classList.remove("medal-locked");
+      medalFiveEl.classList.add("medal-unlocked");
+    } if (points >= 420) {
+      medalSixEl.classList.remove("medal-locked");
+      medalSixEl.classList.add("medal-unlocked");
+    }
+  }
