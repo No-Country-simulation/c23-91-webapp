@@ -13,7 +13,7 @@ export const getInstitutions = async (req, res) => {
     });
   } catch (error) {
     console.error("Error getting institutions:", error);
-    res.status(500).json({ status: "error", message: error.message });
+    res.status(500).json({ status: "error", message: "Internal server error.", error });
   }
 };
 

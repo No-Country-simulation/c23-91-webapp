@@ -81,11 +81,11 @@ export const getUserDetailsById = async (req, res) => {
       return res.status(404).json({ status: "error", message: "User not found" });
     }
 
-    const { donations, appointments, awards } = user;
+    const { donations, appointments, awards, totalPoints } = user;
 
     res.status(200).json({
       status: "success",
-      payload: { donations, appointments, awards },
+      payload: { donations, appointments, awards, totalPoints },
     });
   } catch (error) {
     handleServerError(res, error);
