@@ -33,6 +33,9 @@ const medalFourEl = document.getElementById("medal-four");
 const medalFiveEl = document.getElementById("medal-five");
 const medalSixEl = document.getElementById("medal-six");
 
+const statusDot = document.getElementById("status-dot");
+const statusText = document.getElementById("status-text");
+
 const hospitales = [
   {
     name: "Hospital El Cruce",
@@ -110,6 +113,16 @@ const hospitales = [
     url: "https://www.google.com/maps?q=25+de+Mayo+138+-+4200+Santiago+del+Estero&output=embed",
   },
 ];
+
+function appointmentStatus(status) {
+  if (status === "Cancelled") {
+    statusDot.classList.replace("text-success", "text-primary");
+    statusText.textContent = "Cancelado";
+  } else if (status === "Completed") {
+    statusDot.classList.replace("text-success", "text-blue");
+    statusText.textContent = "Completado";
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchDonationsData();
@@ -191,31 +204,35 @@ const fetchDonationsData = async () => {
     if (appointmentsData.length > 0) {
       const nextAppointment = appointmentsData[appointmentsData.length - 1];
 
-      if (nextAppointment.status === "Pending") {
-        const appointmentDate = new Date(nextAppointment.appointmentDate);
-        const year_app = appointmentDate.getFullYear();
-        const monthIndex = appointmentDate.getMonth();
-        const month_app = monthNames[monthIndex];
-        const day_app = String(appointmentDate.getDate()).padStart(2, "0");
+      // if (nextAppointment.status === "Pending") {
 
-        mes_prox_cita_El.textContent = month_app;
-        dia_prox_cita_El.textContent = day_app;
-        anio_prox_cita_El.textContent = year_app;
+      const appointmentDate = new Date(nextAppointment.appointmentDate);
+      const year_app = appointmentDate.getFullYear();
+      const monthIndex = appointmentDate.getMonth();
+      const month_app = monthNames[monthIndex];
+      const day_app = String(appointmentDate.getDate()).padStart(2, "0");
 
-        cancelar_cita_El.disabled = false;
-        cancelar_cita_El.style.display = "block";
+      mes_prox_cita_El.textContent = month_app;
+      dia_prox_cita_El.textContent = day_app;
+      anio_prox_cita_El.textContent = year_app;
 
-        nextAppointmentHospital =
-          appointmentsData[appointmentsData.length - 1]?.institutionId?.name;
-        nombre_hosp_prox_cita_El.textContent = nextAppointmentHospital;
+      cancelar_cita_El.disabled = false;
+      cancelar_cita_El.style.display = "block";
 
-        const hospitalIndexCit = hospitales.findIndex(
-          (hospital) => hospital.name === nextAppointmentHospital
-        );
-        mapFrameCitEl.src = hospitales[hospitalIndexCit].url;
-        sitio_Web_Link_Cit.href = hospitales[hospitalIndexCit].website;
-        sitio_Web_Link_Cit.target = "_blank";
-      } else {
+      nextAppointmentHospital =
+        appointmentsData[appointmentsData.length - 1]?.institutionId?.name;
+      nombre_hosp_prox_cita_El.textContent = nextAppointmentHospital;
+
+      const hospitalIndexCit = hospitales.findIndex(
+        (hospital) => hospital.name === nextAppointmentHospital
+      );
+      mapFrameCitEl.src = hospitales[hospitalIndexCit].url;
+      sitio_Web_Link_Cit.href = hospitales[hospitalIndexCit].website;
+      sitio_Web_Link_Cit.target = "_blank";
+
+      appointmentStatus(nextAppointment.status);
+
+      /* } else {
         cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary rounded">
       <p class="mb-3 text-primary fs-6">"No tienes ninguna cita agendada"</p>
@@ -225,7 +242,10 @@ const fetchDonationsData = async () => {
 
         cancelar_cita_El.style.display = "none";
         estado_El.classList.add("d-none");
-      }
+
+        console.log("Estado de la cita: " + nextAppointment.status);
+        appointmentStatus(nextAppointment.status);
+      }*/
     } else {
       cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded">
@@ -335,12 +355,16 @@ cancelar_cita_El.addEventListener("click", async function () {
     const result = await response.json();
     console.log("Appointment cancelled:", result);
 
-    cancelar_cita_El.disabled = true;
+    statusDot.classList.replace("text-success", "text-primary");
+    statusText.textContent = "Cancelada";
+
+    cancelar_cita_El.disabled = false;
   } catch (error) {
     console.error("Failed to cancel the appointment:", error);
   }
 
-  cita_content_El.innerHTML = `
+  /*
+    cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary rounded">
       <p class="mb-3 text-primary fs-6">"No tienes ninguna cita agendada"</p>
       <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
@@ -348,7 +372,8 @@ cancelar_cita_El.addEventListener("click", async function () {
     `;
 
   cancelar_cita_El.style.display = "none";
-  estado_El.classList.add("d-none");
+  // estado_El.classList.add("d-none");
+  */
 });
 
 if (document.referrer.includes("login.html")) {
@@ -357,7 +382,7 @@ if (document.referrer.includes("login.html")) {
 
   setTimeout(() => {
     successAlert.classList.replace("d-flex", "d-none");
-  }, 5000);
+  }, 3000);
 }
 
 let userPoints = "";
@@ -376,40 +401,40 @@ fetch(`http://localhost:8080/api/users/${userID}`)
   })
   .catch((error) => console.error("Error fetching data:", error));
 
-  function updateMedals(points) {
-    if (points >= 30) {
-      medalOneEl.classList.remove("medal-locked");
-      medalOneEl.classList.add("medal-unlocked");
-    }
-    if (points >= 120) {
-      medalTwoEl.classList.remove("medal-locked");
-      medalTwoEl.classList.add("medal-unlocked");
-    }
-    if (points >= 210) {
-      medalThreeEl.classList.remove("medal-locked");
-      medalThreeEl.classList.add("medal-unlocked");
-    }
-    if (points >= 300) {
-      medalFourEl.classList.remove("medal-locked");
-      medalFourEl.classList.add("medal-unlocked");
-    }
-    if (points >= 390) {
-      medalFiveEl.classList.remove("medal-locked");
-      medalFiveEl.classList.add("medal-unlocked");
-    } if (points >= 420) {
-      medalSixEl.classList.remove("medal-locked");
-      medalSixEl.classList.add("medal-unlocked");
-    }
+function updateMedals(points) {
+  if (points >= 30) {
+    medalOneEl.classList.remove("medal-locked");
+    medalOneEl.classList.add("medal-unlocked");
   }
+  if (points >= 120) {
+    medalTwoEl.classList.remove("medal-locked");
+    medalTwoEl.classList.add("medal-unlocked");
+  }
+  if (points >= 210) {
+    medalThreeEl.classList.remove("medal-locked");
+    medalThreeEl.classList.add("medal-unlocked");
+  }
+  if (points >= 300) {
+    medalFourEl.classList.remove("medal-locked");
+    medalFourEl.classList.add("medal-unlocked");
+  }
+  if (points >= 390) {
+    medalFiveEl.classList.remove("medal-locked");
+    medalFiveEl.classList.add("medal-unlocked");
+  }
+  if (points >= 420) {
+    medalSixEl.classList.remove("medal-locked");
+    medalSixEl.classList.add("medal-unlocked");
+  }
+}
 
-  document.addEventListener("DOMContentLoaded", () => {
-    cancelar_cita_El.addEventListener("click", () => {
-      cancelar_cita_El.style.display = "none";
-      estado_El.classList.add("d-none");
+cancelar_cita_El.addEventListener("click", () => {
+  cancelar_cita_El.innerHTML = `
+        <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
+      `;
+  /*estado_El.classList.add("d-none");
       nombre_hosp_prox_cita.classList.add("d-none");
       link_Citas_El.style.display = "none";
       bloodIcon.style.display = "none";
-      mapFrameCitEl.style.display = "none";
-    });
-  });
-  
+      mapFrameCitEl.style.display = "none"; */
+});

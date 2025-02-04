@@ -1,6 +1,6 @@
 .dash_awards {
   display: block;
-  background-color: red;
+  background-color: var(--bs-primary);
   height: 2px;
   width: 20%;
   margin-left: 130px;
