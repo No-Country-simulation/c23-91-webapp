@@ -42,3 +42,25 @@ function removeDisease(event){
   diseasesToggle();
 
 }
+
+const userID = localStorage.getItem("userID");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("a"); // Select all links in the document
+  const userID = localStorage.getItem("userID");
+
+  links.forEach(link => {
+    if (!userID && (link.href.includes("/app/pages/schedule_appointment/sched_appointment.html") ||
+                    link.href.includes("/app/pages/awards/awards.htm") ||
+                    link.href.includes("/app/pages/profile/profile.htm")))
+    {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        link.style.pointerEvents = "none";
+        link.style.opacity = "0.5";
+      });
+    }
+  });
+});
+
+

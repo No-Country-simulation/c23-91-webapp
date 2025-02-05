@@ -11978,6 +11978,10 @@ textarea.form-control-lg {
   border: none;
 }
 
+#logoutBtn_D {
+  margin-left: 1em;
+}
+
 @media (max-width: 991px) {
   .dropdown-menu {
       position: static !important;
@@ -12009,7 +12013,7 @@ textarea.form-control-lg {
       position: absolute;
       top: 68px;
       right: 10px;
-      width: 140px;
+      width: 160px;
       background: red;
       border-radius: 5px;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
