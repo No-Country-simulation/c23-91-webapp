@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-8 d-flex-column gap-2 align-items-center justify-content-center align-self-center">
                             <div class="w-100">
-                                <h4 id="userTitle">Nombre de usuario</h4>
+                                <h4 class="ps-3" id="userTitle">Nombre de usuario</h4>
                                 <div class="container mt-2">
                                     <div class="items-center gap-3 w-100 position-relative">
                                         <label class="font-semibold">Nivel 1</label>
@@ -93,11 +93,11 @@
                                 <p class="fs-6">Racha de donaciones</p>
                             </div>
                             <div class="d-flex flex-column w-25 flex-md-row">
-                                <h4 class="pe-2">13</h4>
+                                <h4 id="numero-total-donaciones" class="pe-2">13</h4>
                                 <p class="fs-6">Donaciones totales</p>
                             </div>
                             <div class="d-flex flex-column w-25 flex-md-row">
-                                <h4 class="pe-2">330</h4>
+                                <h4 id="userTotalPoints" class="pe-2">330</h4>
                                 <p class="fs-6">Puntos totales</p>
                             </div>
                         </div>
@@ -105,41 +105,45 @@
                 </div>
             </div>
 
-            <form id="staticForm" class="container mt-4 d-flex flex-column bg-info rounded pt-4">
+            <form id="staticForm" class="container mt-4 d-flex flex-column bg-info rounded pt-4 w-100">
                 <h3 class="text-center border-bottom border-primary border-2 pb-2 w-75 align-self-center">Mis datos</h3>
-                <div class="row mt-4">
+                <div class="row mt-4 w-75 mx-auto">
                     <div class="col-md-6 d-flex align-items-center flex-column">
                         <div class="mb-3">
-                            <label for="inputName" class="form-label text-primary fw-semibold">Nombre(s)</label>
+                            <label for="inputName" class="form-label text-primary fw-semibold">Nombre completo</label>
                             <input type="text" readonly class="form-control-plaintext" id="inputName" value="">
                         </div>
                         <div class="mb-3">
                             <label for="inputBithday" class="form-label text-primary fw-semibold">Cumpleaños</label>
-                            <input type="text" readonly class="form-control-plaintext" id="inputBithday" value="email@example.com">
+                            <input type="text" readonly class="form-control-plaintext" id="inputBithday">
                         </div>
                         <div class="mb-3">
                             <label for="inputBloodType" class="form-label text-primary fw-semibold">Tipo de sangre</label>
-                            <input type="text" readonly class="form-control-plaintext" id="inputBloodType" value="email@example.com">
+                            <input type="text" readonly class="form-control-plaintext" id="inputBloodType">
                         </div>
                         <div class="mb-3">
                             <label for="inputDiseases" class="form-label text-primary fw-semibold">Enfermedades</label>
-                            <input type="text" readonly class="form-control-plaintext" id="inputDiseases" value="Si">
+                            <input type="text" readonly class="form-control-plaintext" id="inputDiseases">
                         </div>
-                        <div id="selectedDiseases"></div>
+                        <div id="selectedDiseases" class="mb-3 justify-content-center form-control-plaintext mx-auto w-100 ps-1 w-md-50 "></div>
+
+
+
                     </div>
             
                     <div class="col-md-6 d-flex align-items-center flex-column">
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="inputLastName" class="form-label text-primary fw-semibold">Apellido(s)</label>
                             <input type="text" readonly class="form-control-plaintext" id="inputLastName" value="email@example.com">
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="inputGender" class="form-label text-primary fw-semibold">Género</label>
-                            <input type="text" readonly class="form-control-plaintext" id="inputGender" value="email@example.com">
+                            <input type="text" readonly class="form-control-plaintext" id="inputGender">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3  align-self-center ps-5" >
                             <label for="inputEmail" class="form-label text-primary fw-semibold">Email</label>
-                            <input type="text" readonly class="form-control-plaintext" id="inputEmail" value="email@example.com">
+                            <input type="text" readonly class="form-control-plaintext" id="inputEmail" style="min-width: 250px; max-width: 100%;">
+
                         </div>
                     </div>
                 </div>

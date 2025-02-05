@@ -1,7 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    const numeroTotalDonacionesEl = document.getElementById("numero-total-donaciones");
+    const numeroTotalPuntosEl = document.getElementById("userTotalPoints");
+    console.log('Este es el numero total de puntos: ' + numeroTotalPuntosEl);
+
+
     // Load user data in 'datos personales' form
     async function loadFormData() {
-        const spinner = document.getElementById("spinner"); 
+        const spinner = document.getElementById("spinner");
         spinner.style.display = "block";
         const userID = localStorage.getItem("userID");
         try {
@@ -17,8 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error("Error al cargar los datos");
             }
             const data = await response.json();
-            user = data.payload.user; 
+            user = data.payload.user;
             console.log(user);
+            const userDonationsArray = data.payload.user.donations;
+            const userTotalDonations = userDonationsArray.length;
+            numeroTotalDonacionesEl.textContent = userTotalDonations;
+
+            const userTotalPoints = data.payload.user.totalPoints;
+            numeroTotalPuntosEl.textContent = userTotalPoints;
+
+
+            console.log(data.payload.user.donations);
 
 
             //Load principal user data
@@ -26,8 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("label.font-semibold").textContent = "Nuevo Nivel";
 
             //Load user data in form
-            document.getElementById("inputName").value = user.firstName || "";
-            document.getElementById("inputLastName").value = user.lastName || "";
+            document.getElementById("inputName").value = `${user.firstName || ""} ${user.lastName || ""}`.trim();
             document.getElementById("inputEmail").value = user.email || "";
             document.getElementById("inputBloodType").value = user.bloodType || "";
             document.getElementById("inputBithday").value = user.birthday || "";
