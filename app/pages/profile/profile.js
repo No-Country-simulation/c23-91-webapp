@@ -44,12 +44,16 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(year_app);
             console.log(monthIndex);
             console.log(day_app);
-            
+                       
             document.getElementById("inputName").value = `${user.firstName || ""} ${user.lastName || ""}`.trim();
             document.getElementById("inputEmail").value = user.email || "";
             document.getElementById("inputBloodType").value = user.bloodType || "";
             document.getElementById("inputBithday").value = `${day_app} / ${monthIndex} / ${year_app}`|| "";
+            document.getElementById("inputBithday").value = `${day_app} / ${monthIndex} / ${year_app}`|| "";
             document.getElementById("inputGender").value = user.gender || "";
+
+
+
 
 
 
@@ -77,11 +81,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function createDiseasePill(diseaseValue, diseaseName) {
     const pill = document.createElement('span');
-    pill.className = 'badge bg-secondary text-primary rounded-pill ms-1 p-2';
+    pill.className = 'badge bg-secondary text-primary rounded-pill ms-1';
     pill.dataset.value = diseaseValue;
     pill.textContent = diseaseName;
 
     return pill;
 }
+
+
+
 
 
