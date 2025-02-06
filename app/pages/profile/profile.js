@@ -2,10 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const numeroTotalDonacionesEl = document.getElementById("numero-total-donaciones");
     const numeroTotalPuntosEl = document.getElementById("userTotalPoints");
-    console.log('Este es el numero total de puntos: ' + numeroTotalPuntosEl);
 
-
-    // Load user data in 'datos personales' form
     async function loadFormData() {
         const spinner = document.getElementById("spinner");
         spinner.style.display = "block";
@@ -35,17 +32,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log(data.payload.user.donations);
 
-
-            //Load principal user data
             document.getElementById("userTitle").textContent = user.firstName || "";
             document.querySelector("label.font-semibold").textContent = "Nuevo Nivel";
 
-            //Load user data in form
+            const birthdayDate = new Date(user.birthday);
+            const year_app = birthdayDate.getFullYear();
+            const monthIndex = birthdayDate.getMonth();
+            const day_app = String(birthdayDate.getDate()).padStart(2, "0");
+
+            console.log(birthdayDate);
+            console.log(year_app);
+            console.log(monthIndex);
+            console.log(day_app);
+            
             document.getElementById("inputName").value = `${user.firstName || ""} ${user.lastName || ""}`.trim();
             document.getElementById("inputEmail").value = user.email || "";
             document.getElementById("inputBloodType").value = user.bloodType || "";
-            document.getElementById("inputBithday").value = user.birthday || "";
+            document.getElementById("inputBithday").value = `${day_app} / ${monthIndex} / ${year_app}`|| "";
             document.getElementById("inputGender").value = user.gender || "";
+
+
+
 
             if (user.diseases.length > 0) {
                 document.getElementById("inputDiseases").value = "Si";
@@ -65,15 +72,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
     }
 
-    // Call function on window load
     loadFormData();
 });
 
 function createDiseasePill(diseaseValue, diseaseName) {
     const pill = document.createElement('span');
-    pill.className = 'badge bg-secondary text-primary p-2 rounded-pill mx-1';
+    pill.className = 'badge bg-secondary text-primary rounded-pill ms-1 p-2';
     pill.dataset.value = diseaseValue;
     pill.textContent = diseaseName;
 
     return pill;
 }
+
+
