@@ -103,7 +103,7 @@ function createUser(event) {
     .then(data => {
 
       if (data.status === 'success') {
-        document.getElementById("success-alert").classList.replace("d-none", "d-flex");
+        document.getElementById("succes-alert").classList.replace("d-none", "d-flex");
         console.log('User registered:', data);
       } else {
         const alertError = document.getElementById("error-alert")
