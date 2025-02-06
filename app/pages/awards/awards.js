@@ -190,13 +190,14 @@ const fetchDonationsData = async () => {
       dia_ult_don_El.textContent = day;
       anio_ult_don_El.textContent = year;
     }
-
-    const hospitalIndexDon = hospitales.findIndex(
-      (hospital) => hospital.name === lastDonationHospital
-    );
-    mapFrameDonEl.src = hospitales[hospitalIndexDon].url;
-    sitio_Web_Link_Don.href = hospitales[hospitalIndexDon].website;
-    sitio_Web_Link_Don.target = "_blank";
+    if (lastDonationHospital) {
+      const hospitalIndexDon = hospitales.findIndex(
+        (hospital) => hospital.name === lastDonationHospital
+      );
+      mapFrameDonEl.src = hospitales[hospitalIndexDon].url;
+      sitio_Web_Link_Don.href = hospitales[hospitalIndexDon].website;
+      sitio_Web_Link_Don.target = "_blank";
+    }
 
     const appointmentsData = data.payload?.appointments || [];
     appointmentId = appointmentsData[appointmentsData.length - 1]._id;

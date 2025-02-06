@@ -24,16 +24,17 @@ document.addEventListener("DOMContentLoaded", function () {
             user = data.payload.user;
             console.log(data);
 
-            if(data.payload.lastAppointment.status === "Pending"){
+            if(data.payload.lastAppointment === null){
+                console.log("No hay citas previas")
+            } else if(data.payload.lastAppointment.status === "Pending"){
                 document.getElementById("pendingDate-alert").classList.replace("d-none", "d-flex");
                 document.getElementById("next-button1").disabled = true;
             } else if (data.payload.lastAppointment.status === "Completed") {
                 const mydate =  data.payload.lastAppointment.donationDate;
                 nextDonationDate = new Date(nextDonation(user.gender, mydate)).toISOString().split("T")[0];
-                // nextDonationDate = "2025-03-04";
                 console.log(nextDonationDate);
                 document.getElementById("nextDate-alert").classList.replace("d-none", "d-flex");
-            }
+            } 
 
             document.getElementById("inputName").value = user.firstName || "";
             document.getElementById("inputLastName").value = user.lastName || "";

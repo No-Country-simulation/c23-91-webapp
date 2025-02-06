@@ -44,12 +44,16 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(year_app);
             console.log(monthIndex);
             console.log(day_app);
-            
+                       
             document.getElementById("inputName").value = `${user.firstName || ""} ${user.lastName || ""}`.trim();
             document.getElementById("inputEmail").value = user.email || "";
             document.getElementById("inputBloodType").value = user.bloodType || "";
             document.getElementById("inputBithday").value = `${day_app} / ${monthIndex} / ${year_app}`|| "";
+            document.getElementById("inputBithday").value = `${day_app} / ${monthIndex} / ${year_app}`|| "";
             document.getElementById("inputGender").value = user.gender || "";
+
+
+
 
 
 
@@ -83,6 +87,8 @@ function createDiseasePill(diseaseValue, diseaseName) {
 
     return pill;
 }
+
+
 
 
 
