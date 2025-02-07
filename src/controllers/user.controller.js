@@ -1,17 +1,19 @@
 import User from "../models/user.model.js";
-import { handleServerError } from "../utils/errorHandler.js";
+import logger from "../config/logger.js";
 
 // GET - Obtener todos los usuarios.
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find()
-      .populate("appointments")
-      .populate("donations")
+      // .populate("appointments")
+      // .populate("donations")
       .populate("awards");
 
+    logger.info("Users fetched successfully");
     res.status(200).json({ status: "success", payload: users });
   } catch (error) {
-    handleServerError(res, error);
+    logger.error("Error fetching users:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -25,6 +27,7 @@ export const getUserById = async (req, res) => {
       .populate("awards");
 
     if (!user) {
+      logger.warn(`User not found with ID: ${id}`);
       return res.status(404).json({ status: "error", message: "User not found" });
     }
 
@@ -43,6 +46,7 @@ export const getUserById = async (req, res) => {
       };
     }
 
+    logger.info(`User fetched successfully: ${user.email}`);
     res.status(200).json({
       status: "success",
       payload: {
@@ -51,7 +55,8 @@ export const getUserById = async (req, res) => {
       },
     });
   } catch (error) {
-    handleServerError(res, error);
+    logger.error("Error fetching user by ID:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -78,33 +83,70 @@ export const getUserDetailsById = async (req, res) => {
       .populate("awards");
 
     if (!user) {
+      logger.warn(`User not found with ID: ${id}`);
       return res.status(404).json({ status: "error", message: "User not found" });
     }
 
     const { donations, appointments, awards, totalPoints } = user;
 
+    logger.info(`User details fetched successfully: ${user.email}`);
     res.status(200).json({
       status: "success",
       payload: { donations, appointments, awards, totalPoints },
     });
   } catch (error) {
-    handleServerError(res, error);
+    logger.error("Error fetching user details:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
 // POST - Crear un nuevo usuario.
 export const createUser = async (req, res) => {
   try {
-    const newUser = new User(req.body);
+    const {
+      firstName,
+      lastName,
+      birthday,
+      gender,
+      bloodType,
+      email,
+      password,
+      diseases,
+    } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      logger.warn(`Duplicate email: ${email}`);
+      return res.status(409).json({ status: "error", message: "Email already registered." });
+    }
+
+    const newUser = new User({
+      firstName,
+      lastName,
+      birthday,
+      gender,
+      bloodType,
+      email,
+      password,
+      diseases,
+    });
+
     const savedUser = await newUser.save();
+    logger.info(`User created successfully: ${savedUser.email}`);
 
     res.status(201).json({
       status: "success",
-      message: "User created successfully",
+      message: "User created successfully.",
       payload: savedUser,
     });
   } catch (error) {
-    handleServerError(res, error);
+    if (error.code === 11000) {
+      logger.warn(`Duplicate key error: ${error.message}`);
+      return res.status(409).json({ status: "error", message: "Duplicate key error." });
+    }
+
+    logger.error("Error creating user:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -118,16 +160,19 @@ export const updateUser = async (req, res) => {
     });
 
     if (!updatedUser) {
+      logger.warn(`User not found with ID: ${id}`);
       return res.status(404).json({ status: "error", message: "User not found" });
     }
 
+    logger.info(`User updated successfully: ${updatedUser.email}`);
     res.status(200).json({
       status: "success",
       message: "User updated successfully",
       payload: updatedUser,
     });
   } catch (error) {
-    handleServerError(res, error);
+    logger.error("Error updating user:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -138,14 +183,17 @@ export const deleteUser = async (req, res) => {
     const deletedUser = await User.findByIdAndDelete(id);
 
     if (!deletedUser) {
+      logger.warn(`User not found with ID: ${id}`);
       return res.status(404).json({ status: "error", message: "User not found" });
     }
 
+    logger.info(`User deleted successfully: ${deletedUser.email}`);
     res.status(200).json({
       status: "success",
       message: "User deleted successfully",
     });
   } catch (error) {
-    handleServerError(res, error);
+    logger.error("Error deleting user:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };

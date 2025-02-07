@@ -2,10 +2,10 @@ import express from "express";
 import {
   getUsers,
   getUserById,
+  getUserDetailsById,
   createUser,
   updateUser,
   deleteUser,
-  getUserDetailsById,
 } from "../controllers/user.controller.js";
 
 const router = express.Router();
