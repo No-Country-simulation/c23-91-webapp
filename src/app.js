@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import helmet from "helmet";
 import config from "./config/config.js";
+import logger from "./config/logger.js";
+import httpLogger from "./middlewares/httpLogger.js";
 
 import userRouter from "./router/user.routes.js";
 import donationRouter from "./router/donation.routes.js";
@@ -19,6 +21,7 @@ const MONGO_URI = config.MONGO_URI;
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+app.use(httpLogger);
 
 // Rutas
 app.use("/api", userRouter);
@@ -30,12 +33,12 @@ app.use("/auth", authRoter);
 // MongoDB
 mongoose.connect(MONGO_URI)
   .then(() => {
-    console.log("Connected to MongoDB");
+    logger.info("Connected to MongoDB");
   })
   .catch((error) => {
-    console.error("Error connecting to MongoDB:", error.message);
+    logger.error("Error connecting to MongoDB:", error.message);
   });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  logger.info(`Server is running on port ${PORT}`);
 });

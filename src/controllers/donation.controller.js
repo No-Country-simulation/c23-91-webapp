@@ -1,8 +1,5 @@
 import Donation from "../models/donation.model.js";
-// import User from "../models/user.model.js";
-// import Institution from "../models/institution.model.js";
-// import Appointment from "../models/appointment.model.js";
-// import Award from "../models/award.model.js";
+import logger from "../config/logger.js";
 
 // GET - Obtener todas las donaciones.
 export const getDonations = async (req, res) => {
@@ -11,12 +8,13 @@ export const getDonations = async (req, res) => {
       .populate("userId")
       .populate("institutionId");
 
+    logger.info("Donations fetched successfully");
     res.status(200).json({
       status: "success",
       payload: donations,
     });
   } catch (error) {
-    console.error("Error getting donations:", error);
-    res.status(500).json({ status: "error", message: error.message });
+    logger.error("Error fetching donations:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };

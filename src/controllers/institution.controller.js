@@ -1,19 +1,21 @@
 import Institution from "../models/institution.model.js";
+import logger from "../config/logger.js";
 
-// GET - Obtener instituciones. Ordenar respuesta json.
+// GET - Obtener instituciones.
 export const getInstitutions = async (req, res) => {
   try {
     const institutions = await Institution.find()
       .populate("donations")
       .populate("appointments");
 
+    logger.info("Institutions fetched successfully");
     res.status(200).json({
       status: "success",
       payload: institutions,
     });
   } catch (error) {
-    console.error("Error getting institutions:", error);
-    res.status(500).json({ status: "error", message: "Internal server error.", error });
+    logger.error("Error fetching institutions:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -25,12 +27,14 @@ export const getInstitutionAppointments = async (req, res) => {
     const institution = await Institution.findById(id).populate("appointments");
 
     if (!institution) {
+      logger.warn(`Institution not found with ID: ${id}`);
       return res.status(404).json({
         status: "error",
         message: "Institution not found.",
       });
     }
 
+    logger.info(`Institution appointments fetched successfully: ${institution.name}`);
     res.status(200).json({
       status: "success",
       message: "Institution appointments fetched successfully.",
@@ -41,101 +45,40 @@ export const getInstitutionAppointments = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error fetching institution appointments:", error);
-    res.status(500).json({ status: "error", message: "Internal server error.", error });
+    logger.error("Error fetching institution appointments:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
 // POST - Crear una nueva institución.
 export const createInstitution = async (req, res) => {
   try {
+    const { email } = req.body;
+
+    const existingInstitution = await Institution.findOne({ email });
+    if (existingInstitution) {
+      logger.warn(`Duplicate email: ${email}`);
+      return res.status(409).json({ status: "error", message: "Email already registered." });
+    }
+
     const newInstitution = new Institution(req.body);
     const savedInstitution = await newInstitution.save();
 
+    logger.info(`Institution created successfully: ${savedInstitution.name}`);
+
     res.status(201).json({
       status: "success",
-      message: "Institution created successfully",
+      message: "Institution created successfully.",
       payload: savedInstitution,
     });
   } catch (error) {
-    console.error("Error creating institution:", error);
-    res.status(500).json({ status: "error", message: error.message });
-  }
-};
-
-// POST - Registrar un lote de instituciones.
-export const createInstitutionsBatch = async (req, res) => {
-  try {
-    const institutions = req.body;
-
-    if (!Array.isArray(institutions) || institutions.length === 0) {
-      return res.status(400).json({
-        status: "error",
-        message: "Request must include an array of institutions.",
-      });
+    if (error.code === 11000) {
+      logger.warn(`Duplicate key error: ${error.message}`);
+      return res.status(409).json({ status: "error", message: "Duplicate key error." });
     }
 
-    const savedInstitutions = [];
-
-    for (const institution of institutions) {
-      const {
-        name,
-        institutionType,
-        address,
-        email,
-        operatingHours,
-        dailyDonorCapacity,
-      } = institution;
-
-      if (
-        !name ||
-        !institutionType ||
-        !address ||
-        !email ||
-        !operatingHours ||
-        dailyDonorCapacity === undefined
-      ) {
-        return res.status(400).json({
-          status: "error",
-          message: "All fields are required for each institution.",
-        });
-      }
-
-      const existingInstitution = await Institution.findOne({ email });
-      if (existingInstitution) {
-        return res.status(409).json({
-          status: "error",
-          message: `Email ${email} is already registered.`,
-        });
-      }
-
-      const newInstitution = new Institution({
-        name,
-        institutionType,
-        address,
-        email,
-        operatingHours,
-        dailyDonorCapacity,
-        donations: [],
-        appointments: [],
-      });
-
-      const savedInstitution = await newInstitution.save();
-      savedInstitutions.push({
-        id: savedInstitution._id,
-        name: savedInstitution.name,
-        email: savedInstitution.email,
-      });
-    }
-
-    res.status(201).json({
-      status: "success",
-      message: `${savedInstitutions.length} institutions registered successfully.`,
-      payload: savedInstitutions,
-    });
-  } catch (error) {
-    console.error("Error registering institutions batch:", error);
-    res.status(500).json({ status: "error", message: "Internal server error.", error });
+    logger.error("Error creating institution:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -151,20 +94,22 @@ export const updateInstitution = async (req, res) => {
     );
 
     if (!updatedInstitution) {
+      logger.warn(`Institution not found with ID: ${id}`);
       return res.status(404).json({
         status: "error",
         message: "Institution not found.",
       });
     }
 
+    logger.info(`Institution updated successfully: ${updatedInstitution.name}`);
     res.status(200).json({
       status: "success",
       message: "Institution updated successfully.",
       payload: updatedInstitution,
     });
   } catch (error) {
-    console.error("Error updating institution:", error);
-    res.status(500).json({ status: "error", message: "Internal server error.", error });
+    logger.error("Error updating institution:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -176,18 +121,20 @@ export const deleteInstitution = async (req, res) => {
     const deletedInstitution = await Institution.findByIdAndDelete(id);
 
     if (!deletedInstitution) {
+      logger.warn(`Institution not found with ID: ${id}`);
       return res.status(404).json({
         status: "error",
         message: "Institution not found.",
       });
     }
 
+    logger.info(`Institution deleted successfully: ${deletedInstitution.name}`);
     res.status(200).json({
       status: "success",
       message: "Institution deleted successfully.",
     });
   } catch (error) {
-    console.error("Error deleting institution:", error);
-    res.status(500).json({ status: "error", message: "Internal server error.", error });
+    logger.error("Error deleting institution:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };

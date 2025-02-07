@@ -1,7 +1,7 @@
 import express from "express";
 import {
-  createAppointment,
   getAppointments,
+  createAppointment,
   confirmAppointment,
   cancelAppointment,
 } from "../controllers/appointment.controller.js";

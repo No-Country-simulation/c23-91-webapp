@@ -3,6 +3,7 @@ import User from "../models/user.model.js";
 import Institution from "../models/institution.model.js";
 import Donation from "../models/donation.model.js";
 import Award from "../models/award.model.js";
+import logger from "../config/logger.js";
 
 // GET - Obtener todas las citas.
 export const getAppointments = async (req, res) => {
@@ -17,13 +18,14 @@ export const getAppointments = async (req, res) => {
         select: "name institutionType address",
       });
 
+    logger.info("Appointments fetched successfully");
     res.status(200).json({
       status: "success",
       payload: appointments,
     });
   } catch (error) {
-    console.error("Error getting appointments:", error);
-    res.status(500).json({ status: "error", message: error.message });
+    logger.error("Error fetching appointments:", error.message);
+    res.status(500).json({ status: "error", message: "Internal server error." });
   }
 };
 
@@ -38,6 +40,7 @@ export const createAppointment = async (req, res) => {
     });
 
     if (conflictingAppointment) {
+      logger.warn("Conflicting appointment found");
       return res.status(400).json({
         status: "error",
         message: "The selected date and time are not available.",
@@ -46,25 +49,12 @@ export const createAppointment = async (req, res) => {
 
     const user = await User.findById(userId);
     if (!user) {
+      logger.warn(`User not found with ID: ${userId}`);
       return res.status(404).json({
         status: "error",
         message: "User not found.",
       });
     }
-
-    // const lastDonation = await Donation.findOne({ userId }).sort({ donationDate: -1 });
-    // if (lastDonation) {
-    //   const monthsToWait = user.gender === "Male" ? 3 : 4;
-    //   const nextEligibleDate = new Date(lastDonation.donationDate);
-    //   nextEligibleDate.setMonth(nextEligibleDate.getMonth() + monthsToWait);
-
-    //   if (new Date(appointmentDate) < nextEligibleDate) {
-    //     return res.status(400).json({
-    //       status: "error",
-    //       message: `You must wait at least ${monthsToWait} months before scheduling a new donation appointment.`,
-    //     });
-    //   }
-    // }
 
     const newAppointment = new Appointment({
       userId,
@@ -84,17 +74,17 @@ export const createAppointment = async (req, res) => {
       $push: { appointments: savedAppointment._id },
     });
 
+    logger.info(`Appointment created successfully: ${savedAppointment._id}`);
     res.status(201).json({
       status: "success",
       message: "Appointment created successfully.",
       payload: savedAppointment,
     });
   } catch (error) {
-    console.error("Error creating appointment:", error);
+    logger.error("Error creating appointment:", error.message);
     res.status(500).json({
       status: "error",
       message: "Internal server error.",
-      error,
     });
   }
 };
@@ -106,6 +96,7 @@ export const confirmAppointment = async (req, res) => {
 
     const appointment = await Appointment.findById(id);
     if (!appointment || appointment.status !== "Pending") {
+      logger.warn("Appointment not found or already completed");
       return res.status(400).json({
         status: "error",
         message: "Appointment not found or already completed.",
@@ -116,6 +107,7 @@ export const confirmAppointment = async (req, res) => {
 
     const user = await User.findById(userId);
     if (!user) {
+      logger.warn(`User not found with ID: ${userId}`);
       return res.status(404).json({ status: "error", message: "User not found." });
     }
 
@@ -158,6 +150,7 @@ export const confirmAppointment = async (req, res) => {
 
     await User.findByIdAndUpdate(userId, updateData);
 
+    logger.info(`Appointment confirmed successfully: ${updatedAppointment._id}`);
     res.status(200).json({
       status: "success",
       message:"Appointment confirmed, donation created, and user updated successfully.",
@@ -169,11 +162,10 @@ export const confirmAppointment = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error confirming appointment:", error);
+    logger.error("Error confirming appointment:", error.message);
     res.status(500).json({
       status: "error",
       message: "Internal server error.",
-      error,
     });
   }
 };
@@ -186,6 +178,7 @@ export const cancelAppointment = async (req, res) => {
     const appointment = await Appointment.findById(id);
 
     if (!appointment || appointment.status !== "Pending") {
+      logger.warn("Appointment not found or cannot be cancelled");
       return res.status(400).json({
         status: "error",
         message: "Appointment not found or cannot be cancelled.",
@@ -198,17 +191,17 @@ export const cancelAppointment = async (req, res) => {
       { new: true }
     );
 
+    logger.info(`Appointment cancelled successfully: ${updatedAppointment._id}`);
     res.status(200).json({
       status: "success",
       message: "Appointment cancelled successfully.",
       payload: updatedAppointment,
     });
   } catch (error) {
-    console.error("Error cancelling appointment:", error);
+    logger.error("Error cancelling appointment:", error.message);
     res.status(500).json({
       status: "error",
       message: "Internal server error.",
-      error,
     });
   }
 };
