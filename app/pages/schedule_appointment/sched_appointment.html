@@ -42,13 +42,28 @@
                                     <a class="nav-link text-white p-1 mx-3" href="/app/index.html">Principal</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white p-1 mx-3"
-                                        href="/app/pages/awards/awards.html">Premios</a>
+                                    <a class="nav-link text-white p-1 mx-3" href="/app/pages/awards/awards.html">Premios</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white p-1 mx-3"
-                                        href="/app/pages/profile/profile.html">Perfil</a>
+                                        href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
+                                 </li>
+                                 <li class="nav-item dropdown logged">
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                        <img src="../../assets/user.jpg" alt="User" class="rounded-circle" width="30">
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="userDropdown">
+                                        <li class="logged"><a class="dropdown-item text-white" href="../../pages/profile/profile.html">Perfil</a></li>
+                                        <li class="logged"><a class="dropdown-item text-white" href="#">Configuración</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li class="logged">
+                                            <button id="logoutBtn_D" class="dropdown-item m-0 text-white" type="button">
+                                                Cerrar sesión
+                                            </button>
+                                        </li>
+                                    </ul>
                                 </li>
+    
                             </ul>
                         </div>
                     </div>

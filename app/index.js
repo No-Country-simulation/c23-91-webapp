@@ -44,58 +44,30 @@ function removeDisease(event) {
   diseasesToggle();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll("a");
-  const userID = localStorage.getItem("userID");
-
-  links.forEach((link) => {
-    if (
-      !userID &&
-      (link.href.includes(
-        "/app/pages/schedule_appointment/sched_appointment.html"
-      ) ||
-        link.href.includes("/app/pages/awards/awards.htm") ||
-        link.href.includes("/app/pages/profile/profile.htm"))
-    ) {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        alert("Debe iniciar sesión");
-        link.style.pointerEvents = "none";
-        link.style.opacity = "0.5";
-      });
-    }
-  });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const userID = localStorage.getItem("userID");
-  const loginLink = document.getElementById("login-link");
-  const logoutBtnD = document.getElementById("logoutBtn_D");
+  console.log(userID);
 
 
-  if (userID && loginLink) {
-    loginLink.addEventListener("click", (event) => {
-      if (userID) {
-        event.preventDefault();
-        alert("Usted ya ha iniciado sesión.");
-      }
+  const loggedLinks = document.querySelectorAll(".logged");
+  const notLoggedLinks = document.querySelectorAll(".not-logged");
+
+  if (userID) {
+
+    loggedLinks.forEach(link => {
+      link.style.display = "block";  // or "inline-block" / "" depending on your layout
     });
+    notLoggedLinks.forEach(link => {
+      link.style.display = "none";
+    });
+  } else {
 
-    if (userID) {
-      loginLink.classList.add("disabled");
-      loginLink.setAttribute("aria-disabled", "true");
-      loginLink.style.pointerEvents = "auto";
-    }
-  }
-
-  if (logoutBtnD) {
-    if (!userID) {
-      logoutBtnD.addEventListener("click", (event) => {
-        event.preventDefault();
-        alert("No ha iniciado sesión.");
-      });
-      logoutBtnD.disabled = true;
-      logoutBtnD.style.opacity = "0.5";
-    }
+    loggedLinks.forEach(link => {
+      link.style.display = "none";
+    });
+    notLoggedLinks.forEach(link => {
+      link.style.display = "block";
+    });
   }
 });

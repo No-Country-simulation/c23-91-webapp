@@ -26,32 +26,45 @@
 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
+                            <li class="nav-item not-logged">
                                 <a class="nav-link text-white p-1 mx-3"
                                     href="/app/pages/sign_up/sign_up.html">Registrarse</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item not-logged">
                                 <a id="login-link" class="nav-link text-white p-1 mx-3"
                                     href="/app/pages/login/login.html" title="Debe registrarse primero">Iniciar
                                     sesión</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-3"
+                                    href="./index.html">Principal</a>
+                            </li>
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/awards/awards.html">Premios</a>
+                            </li>
+                            <li class="nav-item logged">
                                 <a class="nav-link text-white p-1 mx-3"
                                     href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/awards/awards.html">Premios</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3"
-                                    href="/app/pages/profile/profile.html">Perfil</a>
-                            </li>
-                            <li class="nav-item">
-                                <button id="logoutBtn_D" class="nav-link text-white p-1" type="button"
-                                    aria-label="Cierre su sesión">
-                                    Cerrar sesión
-                                </button>
-                            </li>
+
+                            <!-- User button and dropdown menu -->
+
+                            <li class="nav-item dropdown logged">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <img src="./assets/user.jpg" alt="User" class="rounded-circle" width="30">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="userDropdown">
+                                    <li class="logged"><a class="dropdown-item text-white" href="./pages/profile/profile.html">Perfil</a></li>
+                                    <li class="logged"><a class="dropdown-item text-white" href="#">Configuración</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="logged">
+                                        <button id="logoutBtn_D" class="dropdown-item m-0 text-white" type="button">
+                                            Cerrar sesión
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li> 
+                            
 
                         </ul>
                     </div>
