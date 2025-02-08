@@ -138,11 +138,6 @@ const fetchDonationsData = async () => {
       return;
     }
 
-    console.log(
-      "Fetching from:",
-      `http://localhost:8080/api/users/${userID}/details`
-    );
-
     const response = await fetch(
       `http://localhost:8080/api/users/${userID}/details`
     );

@@ -12,7 +12,7 @@
 <body>
     <div id="main-container">
         <header class="header d-flex align-items-center justify-content-between px-3 bg-primary" style="height: 80px;">
-            <a href="./index.html">
+            <a href="../../index.html">
                 <img class="logo rounded-circle img-fluid" src="/app/assets/logo.svg" alt="Logo" style="height: 50px;">
             </a>
 
@@ -30,6 +30,29 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white p-1 mx-3" href="/app/index.html">Principal</a>
                             </li>
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/awards/awards.html">Premios</a>
+                            </li>
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-3"
+                                    href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
+                             </li>
+                             <li class="nav-item dropdown logged">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <img src="../../assets/user.jpg" alt="User" class="rounded-circle" width="30">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="userDropdown">
+                                    <li class="logged"><a class="dropdown-item text-white" href="../../pages/profile/profile.html">Perfil</a></li>
+                                    <li class="logged"><a class="dropdown-item text-white" href="#">Configuración</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="logged">
+                                        <button id="logoutBtn_D" class="dropdown-item m-0 text-white" type="button">
+                                            Cerrar sesión
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li>  
+
                         </ul>
                     </div>
                 </div>
@@ -43,8 +66,8 @@
             <div class="row w-lg-25">
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label ">Email *</label>
-                    <input name="email" type="email" class="form-control" id="inputEmail"
-                        placeholder="mymail@mail.com" required onblur="inputValidation(event)">
+                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="mymail@mail.com"
+                        required onblur="inputValidation(event)">
                     <div class="invalid-feedback" data-input-error="inputEmail"></div>
                 </div>
                 <div class="mb-3">
@@ -78,12 +101,8 @@
         </div>
         <div id="2" class="d-flex gap-4 gap-lg-5 justify-content-center align-items-center flex-grow-1">
             <div id="3" class="d-flex flex-column justify-content-center align-items-start">
-                <a href="./index.html" class="text-white text-decoration-none m-1"
+                <a href="../../index.html" class="text-white text-decoration-none m-1"
                     style="font-size: 0.8rem; font-weight: 300;">Inicio</a>
-                <a href="./pages/login.html" class="text-white text-decoration-none m-1"
-                    style="font-size: 0.8rem; font-weight: 300;">Inicio de sesión</a>
-                <a href="#" class="text-white text-decoration-none m-1"
-                    style="font-size: 0.8rem; font-weight: 300;">Agenda tu cita</a>
             </div>
             <div id="4" class="d-flex flex-column justify-content-center align-items-start">
                 <a href="#" class="text-white text-decoration-none m-1"

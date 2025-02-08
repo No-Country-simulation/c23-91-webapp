@@ -26,26 +26,45 @@
 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/sign_up/sign_up.html">Registrarse</a>
+                            <li class="nav-item not-logged">
+                                <a class="nav-link text-white p-1 mx-3"
+                                    href="/app/pages/sign_up/sign_up.html">Registrarse</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/login/login.html">Iniciar sesión</a>
+                            <li class="nav-item not-logged">
+                                <a id="login-link" class="nav-link text-white p-1 mx-3"
+                                    href="/app/pages/login/login.html" title="Debe registrarse primero">Iniciar
+                                    sesión</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-3"
+                                    href="./index.html">Principal</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item logged">
                                 <a class="nav-link text-white p-1 mx-3" href="/app/pages/awards/awards.html">Premios</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/profile/profile.html">Perfil</a>
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-3"
+                                    href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
                             </li>
-                            <li class="nav-item">
-                                <button id="logoutBtn_D" class="nav-link text-white p-1" type="button" aria-label="Cierre su sesión">
-                                    Cerrar sesión
-                                </button>
-                            </li>
+
+                            <!-- User button and dropdown menu -->
+
+                            <li class="nav-item dropdown logged">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <img src="./assets/user.jpg" alt="User" class="rounded-circle" width="30">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="userDropdown">
+                                    <li class="logged"><a class="dropdown-item text-white" href="./pages/profile/profile.html">Perfil</a></li>
+                                    <li class="logged"><a class="dropdown-item text-white" href="#">Configuración</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="logged">
+                                        <button id="logoutBtn_D" class="dropdown-item m-0 text-white" type="button">
+                                            Cerrar sesión
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li> 
+                            
 
                         </ul>
                     </div>
@@ -183,7 +202,8 @@
         <div class="col d-flex flex-column align-items-center justify-content-center">
             <p class="bg-secondary p-4 col-10 col-md-7 col-lg-5 rounded-4">Tener entre 18 y 75 años</p>
             <p class="bg-secondary p-4 col-10 col-md-7 col-lg-5 rounded-4">Pesar mínimo 50kg</p>
-            <p class="bg-secondary p-4 col-10 col-md-7 col-lg-5 rounded-4">No padecer epilepsia, tuberculosis o enfermedades del corazón</p>
+            <p class="bg-secondary p-4 col-10 col-md-7 col-lg-5 rounded-4">No padecer epilepsia, tuberculosis o
+                enfermedades del corazón</p>
         </div>
     </div>
 
@@ -192,7 +212,8 @@
         <div class="col  d-flex flex-column align-items-center justify-content-center">
             <h2 fs-1 fw-bold>¡ HAZ TU PRIMERA <span class="d-block text-center fw-bold">CITA HOY !</span></h2>
             <p style="font-size: 0.9rem;">Un pequeño gesto puede cambiar el mundo.</p>
-            <p class="bg-secondary p-3 col-10 col-md-7 col-lg-5 rounded-pill text-primary text-center fw-bold">¡ Dona ahora y salva vidas !
+            <p class="bg-secondary p-3 col-10 col-md-7 col-lg-5 rounded-pill text-primary text-center fw-bold">¡ Dona
+                ahora y salva vidas !
             </p>
         </div>
     </div>
@@ -206,11 +227,9 @@
         <div id="2" class="d-flex gap-4 gap-lg-5 justify-content-center align-items-center flex-grow-1">
             <div id="3" class="d-flex flex-column justify-content-center align-items-start">
                 <a href="./index.html" class="text-white text-decoration-none m-1"
-                    style="font-size: 0.8rem; font-weight: 300;">Inicio</a>
+                    style="font-size: 0.8rem; font-weight: 300;">Arriba</a>
                 <a href="./pages/login/login.html" class="text-white text-decoration-none m-1"
-                    style="font-size: 0.8rem; font-weight: 300;">Inicio de sesión</a>
-                <a href="#" class="text-white text-decoration-none m-1"
-                    style="font-size: 0.8rem; font-weight: 300;">Agenda tu cita</a>
+                    style="font-size: 0.8rem; font-weight: 300;" title="Debe registrarse primero">Inicio de sesión</a>
             </div>
             <div id="4" class="d-flex flex-column justify-content-center align-items-start">
                 <a href="#" class="text-white text-decoration-none m-1"
