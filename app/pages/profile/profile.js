@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error("Error al cargar los datos");
       }
       const data = await response.json();
-      user = data.payload.user;
+      const user = data.payload.user;
       console.log(user);
       const userDonationsArray = data.payload.user.donations;
       const userTotalDonations = userDonationsArray.length;
@@ -48,9 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("inputBloodType").value = user.bloodType || "";
       document.getElementById("inputBithday").value =
         `${day_app} / ${monthIndex} / ${year_app}` || "";
-      document.getElementById("inputBithday").value =
-        `${day_app} / ${monthIndex} / ${year_app}` || "";
-      document.getElementById("inputGender").value = user.gender || "";
+      document.getElementById("inputGender").value =
+        user.gender === "Male" ? "Hombre" : "Mujer";
 
       if (user.diseases.length > 0) {
         document.getElementById("inputDiseases").value = "Si";
