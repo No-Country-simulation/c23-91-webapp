@@ -12059,7 +12059,7 @@ body {
 }
 
 .dropdown-menu {
-  margin-top: 18px !important; /* Adjust this value as needed */
+  margin-top: 18px !important;
 }
 
 .dropdown-divider {
@@ -12067,17 +12067,16 @@ body {
 }
 .nav-item.dropdown {
   display: flex;
-  align-items: center;  /* Vertically center the dropdown button */
+  align-items: center;
 }
 
 .navbar-nav .nav-item a {
-  padding-top: 0.8rem !important; /* Adjust the padding */
-  /* padding-bottom: 0.5rem; */
+  padding-top: 0.8rem !important;
 }
 
 .dropdown-menu .dropdown-item:hover {
-  background-color: rgb(238, 36, 36); /* Or any other color you prefer */
-  color: white; /* Ensure the text stays white */
+  background-color: rgb(238, 36, 36);
+  color: white;
 }
 
 
