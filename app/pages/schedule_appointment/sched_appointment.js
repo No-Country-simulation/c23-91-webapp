@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
           pillContainer.appendChild(pill);
         });
       } else if (user.diseases === 0) {
-        document.getElementById("diseaseNo").checked = true;
+        document.getElementById("diseaseNo").checked = false;
       }
     } catch (error) {
       console.error("Error al cargar los datos del formulario:", error);
