@@ -18,34 +18,40 @@
             <a href="../../index.html">
                 <img class="logo rounded-circle img-fluid" src="/app/assets/logo.svg" alt="Logo" style="height: 50px;">
             </a>
-
+    
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#"></a>
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    
+                    <button class="ms-auto navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
-                    <div class="collapse navbar-collapse" id="navbarNav">
+    
+                    <div class="collapse navbar-collapse bg-primary" id="navbarNav" style="z-index: 100;">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3" href="/app/index.html">Inicio</a>
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-2"
+                                    href="../../index.html">Inicio</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3" href="/app/pages/awards/awards.html">Premios</a>
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-2" href="/app/pages/awards/awards.html">Premios</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white p-1 mx-3"
+                            <li class="nav-item logged">
+                                <a class="nav-link text-white p-1 mx-2"
                                     href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
-                             </li>
-                             <li class="nav-item dropdown logged">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                    <img src="../../assets/user.jpg" alt="User" class="rounded-circle" width="30">
+                            </li>
+
+                            <!-- User button and dropdown menu -->
+
+                            <li class="nav-item dropdown logged bg-primary flex-column me-4 mt-0">
+                                <a class="nav-link d-flex align-items-start gap-1 dropdown-toggle p-0" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <img src="../../assets/user.jpg" alt="User" class="rounded-circle d-none d-lg-inline" width="30"> 
+                                    <span class="text-white d-inline d-lg-none ms-2 p-1">Usuario</span> 
+                                    <i class="bi bi-caret-down-fill text-white d-inline d-lg-none"></i> 
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="userDropdown">
-                                    <li class="logged"><a class="dropdown-item text-white" href="../../pages/profile/profile.html">Perfil</a></li>
+                                <ul id="dropdown-items" class="dropdown-menu dropdown-menu-end bg-primary px-1" aria-labelledby="userDropdown">
+                                    <li class="logged"><a class="dropdown-item text-white" href="../profile/profile.html">Perfil</a></li>
                                     <li class="logged"><a class="dropdown-item text-white" href="#">Configuración</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li class="logged">
@@ -54,7 +60,8 @@
                                         </button>
                                     </li>
                                 </ul>
-                            </li>  
+                            </li> 
+                            
 
                         </ul>
                     </div>

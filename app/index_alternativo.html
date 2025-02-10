@@ -5,99 +5,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <title>Inicio</title>
 </head>
 
 <body>
     <div id="main-container">
-        <header class="header d-flex align-items-center justify-content-between px-3 bg-primary" style="height: 80px;">
+        <header class="header w-100 d-flex align-items-center justify-content-between px-3 bg-primary" style="height: 80px;">
             <a href="./index.html">
-                <img class="logo rounded-circle img-fluid" src="./assets/logo.svg" alt="Logo" style="height: 50px;">
+                <img class="logo rounded-circle img-fluid" src="/app/assets/logo.svg" alt="Logo" style="height: 50px;">
             </a>
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
+            <nav d-flex>
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#"></a>
+                    <ul class="d-flex flex-row align-items-center justify-content-end navbar-nav" style="font-size: 0.75rem;">
+                        <li class="nav-item not-logged">
+                            <a class="nav-link text-white p-1 mx-1 mb-2"
+                                href="/app/pages/sign_up/sign_up.html">Registrarse</a>
+                        </li>
+                        <li class="nav-item not-logged">
+                            <a id="login-link" class="nav-link text-white p-1 mx-3 mb-2"
+                                href="/app/pages/login/login.html" title="Debe registrarse primero">Iniciar
+                                sesión</a>
+                        </li>
+                        <li class="nav-item logged">
+                            <a class="nav-link text-white p-1 mx-1" href="./index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item logged">
+                            <a class="nav-link text-white p-1 mx-1" href="/app/pages/awards/awards.html">Premios</a>
+                        </li>
+                        <li class="nav-item logged">
+                            <a class="nav-link text-white p-1 mx-1"
+                                href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
+                        </li>
 
-                    <button class="ms-auto navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                        <!-- User button and dropdown menu -->
 
-                    <div class="collapse navbar-collapse bg-primary" id="navbarNav" style="z-index: 100;">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item not-logged">
-                                <a class="nav-link text-white p-1 mx-2"
-                                    href="./pages/sign_up/sign_up.html">Registrarse</a>
-                            </li>
-                            <li class="nav-item not-logged">
-                                <a class="nav-link text-white p-1 mx-2"
-                                    href="./pages/login/login.html">Iniciar sesión</a>
-                            </li>
-                            <li class="nav-item logged">
-                                <a class="nav-link text-white p-1 mx-2" href="/app/pages/awards/awards.html">Premios</a>
-                            </li>
-                            <li class="nav-item logged">
-                                <a class="nav-link text-white p-1 mx-2"
-                                    href="/app/pages/schedule_appointment/sched_appointment.html">Agendar cita</a>
-                            </li>
-
-                            <!-- User button and dropdown menu -->
-
-                            <li class="nav-item dropdown logged bg-primary flex-column me-4 mt-0">
-                                <a class="nav-link d-flex align-items-start gap-1 dropdown-toggle p-0" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                    <img src="./assets/user.jpg" alt="User" class="rounded-circle d-none d-lg-inline" width="30"> 
-                                    <span class="text-white d-inline d-lg-none ms-2 p-1">Usuario</span> 
-                                    <i class="bi bi-caret-down-fill text-white d-inline d-lg-none"></i> 
-                                </a>
-                                <ul id="dropdown-items" class="dropdown-menu dropdown-menu-end bg-primary px-1" aria-labelledby="userDropdown">
-                                    <li class="logged"><a class="dropdown-item text-white" href="/app/pages/profile/profile.html">Perfil</a></li>
-                                    <li class="logged"><a class="dropdown-item text-white" href="#">Configuración</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li class="logged">
-                                        <button id="logoutBtn_D" class="dropdown-item m-0 text-white" type="button">
-                                            Cerrar sesión
-                                        </button>
-                                    </li>
-                                </ul>
-                            </li>
+                        <li class="nav-item dropdown logged ms-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <img src="./assets/user.jpg" alt="User" class="rounded-circle ms-2" width="30">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="userDropdown" style="font-size: 0.75rem;">
+                                <li class="logged"><a class="dropdown-item text-white"
+                                        href="./pages/profile/profile.html">Perfil</a></li>
+                                <li class="logged"><a class="dropdown-item text-white" href="#">Configuración</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="logged">
+                                    <button id="logoutBtn_D" class="dropdown-item m-0 text-white" type="button">
+                                        Cerrar sesión
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
 
 
-                        </ul>
-                    </div>
+                    </ul>
+
                 </div>
             </nav>
         </header>
-
     </div>
 
-    <div class="d-flex flex-column">
-        <div id="logOut-alert" class="alert alert-success align-items-center d-none w-75 align-self-center mt-2" role="alert">
-            <i class="bi bi-check-circle-fill fs-3 text-center me-3"></i>
-            <div>
-                Sesión cerrada correctamente.
-            </div>
+    <div id="heroes-de-vida" class="container rounded py-3 mt-4 d-flex flex-column flex-lg-row">
+        <div>
+            <h1 class="display-3 text-left fw-bold ms-4">
+                <span>Red de</span>
+                <span class="new-line d-block">Vida</span>
+            </h1>
+            <hr class="mx-left bg-danger"
+                style="width: 70px; height: 2px; color: red; border: none; margin-left: 2em; opacity: 1;">
+
+            <p class="lead text-left ms-5 w-75" style="font-size: 0.9rem;">
+                Juntos podemos marcar la diferencia.
+                <span class="fw-bold custom-span">Cada donación de sangre puede salvar hasta tres vidas.</span>
+                Sé el héroe que alguien necesita hoy.
+            </p>
         </div>
-        <div id="heroes-de-vida" class="container rounded py-3 mt-4 d-flex flex-column flex-lg-row">
-            <div>
-                <h1 class="display-3 text-left fw-bold ms-4">
-                    <span>Red de</span>
-                    <span class="new-line d-block">Vida</span>
-                </h1>
-                <hr class="mx-left bg-danger"
-                    style="width: 70px; height: 2px; color: red; border: none; margin-left: 2em; opacity: 1;">
-    
-                <p class="lead text-left ms-5 w-75" style="font-size: 0.9rem;">
-                    Juntos podemos marcar la diferencia.
-                    <span class="fw-bold custom-span">Cada donación de sangre puede salvar hasta tres vidas.</span>
-                    Sé el héroe que alguien necesita hoy.
-                </p>
-            </div>
-    
-            <div class="text-center mt-4">
-                <img class="heroes img-fluid" src="./assets/heroes.png" alt="Héroes de Vida" style="width: 260px;">
-            </div>
+
+        <div class="text-center mt-4">
+            <img class="heroes img-fluid" src="./assets/heroes.png" alt="Héroes de Vida" style="width: 260px;">
         </div>
     </div>
 

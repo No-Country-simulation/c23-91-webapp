@@ -33,8 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const userTotalPoints = data.payload.user.totalPoints;
       numeroTotalPuntosEl.textContent = userTotalPoints;
 
-      document.getElementById("userTitle").textContent = user.firstName || "";
-      document.querySelector("label.font-semibold").textContent = "Nuevo Nivel";
+      updateLevelProgress(userTotalPoints);
 
       const birthdayDate = new Date(user.birthday);
       const year_app = birthdayDate.getFullYear();
@@ -82,4 +81,17 @@ function createDiseasePill(diseaseValue, diseaseName) {
   pill.textContent = diseaseName;
 
   return pill;
+}
+
+function updateLevelProgress(userPoints) {
+  const userLevelPoints = 90;
+  
+  // Calcular nivel actual y progreso dentro del nivel
+  let nivel = Math.floor(userPoints / userLevelPoints);
+  let progreso = (userPoints % userLevelPoints) / userLevelPoints * 100;
+
+  // Actualizar la UI
+  document.getElementById("level-label").textContent = `Nivel ${nivel}`;
+  document.getElementById("progress-bar").style.width = `${progreso}%`;
+  document.getElementById("progress-percentage").textContent = `${Math.round(progreso)}%`;
 }
