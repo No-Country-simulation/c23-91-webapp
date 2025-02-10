@@ -71,3 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const logoutAlert = document.getElementById("logOut-alert");
+  const logoutMessage = localStorage.getItem("logoutMessage");
+
+  if (logoutAlert && logoutMessage) {
+    logoutAlert.classList.remove("d-none");
+    logoutAlert.classList.add("d-flex");
+
+    localStorage.removeItem("logoutMessage");
+  }
+});
