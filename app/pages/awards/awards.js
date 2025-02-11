@@ -193,7 +193,18 @@ const fetchDonationsData = async () => {
       mes_ult_don_El.textContent = month;
       dia_ult_don_El.textContent = day;
       anio_ult_don_El.textContent = year;
+
+      displayDonations(donationsData);
+      renderPagination(donationsData);
+    } else {
+      document.getElementById("lastDonation-cont").innerHTML = `
+      <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded" style="min-height: 20vh;">
+      <p class="mb-3 text-primary">"Aqui aparecera la informacion de tu ultima donacion una vez completes una."</p>
+    </div>
+      `;
+      document.getElementById("donations-container").innerHTML = `<p class="text-center">Aun no tienes donaciones</p>`
     }
+
     if (lastDonationHospital) {
       const hospitalIndexDon = hospitales.findIndex(
         (hospital) => hospital.name === lastDonationHospital
@@ -204,9 +215,9 @@ const fetchDonationsData = async () => {
     }
 
     const appointmentsData = data.payload?.appointments || [];
-    appointmentId = appointmentsData[appointmentsData.length - 1]._id;
-
+    
     if (appointmentsData.length > 0) {
+      appointmentId = appointmentsData[appointmentsData.length - 1]._id;
       const nextAppointment = appointmentsData[appointmentsData.length - 1];
 
       // if (nextAppointment.status === "Pending") {
@@ -237,23 +248,9 @@ const fetchDonationsData = async () => {
 
       appointmentStatus(nextAppointment.status);
 
-      /* } else {
-        cita_content_El.innerHTML = `
-    <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary rounded">
-      <p class="mb-3 text-primary fs-6">"No tienes ninguna cita agendada"</p>
-      <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
-    </div>
-`;
-
-        cancelar_cita_El.style.display = "none";
-        estado_El.classList.add("d-none");
-
-        console.log("Estado de la cita: " + nextAppointment.status);
-        appointmentStatus(nextAppointment.status);
-      }*/
-    } else {
+    } else if (appointmentsData.length === 0) {
       cita_content_El.innerHTML = `
-    <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded">
+    <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded" style="min-height: 40vh;">
       <p class="mb-3 text-primary">"No tienes ninguna cita agendada"</p>
       <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
     </div>
@@ -262,9 +259,6 @@ const fetchDonationsData = async () => {
       cancelar_cita_El.style.display = "none";
       estado_El.classList.add("d-none");
     }
-
-    displayDonations(donationsData);
-    renderPagination(donationsData);
   } catch (error) {
     console.error("Error fetching donations data:", error);
   }
