@@ -88,7 +88,7 @@ const hospitales = [
     url: "https://www.google.com/maps?q=Av.+Belgrano+1746,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
   },
   {
-    name: "Banco de Sangre",
+    name: "Banco Central de Sangre",
     address: "Av. Díaz Vélez 3973, Cdad. Autónoma de Buenos Aires",
     website: "https://www.hemocentro.org/",
     url: "https://www.google.com/maps?q=Av.+Díaz+Vélez+3973,+Ciudad+Autónoma+de+Buenos+Aires&output=embed",
@@ -107,7 +107,7 @@ const hospitales = [
     url: "https://www.google.com/maps?q=L.+N.+Alem+%26,+M5502+Salta,+Mendoza&output=embed",
   },
   {
-    name: "Clínica del Norte",
+    name: "Clínica Norte",
     address: "25 de Mayo 138 - 4200 Santiago del Estero",
     website: "https://sanatorionorte.com/",
     url: "https://www.google.com/maps?q=25+de+Mayo+138+-+4200+Santiago+del+Estero&output=embed",
@@ -118,9 +118,18 @@ function appointmentStatus(status) {
   if (status === "Cancelled") {
     statusDot.classList.replace("text-success", "text-primary");
     statusText.textContent = "Cancelado";
+    cancelar_cita_El.innerHTML =
+      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
   } else if (status === "Completed") {
     statusDot.classList.replace("text-success", "text-blue");
     statusText.textContent = "Completado";
+    cancelar_cita_El.innerHTML =
+      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
+  } else if (status === "Pending") {
+    statusDot.classList.replace("text-success", "text-success");
+    statusText.textContent = "Pending";
+    cancelar_cita_El.innerHTML =
+      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Cancela tu cita</a>';
   }
 }
 
