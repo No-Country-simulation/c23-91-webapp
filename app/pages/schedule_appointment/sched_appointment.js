@@ -233,9 +233,9 @@ async function updateUser(event) {
   }));
 
   data.diseases = selectedDiseases;
-
+  const uID = localStorage.getItem("userID")
   await fetch(
-    `https://c23-91-webapp-nfvs.onrender.com/api/users/${localStorage.getItem("userID")}`,
+    `https://c23-91-webapp-nfvs.onrender.com/api/users/${uID}`,
     {
       method: "PUT",
       headers: {
