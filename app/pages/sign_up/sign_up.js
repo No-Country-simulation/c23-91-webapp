@@ -98,6 +98,7 @@ function createUser(event) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer <'your message'>`,
     },
     body: JSON.stringify(data),
   })
