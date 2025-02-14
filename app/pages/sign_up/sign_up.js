@@ -94,7 +94,7 @@ function createUser(event) {
 
   console.log(data);
 
-  fetch("http://localhost:8080/auth/register", {
+  fetch("https://c23-91-webapp-nfvs.onrender.com/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

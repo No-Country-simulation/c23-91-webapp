@@ -21,7 +21,7 @@ async function logUser(event) {
   };
 
   try {
-    const response = await fetch("http://localhost:8080/auth/login", {
+    const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
