@@ -148,7 +148,7 @@ const fetchDonationsData = async () => {
     }
 
     const response = await fetch(
-      `https://c23-91-webapp-nfvs.onrender.com/api/users/${userID}/details`
+      `https://c23-91-webapp-nfvs.onrender.com/users/${userID}/details`
     );
 
     if (!response.ok) {
@@ -340,7 +340,7 @@ cancelar_cita_El.addEventListener("click", async function () {
 
   try {
     const response = await fetch(
-      `https://c23-91-webapp-nfvs.onrender.com/api/appointments/${appointmentId}/cancel`,
+      `https://c23-91-webapp-nfvs.onrender.com/appointments/${appointmentId}/cancel`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -386,7 +386,7 @@ if (document.referrer.includes("login.html")) {
 
 let userPoints = "";
 
-fetch(`https://c23-91-webapp-nfvs.onrender.com/api/users/${userID}`)
+fetch(`https://c23-91-webapp-nfvs.onrender.com/users/${userID}`)
   .then((response) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `https://c23-91-webapp-nfvs.onrender.com/api/users/${userID}`,
+        `https://c23-91-webapp-nfvs.onrender.com/users/${userID}`,
         {
           method: "GET",
           headers: {
