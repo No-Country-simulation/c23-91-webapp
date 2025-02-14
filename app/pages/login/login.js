@@ -41,7 +41,7 @@ async function logUser(event) {
       localStorage.setItem("token", data.payload.token);
       localStorage.setItem("userID", data.payload.user.id);
 
-      const absoluteUrl = `${window.location.origin}pages/awards/awards.html`;
+      const absoluteUrl = `${window.location.origin}../awards/awards.html`;
       window.location.href = absoluteUrl;
     } else {
       document.getElementById("error-alert").innerHTML = `
