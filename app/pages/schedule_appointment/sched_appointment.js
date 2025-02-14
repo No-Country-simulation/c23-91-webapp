@@ -235,14 +235,14 @@ async function updateUser(event) {
   data.diseases = selectedDiseases;
   const uID = localStorage.getItem("userID")
   await fetch(
-    `https://c23-91-webapp-nfvs.onrender.com/users/${uID}`,
+    `https://c23-91-webapp-nfvs.onrender.com/api/users/${uID}`,
     {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-      Authorization: ` Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     }
   )
     .then((response) => response.json())
