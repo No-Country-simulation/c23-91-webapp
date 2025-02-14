@@ -520,7 +520,7 @@ function createAppointment(event) {
 
   console.log(appointmentData);
 
-  fetch("https://c23-91-webapp-nfvs.onrender.com/appointments", {
+  fetch("https://c23-91-webapp-nfvs.onrender.com/api/appointments", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
