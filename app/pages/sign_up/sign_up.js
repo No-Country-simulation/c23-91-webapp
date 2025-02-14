@@ -109,7 +109,7 @@ function createUser(event) {
           .getElementById("succes-alert")
           .classList.replace("d-none", "d-flex");
         console.log("User registered:", data);
-        const absoluteUrl = `${window.location.origin}../login/login.html`;
+        const absoluteUrl = `${window.location.origin}/pages/login/login.html`;
         setTimeout(() => {
           window.location.href = absoluteUrl;
         }, 3000);
