@@ -183,7 +183,7 @@ async function nextStep(currentStep) {
   if (currentStep === 1) {
     calendarInicialization();
     try {
-      const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/institutions", {
+      const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/api/institutions", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -309,7 +309,7 @@ async function getHospitalSchedule(event) {
   const institutionId = event.target.value;
   try {
     const response = await fetch(
-      `https://c23-91-webapp-nfvs.onrender.com/institutions/${institutionId}/appointments`,
+      `https://c23-91-webapp-nfvs.onrender.com/api/institutions/${institutionId}/appointments`,
       {
         method: "GET",
         headers: {
