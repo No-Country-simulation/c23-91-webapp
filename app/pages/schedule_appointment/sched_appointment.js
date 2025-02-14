@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `https://c23-91-webapp-nfvs.onrender.com/users/${userID}`,
+        `https://c23-91-webapp-nfvs.onrender.com/api/users/${userID}`,
         {
           method: "GET",
           headers: {
@@ -183,7 +183,7 @@ async function nextStep(currentStep) {
   if (currentStep === 1) {
     calendarInicialization();
     try {
-      const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/institutions", {
+      const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/api/institutions", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -235,7 +235,7 @@ async function updateUser(event) {
   data.diseases = selectedDiseases;
 
   await fetch(
-    `https://c23-91-webapp-nfvs.onrender.com/users/${localStorage.getItem("userID")}`,
+    `https://c23-91-webapp-nfvs.onrender.com/api/users/${localStorage.getItem("userID")}`,
     {
       method: "PUT",
       headers: {
@@ -309,7 +309,7 @@ async function getHospitalSchedule(event) {
   const institutionId = event.target.value;
   try {
     const response = await fetch(
-      `https://c23-91-webapp-nfvs.onrender.com/institutions/${institutionId}/appointments`,
+      `https://c23-91-webapp-nfvs.onrender.com/api/institutions/${institutionId}/appointments`,
       {
         method: "GET",
         headers: {
