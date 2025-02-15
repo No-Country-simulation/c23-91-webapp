@@ -22,7 +22,7 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
+// app.use(helmet());
 app.use(httpLogger);
 
 // Servir archivos estáticos (CSS, JS, imágenes)

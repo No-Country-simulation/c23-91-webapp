@@ -1,3 +1,5 @@
+console.log("Holis :)");
+
 const inputEmailEl = document.getElementById("inputEmail");
 const passwordInput = document.getElementById("inputPassword");
 const togglePasswordButton = document.getElementById("togglePassword");
@@ -12,7 +14,7 @@ togglePasswordButton.addEventListener("click", () => {
       : '<i class="bi bi-eye-slash"></i>';
 });
 
-async function logUser(event) {
+  async function logUser(event) {
   event.preventDefault();
 
   const userData = {
@@ -25,7 +27,7 @@ async function logUser(event) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer <'your message'>`,
+        // Authorization: `Bearer <'your message'>`,
       },
       body: JSON.stringify(userData),
     });
@@ -41,7 +43,7 @@ async function logUser(event) {
       localStorage.setItem("token", data.payload.token);
       localStorage.setItem("userID", data.payload.user.id);
 
-      const absoluteUrl = `${window.location.origin}/app/pages/awards/awards.html`;
+      const absoluteUrl = `${window.location.origin}/pages/awards/index.html`;
       window.location.href = absoluteUrl;
     } else {
       document.getElementById("error-alert").innerHTML = `

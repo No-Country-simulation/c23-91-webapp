@@ -119,17 +119,17 @@ function appointmentStatus(status) {
     statusDot.classList.replace("text-success", "text-primary");
     statusText.textContent = "Cancelado";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
+      '<a href="../schedule_appointment/index.html" class="btn btn-primary">Agenda tu cita</a>';
   } else if (status === "Completed") {
     statusDot.classList.replace("text-success", "text-blue");
     statusText.textContent = "Completado";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
+      '<a href="../schedule_appointment/index.html" class="btn btn-primary">Agenda tu cita</a>';
   } else if (status === "Pending") {
     statusDot.classList.replace("text-success", "text-success");
     statusText.textContent = "Pending";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Cancela tu cita</a>';
+      '<a href="../schedule_appointment/index.html" class="btn btn-primary">Cancela tu cita</a>';
   }
 }
 
@@ -252,7 +252,7 @@ const fetchDonationsData = async () => {
       cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded" style="min-height: 40vh;">
       <p class="mb-3 text-primary">"No tienes ninguna cita agendada"</p>
-      <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
+      <a href="../schedule_appointment/index.html" class="btn btn-primary">Agenda tu cita</a>
     </div>
 `;
 
@@ -375,7 +375,7 @@ cancelar_cita_El.addEventListener("click", async function () {
   */
 });
 
-if (document.referrer.includes("login.html")) {
+if (document.referrer.includes("index.html")) {
   const successAlert = document.getElementById("success-alert");
   successAlert.classList.replace("d-none", "d-flex");
 
@@ -429,7 +429,7 @@ function updateMedals(points) {
 
 cancelar_cita_El.addEventListener("click", () => {
   cancelar_cita_El.innerHTML = `
-        <button class="btn btn-primary" onclick="window.location.href='../schedule_appointment/sched_appointment.html'">Agendar cita</button>
+        <button class="btn btn-primary" onclick="window.location.href='../schedule_appointment/index.html'">Agendar cita</button>
 
       `;
   /*estado_El.classList.add("d-none");

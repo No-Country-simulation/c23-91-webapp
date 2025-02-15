@@ -536,7 +536,7 @@ function createAppointment(event) {
                     <i class="bi bi-check-circle-fill fs-1 text-success text-center"></i>
                     <h3 class="text-center">Tu cita se ha agendado correctamente</h3>
                     <p>Para ver todos los detalles ve al inicio </p>
-                    <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
+                    <a href="../awards/index.html" class="btn btn-primary">Ir al inicio</a>
                     `;
       } else {
         const divResponse = document.getElementById("step-3");
@@ -544,7 +544,7 @@ function createAppointment(event) {
                     <i class="bi bi-x-circle-fill fs-1 text-primary text-center"></i>
                     <h3 class="text-center">Hubo un error al agendar la cita</h3>
                     <p>Ocurrió un error, intentalo más tarde</p>
-                    <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
+                    <a href="../awards/index.html" class="btn btn-primary">Ir al inicio</a>
                     `;
       }
     })
@@ -554,7 +554,7 @@ function createAppointment(event) {
                 <i class="bi bi-x-circle-fill fs-1 text-primary text-center"></i>
                 <h3 class="text-center">Hubo un error al agendar la cita</h3>
                 <p>Ocurrió un error, intentalo más tarde</p>
-                <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
+                <a href="../awards/index.html" class="btn btn-primary">Ir al inicio</a>
                 `;
     });
 }
