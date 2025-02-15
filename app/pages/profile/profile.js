@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/${userID}`,
+        `https://reddevida.onrender.com/api/users/${userID}`,
         {
           method: "GET",
           headers: {

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/${userID}`,
+        `https://reddevida.onrender.com/api/users/${userID}`,
         {
           method: "GET",
           headers: {
@@ -183,7 +183,7 @@ async function nextStep(currentStep) {
   if (currentStep === 1) {
     calendarInicialization();
     try {
-      const response = await fetch("http://localhost:8080/api/institutions", {
+      const response = await fetch("https://reddevida.onrender.com/api/institutions", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -235,7 +235,7 @@ async function updateUser(event) {
   data.diseases = selectedDiseases;
 
   await fetch(
-    `http://localhost:8080/api/users/${localStorage.getItem("userID")}`,
+    `https://reddevida.onrender.com/api/users/${localStorage.getItem("userID")}`,
     {
       method: "PUT",
       headers: {
@@ -309,7 +309,7 @@ async function getHospitalSchedule(event) {
   const institutionId = event.target.value;
   try {
     const response = await fetch(
-      `http://localhost:8080/api/institutions/${institutionId}/appointments`,
+      `https://reddevida.onrender.com/api/institutions/${institutionId}/appointments`,
       {
         method: "GET",
         headers: {
@@ -520,7 +520,7 @@ function createAppointment(event) {
 
   console.log(appointmentData);
 
-  fetch("http://localhost:8080/api/appointments", {
+  fetch("https://reddevida.onrender.com/api/appointments", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
