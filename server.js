@@ -1,7 +1,7 @@
-import app from "./app.js";
-import connectDB from "./config/db.js";
-import config from "./config/config.js";
-import logger from "./config/logger.js";
+import app from "./src/app.js";
+import connectDB from "./src/config/db.js";
+import config from "./src/config/db.js";
+import logger from "./src/config/logger.js";
 
 const startServer = async () => {
   try {
