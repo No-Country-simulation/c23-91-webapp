@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `https://reddevida.onrender.com/api/users/${userID}`,
+        `https://c23-91-webapp-nfvs.onrender.com/api/users/${userID}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: ` Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -183,7 +183,7 @@ async function nextStep(currentStep) {
   if (currentStep === 1) {
     calendarInicialization();
     try {
-      const response = await fetch("https://reddevida.onrender.com/api/institutions", {
+      const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/api/institutions", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -233,16 +233,16 @@ async function updateUser(event) {
   }));
 
   data.diseases = selectedDiseases;
-
+  const uID = localStorage.getItem("userID")
   await fetch(
-    `https://reddevida.onrender.com/api/users/${localStorage.getItem("userID")}`,
+    `https://c23-91-webapp-nfvs.onrender.com/api/users/${uID}`,
     {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-      Authorization: ` Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     }
   )
     .then((response) => response.json())
@@ -309,7 +309,7 @@ async function getHospitalSchedule(event) {
   const institutionId = event.target.value;
   try {
     const response = await fetch(
-      `https://reddevida.onrender.com/api/institutions/${institutionId}/appointments`,
+      `https://c23-91-webapp-nfvs.onrender.com/api/institutions/${institutionId}/appointments`,
       {
         method: "GET",
         headers: {
@@ -520,7 +520,7 @@ function createAppointment(event) {
 
   console.log(appointmentData);
 
-  fetch("https://reddevida.onrender.com/api/appointments", {
+  fetch("https://c23-91-webapp-nfvs.onrender.com/api/appointments", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
