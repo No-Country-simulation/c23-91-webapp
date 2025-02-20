@@ -1,5 +1,3 @@
-console.log("Holis :)");
-
 const inputEmailEl = document.getElementById("inputEmail");
 const passwordInput = document.getElementById("inputPassword");
 const togglePasswordButton = document.getElementById("togglePassword");
