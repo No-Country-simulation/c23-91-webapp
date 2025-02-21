@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `https://c23-91-webapp-nfvs.onrender.com/api/users/${userID}`,
+        `${config.API_URL}/users/${userID}`,
         {
           method: "GET",
           headers: {
@@ -183,7 +183,7 @@ async function nextStep(currentStep) {
   if (currentStep === 1) {
     calendarInicialization();
     try {
-      const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/api/institutions", {
+      const response = await fetch(`${config.API_URL}/institutions`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -234,8 +234,7 @@ async function updateUser(event) {
 
   data.diseases = selectedDiseases;
   const uID = localStorage.getItem("userID")
-  await fetch(
-    `https://c23-91-webapp-nfvs.onrender.com/api/users/${uID}`,
+  await fetch(`${config.API_URL}/users/${uID}`,
     {
       method: "PUT",
       headers: {
@@ -309,7 +308,7 @@ async function getHospitalSchedule(event) {
   const institutionId = event.target.value;
   try {
     const response = await fetch(
-      `https://c23-91-webapp-nfvs.onrender.com/api/institutions/${institutionId}/appointments`,
+      `${config.API_URL}/institutions/${institutionId}/appointments`,
       {
         method: "GET",
         headers: {
@@ -520,7 +519,7 @@ function createAppointment(event) {
 
   console.log(appointmentData);
 
-  fetch("https://c23-91-webapp-nfvs.onrender.com/api/appointments", {
+  fetch(`${config.API_URL}/appointments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -536,7 +535,7 @@ function createAppointment(event) {
                     <i class="bi bi-check-circle-fill fs-1 text-success text-center"></i>
                     <h3 class="text-center">Tu cita se ha agendado correctamente</h3>
                     <p>Para ver todos los detalles ve al inicio </p>
-                    <a href="../awards/index.html" class="btn btn-primary">Ir al inicio</a>
+                    <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
                     `;
       } else {
         const divResponse = document.getElementById("step-3");
@@ -544,7 +543,7 @@ function createAppointment(event) {
                     <i class="bi bi-x-circle-fill fs-1 text-primary text-center"></i>
                     <h3 class="text-center">Hubo un error al agendar la cita</h3>
                     <p>Ocurrió un error, intentalo más tarde</p>
-                    <a href="../awards/index.html" class="btn btn-primary">Ir al inicio</a>
+                    <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
                     `;
       }
     })

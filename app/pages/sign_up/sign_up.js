@@ -94,11 +94,11 @@ function createUser(event) {
 
   console.log(data);
 
-  fetch("https://c23-91-webapp-nfvs.onrender.com/auth/register", {
+  fetch(`${config.AUTH_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer <'your message'>`,
+      // Authorization: `Bearer <'your message'>`,
     },
     body: JSON.stringify(data),
   })
@@ -110,7 +110,7 @@ function createUser(event) {
           .getElementById("succes-alert")
           .classList.replace("d-none", "d-flex");
         console.log("User registered:", data);
-        const absoluteUrl = `${window.location.origin}/pages/login/login.html`;
+        const absoluteUrl = `${window.location.origin}/app/pages/login/login.html`;
         setTimeout(() => {
           window.location.href = absoluteUrl;
         }, 3000);

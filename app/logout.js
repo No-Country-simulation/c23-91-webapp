@@ -46,5 +46,5 @@ function logout() {
 
   localStorage.setItem("logoutMessage", "Has cerrado sesión exitosamente.");
 
-  window.location.href = `${window.location.origin}/index.html`;
+  window.location.href = `${window.location.origin}/app/index.html`;
 }

@@ -1,4 +1,4 @@
-const inputEmailEl = document.getElementById("inputEmail");
+const inputEmailEl = document.getElementById("inputEmail"); 
 const passwordInput = document.getElementById("inputPassword");
 const togglePasswordButton = document.getElementById("togglePassword");
 
@@ -21,7 +21,7 @@ togglePasswordButton.addEventListener("click", () => {
   };
 
   try {
-    const response = await fetch("https://c23-91-webapp-nfvs.onrender.com/auth/login", {
+    const response = await fetch(`${config.AUTH_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ togglePasswordButton.addEventListener("click", () => {
       localStorage.setItem("token", data.payload.token);
       localStorage.setItem("userID", data.payload.user.id);
 
-      const absoluteUrl = `${window.location.origin}/pages/awards/awards.html`;
+      const absoluteUrl = `${window.location.origin}/app/pages/awards/awards.html`;
       window.location.href = absoluteUrl;
     } else {
       document.getElementById("error-alert").innerHTML = `
