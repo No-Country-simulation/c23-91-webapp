@@ -94,10 +94,11 @@ function createUser(event) {
 
   console.log(data);
 
-  fetch("http://localhost:8080/auth/register", {
+  fetch(`${config.AUTH_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      // Authorization: `Bearer <'your message'>`,
     },
     body: JSON.stringify(data),
   })

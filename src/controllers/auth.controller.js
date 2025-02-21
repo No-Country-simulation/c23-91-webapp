@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import config from "../config/config.js";
 import logger from "../config/logger.js";
 
 // POST - Registrar usuario.
@@ -17,7 +16,15 @@ export const registerUser = async (req, res) => {
       diseases,
     } = req.body;
 
-    if (!firstName ||!lastName ||!birthday ||!gender ||!bloodType ||!email ||!password) {
+    if (
+      !firstName ||
+      !lastName ||
+      !birthday ||
+      !gender ||
+      !bloodType ||
+      !email ||
+      !password
+    ) {
       logger.warn("Missing required fields for user registration");
       return res.status(400).json({ status: "error", message: "All fields are required." });
     }
@@ -75,7 +82,7 @@ export const login = async (req, res) => {
 
     const token = jwt.sign(
       { userId: user._id, email: user.email },
-      config.JWT_SECRET,
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 

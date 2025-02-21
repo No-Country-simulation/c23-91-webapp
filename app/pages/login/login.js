@@ -1,4 +1,4 @@
-const inputEmailEl = document.getElementById("inputEmail");
+const inputEmailEl = document.getElementById("inputEmail"); 
 const passwordInput = document.getElementById("inputPassword");
 const togglePasswordButton = document.getElementById("togglePassword");
 
@@ -12,7 +12,7 @@ togglePasswordButton.addEventListener("click", () => {
       : '<i class="bi bi-eye-slash"></i>';
 });
 
-async function logUser(event) {
+  async function logUser(event) {
   event.preventDefault();
 
   const userData = {
@@ -21,11 +21,11 @@ async function logUser(event) {
   };
 
   try {
-    const response = await fetch("http://localhost:8080/auth/login", {
+    const response = await fetch(`${config.AUTH_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer <'your message'>`,
+        // Authorization: `Bearer <'your message'>`,
       },
       body: JSON.stringify(userData),
     });

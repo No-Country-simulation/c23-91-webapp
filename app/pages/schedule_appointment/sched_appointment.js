@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/${userID}`,
+        `${config.API_URL}/users/${userID}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: ` Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -183,7 +183,7 @@ async function nextStep(currentStep) {
   if (currentStep === 1) {
     calendarInicialization();
     try {
-      const response = await fetch("http://localhost:8080/api/institutions", {
+      const response = await fetch(`${config.API_URL}/institutions`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -233,16 +233,15 @@ async function updateUser(event) {
   }));
 
   data.diseases = selectedDiseases;
-
-  await fetch(
-    `http://localhost:8080/api/users/${localStorage.getItem("userID")}`,
+  const uID = localStorage.getItem("userID")
+  await fetch(`${config.API_URL}/users/${uID}`,
     {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-      Authorization: ` Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     }
   )
     .then((response) => response.json())
@@ -309,7 +308,7 @@ async function getHospitalSchedule(event) {
   const institutionId = event.target.value;
   try {
     const response = await fetch(
-      `http://localhost:8080/api/institutions/${institutionId}/appointments`,
+      `${config.API_URL}/institutions/${institutionId}/appointments`,
       {
         method: "GET",
         headers: {
@@ -520,7 +519,7 @@ function createAppointment(event) {
 
   console.log(appointmentData);
 
-  fetch("http://localhost:8080/api/appointments", {
+  fetch(`${config.API_URL}/appointments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -554,7 +553,7 @@ function createAppointment(event) {
                 <i class="bi bi-x-circle-fill fs-1 text-primary text-center"></i>
                 <h3 class="text-center">Hubo un error al agendar la cita</h3>
                 <p>Ocurrió un error, intentalo más tarde</p>
-                <a href="../awards/awards.html" class="btn btn-primary">Ir al inicio</a>
+                <a href="../awards/index.html" class="btn btn-primary">Ir al inicio</a>
                 `;
     });
 }

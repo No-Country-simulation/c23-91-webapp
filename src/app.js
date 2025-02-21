@@ -1,44 +1,51 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import helmet from "helmet";
-import config from "./config/config.js";
-import logger from "./config/logger.js";
 import httpLogger from "./middlewares/httpLogger.js";
 
 import userRouter from "./router/user.routes.js";
 import donationRouter from "./router/donation.routes.js";
 import appointmentRouter from "./router/appointment.routes.js";
 import institutionRouter from "./router/institution.routes.js";
-import authRoter from "./router/auth.routes.js";
+import authRouter from "./router/auth.routes.js";
+// import viewsRouter from "./router/views.routes.js"
 
-// Variables
+// import { fileURLToPath } from "url";
+// import path from "path";
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// Express
 const app = express();
-const PORT = config.PORT || 8080;
-const MONGO_URI = config.MONGO_URI;
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: [
+      "http://127.0.0.1:5500", // Live Server con IP
+      "http://localhost:5500", // Live Server con localhost
+      "http://localhost:8080",
+      "https://reddevida.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 app.use(helmet());
 app.use(httpLogger);
+
+// // Servir archivos estáticos (CSS, JS, imágenes)
+// const staticPath = path.join(__dirname, "..", "app");
+// app.use(express.static(staticPath));
 
 // Rutas
 app.use("/api", userRouter);
 app.use("/api", donationRouter);
 app.use("/api", appointmentRouter);
 app.use("/api", institutionRouter);
-app.use("/auth", authRoter);
+app.use("/auth", authRouter);
+// app.use("/", viewsRouter)
 
-// MongoDB
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    logger.info("Connected to MongoDB");
-  })
-  .catch((error) => {
-    logger.error("Error connecting to MongoDB:", error.message);
-  });
-
-app.listen(PORT, () => {
-  logger.info(`Server is running on port ${PORT}`);
-});
+export default app;

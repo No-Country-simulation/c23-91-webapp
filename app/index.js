@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (userID) {
 
     loggedLinks.forEach(link => {
-      link.style.display = "block";  // or "inline-block" / "" depending on your layout
+      link.style.display = "block";
     });
     notLoggedLinks.forEach(link => {
       link.style.display = "none";

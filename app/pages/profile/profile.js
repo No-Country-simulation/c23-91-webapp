@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const userID = localStorage.getItem("userID");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/${userID}`,
+        `${config.API_URL}/users/${userID}`,
         {
           method: "GET",
           headers: {
