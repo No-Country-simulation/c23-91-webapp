@@ -20,19 +20,18 @@ import authRouter from "./router/auth.routes.js";
 const app = express();
 
 // Middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
-      "http://127.0.0.1:5500", // Live Server con IP
-      "http://localhost:5500", // Live Server con localhost
+      "http://127.0.0.1:5500",
+      "http://localhost:5500",
       "http://localhost:8080",
-      "https://reddevida.onrender.com",
+      "https://c23-91-webapp-nfvs.onrender.com"
     ],
-    credentials: true,
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(httpLogger);
 
