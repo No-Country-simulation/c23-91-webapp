@@ -427,7 +427,7 @@ function updateMedals(points) {
 
 cancelar_cita_El.addEventListener("click", () => {
   cancelar_cita_El.innerHTML = `
-        <button class="btn btn-primary" onclick="window.location.href='pages/schedule_appointment/index.html'">Agendar cita</button>
+        <button class="btn btn-primary" onclick="window.location.href='pages/schedule_appointment/sched_appointment.html'">Agendar cita</button>
 
       `;
   /*estado_El.classList.add("d-none");
