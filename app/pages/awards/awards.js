@@ -250,7 +250,7 @@ const fetchDonationsData = async () => {
       cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded" style="min-height: 40vh;">
       <p class="mb-3 text-primary">"No tienes ninguna cita agendada"</p>
-      <a href="../schedule_appointment/index.html" class="btn btn-primary">Agenda tu cita</a>
+      <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
     </div>
 `;
 
