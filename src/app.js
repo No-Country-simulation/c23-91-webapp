@@ -1,5 +1,5 @@
 import express from "express";
-import cors from "cors";
+// import cors from "cors";
 import helmet from "helmet";
 import httpLogger from "./middlewares/httpLogger.js";
 
@@ -22,7 +22,7 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
+// app.use(
   // cors({
   //   origin: [
   //     "http://127.0.0.1:5500", // Live Server con IP
@@ -33,7 +33,7 @@ app.use(
   //   ],
   //   credentials: true,
   // })
-);
+// );
 app.use(helmet());
 app.use(httpLogger);
 
