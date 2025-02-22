@@ -29,6 +29,7 @@ app.use(
       "http://localhost:5500", // Live Server con localhost
       "http://localhost:8080",
       "https://reddevida.onrender.com",
+      "https://red-de-vida.netlify.app/",
     ],
     credentials: true,
   })
