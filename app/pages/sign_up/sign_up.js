@@ -110,9 +110,12 @@ function createUser(event) {
           .getElementById("succes-alert")
           .classList.replace("d-none", "d-flex");
         console.log("User registered:", data);
-        const absoluteUrl = `${window.location.origin}/app/pages/login/login.html`;
+        const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      const targetUrl = isLocal
+        ? "app/pages/schedule_appointment/sched_appointment.html"
+        : "pages/schedule_appointment/sched_appointment.html";
         setTimeout(() => {
-          window.location.href = absoluteUrl;
+          window.location.href = targetUrl;
         }, 3000);
       } else {
         const alertError = document.getElementById("error-alert");

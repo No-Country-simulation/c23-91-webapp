@@ -426,13 +426,16 @@ function updateMedals(points) {
 }
 
 cancelar_cita_El.addEventListener("click", () => {
-  cancelar_cita_El.innerHTML = `
-        <button class="btn btn-primary" onclick="window.location.href='pages/schedule_appointment/sched_appointment.html'">Agendar cita</button>
+  // Determine if we're running locally
+  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
-      `;
-  /*estado_El.classList.add("d-none");
-      nombre_hosp_prox_cita.classList.add("d-none");
-      link_Citas_El.style.display = "none";
-      bloodIcon.style.display = "none";
-      mapFrameCitEl.style.display = "none"; */
+  // Set the correct path based on environment
+  const targetUrl = isLocal 
+    ? "app/pages/schedule_appointment/sched_appointment.html"
+    : "pages/schedule_appointment/sched_appointment.html";
+
+  cancelar_cita_El.innerHTML = `
+        <button class="btn btn-primary" onclick="window.location.href='${targetUrl}'">Agendar cita</button>
+  `; 
 });
+

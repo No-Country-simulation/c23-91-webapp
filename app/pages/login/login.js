@@ -41,8 +41,12 @@ togglePasswordButton.addEventListener("click", () => {
       localStorage.setItem("token", data.payload.token);
       localStorage.setItem("userID", data.payload.user.id);
 
-      const absoluteUrl = `${window.location.origin}/pages/awards/awards.html`;
-      window.location.href = absoluteUrl;
+      const targetUrl = isLocal
+      ? "app/pages/awards/awards.html"
+      : "pages/awards/awards.html";
+
+      window.location.href = targetUrl;
+
     } else {
       document.getElementById("error-alert").innerHTML = `
         <div class="alert alert-danger d-flex align-items-center" role="alert">
