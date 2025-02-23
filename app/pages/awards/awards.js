@@ -119,19 +119,26 @@ function appointmentStatus(status) {
     statusDot.classList.replace("text-success", "text-primary");
     statusText.textContent = "Cancelado";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
+      '<button class="btn btn-primary">Agenda tu cita</button>'; // No redirection
   } else if (status === "Completed") {
     statusDot.classList.replace("text-success", "text-blue");
     statusText.textContent = "Completado";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
+      '<button class="btn btn-primary">Agenda tu cita</button>'; // No redirection
   } else if (status === "Pending") {
     statusDot.classList.replace("text-success", "text-success");
     statusText.textContent = "Pending";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Cancela tu cita</a>';
+      '<button class="btn btn-primary" id="cancel-btn">Cancela tu cita</button>';
+
+    // Add event listener to change button when clicked
+    document.getElementById("cancel-btn").addEventListener("click", () => {
+      cancelar_cita_El.innerHTML =
+        '<button class="btn btn-primary">Agenda tu cita</button>'; // Changes to "Agendar cita" after clicking
+    });
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchDonationsData();
@@ -250,9 +257,9 @@ const fetchDonationsData = async () => {
       cita_content_El.innerHTML = `
     <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary text-white rounded" style="min-height: 40vh;">
       <p class="mb-3 text-primary">"No tienes ninguna cita agendada"</p>
-      <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
+      <button class="btn btn-primary">Agenda tu cita</button>
     </div>
-`;
+  `;
 
       cancelar_cita_El.style.display = "none";
       estado_El.classList.add("d-none");
@@ -360,17 +367,6 @@ cancelar_cita_El.addEventListener("click", async function () {
     console.error("Failed to cancel the appointment:", error);
   }
 
-  /*
-    cita_content_El.innerHTML = `
-    <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-secondary rounded">
-      <p class="mb-3 text-primary fs-6">"No tienes ninguna cita agendada"</p>
-      <a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>
-    </div>
-    `;
-
-  cancelar_cita_El.style.display = "none";
-  // estado_El.classList.add("d-none");
-  */
 });
 
 if (document.referrer.includes("index.html")) {
@@ -426,17 +422,12 @@ function updateMedals(points) {
 }
 
 cancelar_cita_El.addEventListener("click", () => {
-  // Determine if we're running locally
-  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-
-  // Set the correct path based on environment
-  const targetUrl = isLocal
-    ? "app/pages/schedule_appointment/sched_appointment.html"
-    : "pages/schedule_appointment/sched_appointment.html";
-    console.log("This is local: " + isLocal);
-
   cancelar_cita_El.innerHTML = `
-        <button class="btn btn-primary" onclick="window.location.href='${targetUrl}'">Agendar cita</button>
-  `; 
+  <a href="../schedule_appointment/sched_appointment.html">
+  <button class="btn btn-primary">Agendar cita</button>
+</a>
+
+  `;
 });
+
 
