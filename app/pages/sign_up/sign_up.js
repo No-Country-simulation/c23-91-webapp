@@ -1,4 +1,5 @@
-window.onload = () => {
+ window.onload = () => {
+  
   const select = document.getElementById("diseasesSelect");
   const selectedDiseasesContainer = document.getElementById("selectedDiseases");
 
@@ -112,8 +113,8 @@ function createUser(event) {
         console.log("User registered:", data);
         const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
         const targetUrl = isLocal
-         ? "app/pages/schedule_appointment/sched_appointment.html"
-        : "pages/schedule_appointment/sched_appointment.html";
+         ? "/app/pages/login/login.html"
+        : "/pages/login/login.html";
         setTimeout(() => {
           window.location.href = targetUrl;
         }, 3000);
