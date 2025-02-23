@@ -1,3 +1,6 @@
+const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+
+
 document.addEventListener("DOMContentLoaded", function () {
   // Insert modal in body
   if (!document.getElementById("logoutModal")) {
@@ -24,6 +27,23 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.insertAdjacentHTML("beforeend", modalHTML);
   }
 
+  function logout() {
+    // Remove user data from local storage
+    localStorage.removeItem("token");
+    localStorage.removeItem("userID");
+  
+    // Store logout message
+    localStorage.setItem("logoutMessage", "Has cerrado sesión exitosamente.");
+  
+    // Determine if running locally or on Netlify
+    const targetUrl = isLocal ? "/app/index.html" : "/index.html";
+  
+    console.log("Redirecting to:", targetUrl); //
+    
+    // Redirect to the target URL
+    window.location.href = targetUrl;
+  }
+
   const logoutBtnM = document.getElementById("logoutBtn_M");
   const logoutBtnD = document.getElementById("logoutBtn_D");
 
@@ -40,11 +60,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function logout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("userID");
 
-  localStorage.setItem("logoutMessage", "Has cerrado sesión exitosamente.");
 
-  window.location.href = `${window.location.origin}/index.html`;
-}

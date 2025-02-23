@@ -119,17 +119,17 @@ function appointmentStatus(status) {
     statusDot.classList.replace("text-success", "text-primary");
     statusText.textContent = "Cancelado";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/index.html" class="btn btn-primary">Agenda tu cita</a>';
+      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
   } else if (status === "Completed") {
     statusDot.classList.replace("text-success", "text-blue");
     statusText.textContent = "Completado";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/index.html" class="btn btn-primary">Agenda tu cita</a>';
+      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Agenda tu cita</a>';
   } else if (status === "Pending") {
     statusDot.classList.replace("text-success", "text-success");
     statusText.textContent = "Pending";
     cancelar_cita_El.innerHTML =
-      '<a href="../schedule_appointment/index.html" class="btn btn-primary">Cancela tu cita</a>';
+      '<a href="../schedule_appointment/sched_appointment.html" class="btn btn-primary">Cancela tu cita</a>';
   }
 }
 
@@ -430,9 +430,10 @@ cancelar_cita_El.addEventListener("click", () => {
   const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
   // Set the correct path based on environment
-  const targetUrl = isLocal 
+  const targetUrl = isLocal
     ? "app/pages/schedule_appointment/sched_appointment.html"
     : "pages/schedule_appointment/sched_appointment.html";
+    console.log("This is local: " + isLocal);
 
   cancelar_cita_El.innerHTML = `
         <button class="btn btn-primary" onclick="window.location.href='${targetUrl}'">Agendar cita</button>

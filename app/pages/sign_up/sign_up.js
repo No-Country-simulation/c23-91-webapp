@@ -111,8 +111,8 @@ function createUser(event) {
           .classList.replace("d-none", "d-flex");
         console.log("User registered:", data);
         const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-      const targetUrl = isLocal
-        ? "app/pages/schedule_appointment/sched_appointment.html"
+        const targetUrl = isLocal
+         ? "app/pages/schedule_appointment/sched_appointment.html"
         : "pages/schedule_appointment/sched_appointment.html";
         setTimeout(() => {
           window.location.href = targetUrl;

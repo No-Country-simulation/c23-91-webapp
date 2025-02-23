@@ -1,3 +1,4 @@
+
 const inputEmailEl = document.getElementById("inputEmail"); 
 const passwordInput = document.getElementById("inputPassword");
 const togglePasswordButton = document.getElementById("togglePassword");
@@ -40,12 +41,14 @@ togglePasswordButton.addEventListener("click", () => {
       console.log(data);
       localStorage.setItem("token", data.payload.token);
       localStorage.setItem("userID", data.payload.user.id);
-
+      const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
       const targetUrl = isLocal
-      ? "app/pages/awards/awards.html"
-      : "pages/awards/awards.html";
+        ? "/app/pages/awards/awards.html"
+        : "/pages/awards/awards.html"; // Added leading slash
 
+      console.log("Redirecting to:", targetUrl);
       window.location.href = targetUrl;
+      console.log("This is target URL: " + targetUrl)
 
     } else {
       document.getElementById("error-alert").innerHTML = `
